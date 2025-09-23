@@ -9,7 +9,8 @@ export const Footer = () => {
   return (
     <footer className="py-5 px-4 sm:px-8 md:px-14 bg-card relative border-t border-border mt-12 pt-8 flex flex-wrap justify-between items-center gap-4">
       <p className="text-sm text-muted-foreground">
-        &copy; {new Date().getFullYear()} MidasTech.co. All rights reserved.
+        &copy; {new Date().getFullYear()} Leticia. Todos los derechos
+        reservados.
       </p>
       <a
         href="#hero"
