@@ -1,12 +1,4 @@
-import {
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Twitch,
-} from "lucide-react";
+import { Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { cn } from "../lib/utils";
 import { useToast } from "../hooks/use-toast";
 import type React from "react";
@@ -32,27 +24,27 @@ export const ContactSection = () => {
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Get in <span className="text-primary">Touch</span>
+          Ponte en <span className="text-primary">contacto</span>
         </h2>
         <p className="text-center text-muted-foreground mb-12">
-          Have a project in
+          ¿Quieres colaborar o simplemente saludar?
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg ">
             <h3 className="text-2xl font-semibold mb-8 ">
-              Contact Information
+              Información de contacto
             </h3>
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-full bg-primary/10 shadow-md">
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
-                <h4 className="font-medium">Email</h4>
+                <h4 className="font-medium">Email:</h4>
                 <a
                   href="mailto:leticiaranda78@gmail.com"
                   className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
-                  leticiaranda78@gmail.com
+                  leticia.m.aranda@gmail.com
                 </a>
               </div>
 
@@ -60,12 +52,12 @@ export const ContactSection = () => {
                 <div className="p-3 rounded-full bg-primary/10 shadow-md">
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
-                <h4 className="font-medium">Phone</h4>
+                <h4 className="font-medium">Celular:</h4>
                 <a
-                  href="tel:+595981585841"
+                  href="tel:+595981473267"
                   className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
-                  +595 981 585 841
+                  +595 981 473 267
                 </a>
               </div>
 
@@ -74,35 +66,20 @@ export const ContactSection = () => {
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
 
-                <h4 className="font-medium">Location</h4>
+                <h4 className="font-medium">Dirección:</h4>
                 <a className="text-muted-foreground hover:text-primary transition-colors duration-300">
                   Asunción, Paraguay
                 </a>
               </div>
             </div>
-            <div className="pt-6">
-              <h4 className="font-medium mb-4">Connect With -Me</h4>
+            <div className="pt-25">
               <div className="flex space-x-4 justify-center">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/leticia-aranda-871575238/"
                   target="_blank"
                   className="hover:scale-110 transition-transform duration-300"
                 >
                   <Linkedin />
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="hover:scale-110 transition-transform duration-300"
-                >
-                  <Instagram />
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="hover:scale-110 transition-transform duration-300"
-                >
-                  <Twitch />
                 </a>
               </div>
             </div>
@@ -111,14 +88,14 @@ export const ContactSection = () => {
             className="space-y-10 bg-card p-8 rounded-xl shadow-lg"
             onSubmit={handleSubmit}
           >
-            <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+            <h3 className="text-2xl font-semibold mb-6">Envía un mensaje</h3>
             <form action="" className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium mb-2"
                 >
-                  Name
+                  Nombre
                 </label>
                 <input
                   type="text"
@@ -150,14 +127,14 @@ export const ContactSection = () => {
                   htmlFor="message"
                   className="block text-sm font-medium mb-2"
                 >
-                  Message
+                  Mensaje
                 </label>
                 <textarea
                   name="message"
                   id="message"
                   required
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary transition-all duration-200 ease-in-out resize-none"
-                  placeholder="Here your message"
+                  placeholder="Aquí tu mensaje"
                 />
               </div>
               <button
@@ -168,7 +145,7 @@ export const ContactSection = () => {
                   ""
                 )}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? "Enviando..." : "Mensaje enviado"}
                 <Send size={16} />
               </button>
             </form>

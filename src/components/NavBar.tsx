@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 // Para recorrer la lista de elementos del menú de navegación
 const navItems = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
+  { name: "Inicio", href: "#hero" },
+  { name: "Sobre mi", href: "#about" },
   { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Proyectos", href: "#projects" },
+  { name: "Contacto", href: "#contact" },
 ];
 
 export const NavBar = () => {
@@ -63,7 +63,7 @@ export const NavBar = () => {
         >
           <span className="relativa z-10">
             {""}
-            <span className="text-glow text-foreground">MidasTech</span>{" "}
+            <span className="text-glow text-foreground">EleTech</span>{" "}
             Portafolio
           </span>
         </a>

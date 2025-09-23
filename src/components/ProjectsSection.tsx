@@ -4,20 +4,29 @@ const projects = [
   {
     id: 1,
     title: "SaaS Landing Page",
-    description: "A beatiful landing page using React and Tailwind.",
-    image: "/projects/project1.png",
+    description: "Un landing page usando React y Tailwind",
+    image: "/projects/landing-page-saas.png",
     tags: ["React", "TailwindCSS"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/LarandaC/landing-page",
   },
   {
     id: 2,
-    title: "ORbit Analytics Dashboard",
-    description: "A beatiful landing page using React and Tailwind.",
-    image: "/projects/project2.png",
+    title: "Bank Landing Page",
+    description: "Landing page para un banco usando React y Tailwind",
+    image: "/projects/landing-page-banco.png",
     tags: ["React", "TailwindCSS"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/LarandaC/landing-page-bank",
+  },
+  {
+    id: 3,
+    title: "RESTEplorer",
+    description: "Sitio web conectada a la API REST Countries",
+    image: "/projects/react-route.png",
+    tags: ["React", "React-router", "TailwindCSS"],
+    demoUrl: "#",
+    githubUrl: "https://github.com/LarandaC/paises-react-route",
   },
 ];
 
@@ -26,11 +35,12 @@ export const ProjectsSection = () => {
     <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Features <span className="text-primary">Projects</span>
+          Proyectos <span className="text-primary">destacados</span>
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here some of my recent projects. Each project was carefully crafted
-          with attention to detail, perfomance and user experience.
+          Estos son algunos de mis proyectos recientes. Cada uno fue
+          desarrollado con atención al detalle, rendimiento y experiencia de
+          usuario.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key) => (
@@ -86,7 +96,7 @@ export const ProjectsSection = () => {
             target="_blank"
             href="https:github.com/Laranda"
           >
-            Check my GitHub <ArrowRight size={16} />
+            Mira mi GitHub <ArrowRight size={16} />
           </a>
         </div>
       </div>

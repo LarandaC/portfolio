@@ -13,32 +13,39 @@ const skills = [
     category: "frontend",
     icon: "tailwind-icon",
   },
-  { name: "Next.js", level: 80, category: "frontend", icon: "next-icon" },
+  //{ name: "Next.js", level: 80, category: "frontend", icon: "next-icon" },
+  { name: "TypeScript", level: 80, category: "frontend", icon: "next-icon" },
 
   //backend skills
-  { name: "Node.js", level: 80, category: "backend", icon: "node-icon" },
+  //{ name: "Node.js", level: 80, category: "backend", icon: "node-icon" },
   { name: "Python", level: 80, category: "backend", icon: "python-icon" },
-  { name: "Express", level: 75, category: "backend", icon: "express-icon" },
+  //{ name: "Express", level: 75, category: "backend", icon: "express-icon" },
   { name: "PostgreSQL", level: 70, category: "backend", icon: "postgres-icon" },
+  {
+    name: "SQL Server",
+    level: 70,
+    category: "backend",
+    icon: "sqlserver-icon",
+  },
 
   //tools
-  { name: "Git/GitHub", level: 90, category: "tools", icon: "git-icon" },
-  { name: "Figma", level: 80, category: "tools", icon: "figma-icon" },
-  { name: "VS Code", level: 80, category: "tools", icon: "vscode-icon" },
-  { name: "Docker", level: 60, category: "tools", icon: "docker-icon" },
+  { name: "Git/GitHub", level: 90, category: "herramientas", icon: "git-icon" },
+  { name: "Figma", level: 80, category: "herramientas", icon: "figma-icon" },
+  { name: "VS Code", level: 80, category: "herramientas", icon: "vscode-icon" },
+  //{ name: "Docker", level: 60, category: "tools", icon: "docker-icon" },
 ];
 
 // categorias de las habilidades
-const categories = ["all", "frontend", "backend", "tools"];
+const categories = ["todos", "frontend", "backend", "herramientas"];
 
 // para listar las habilidades, mostrar el procentaje y filtrar por categorias
 export const SkillsSection = () => {
   // estado para la categoria
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("todos");
 
-  // filtra la categoria segun el valor del estado, si es all trae todo y si no solo trae lo que esta en activeCategoria
+  // filtra la categoria segun el valor del estado, si es todos trae todo y si no solo trae lo que esta en activeCategoria
   const filteredSkills = skills.filter(
-    (skill) => activeCategory === "all" || skill.category === activeCategory
+    (skill) => activeCategory === "todos" || skill.category === activeCategory
   );
 
   return (
