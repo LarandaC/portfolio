@@ -13,8 +13,8 @@ export const ContactSection = () => {
     setIsSubmitting(true);
     setTimeout(() => {
       toast({
-        title: "Message sent",
-        description: "Thank you, ill be on touch",
+        title: "Mensaje enviado",
+        description: "Gracias, me pondré en contacto contigo pronto.",
       });
       setIsSubmitting(false);
     }, 1500);
