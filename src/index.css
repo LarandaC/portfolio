@@ -207,6 +207,10 @@
   color: var(--color-primary);
 }
 
+.bg-background {
+  background-color: var(--color-background);
+}
+
 .bg-primary {
   background-color: var(--color-primary);
 }
