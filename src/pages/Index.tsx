@@ -11,11 +11,8 @@ import { Footer } from "../components/Footer";
 export const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Theme */}
       <ThemeToggle />
-      {/* Background */}
       <StarBackground />
-      {/* NavBar */}
       <NavBar />
       {/* Main Content */}
       <main>
@@ -25,7 +22,6 @@ export const Index = () => {
         <ProjectsSection />
         <ContactSection />
       </main>
-      {/* Footer */}
       <Footer />
     </div>
   );
