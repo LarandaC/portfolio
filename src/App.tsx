@@ -2,8 +2,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Index } from "./pages/Index";
 import { NotFound } from "./pages/NotFound";
 import { Toaster } from "./components/ui/toaster";
+import { useEffect, useState } from "react";
+import { Loader } from "./components/ui/Loader";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) return <Loader />;
   return (
     <>
       <Toaster />
