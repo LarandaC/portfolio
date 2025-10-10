@@ -1,4 +1,5 @@
 import { ArrowDown } from "lucide-react";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 export const HeroSection = () => {
   return (
@@ -6,26 +7,29 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10">
-        <div className="space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="opacity-0 animate-fade-in">Hola, soy </span>
-            <span className="text-primary opacity-0 animate-fade-in-delay-1">
-              {""}Leticia{" "}
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-2-2xl opacity-0 animate-fade-in-delay-3">
-            Desarrolladora Frontend con pasión por crear soluciones innovadoras
-            y mejorar la experiencia del usuario. Diseño aplicaciones web
-            atractivas y funcionales, enfocadas en usabilidad y rendimiento
-          </p>
-          <div className="pt-4 opacity-0 animate-fade-in-delay-4">
-            <a href="#projects" className="cosmic-button">
-              Mis proyectos
-            </a>
+      <RevealOnScroll>
+        <div className="container max-w-4xl mx-auto text-center z-10">
+          <div className="space-y-6">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              <span className="opacity-0 animate-fade-in">Hola, soy </span>
+              <span className="text-primary opacity-0 animate-fade-in-delay-1">
+                {""}Leticia{" "}
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-2-2xl opacity-0 animate-fade-in-delay-3">
+              Desarrolladora Frontend con pasión por crear soluciones
+              innovadoras y mejorar la experiencia del usuario. Diseño
+              aplicaciones web atractivas y funcionales, enfocadas en usabilidad
+              y rendimiento
+            </p>
+            <div className="pt-4 opacity-0 animate-fade-in-delay-4">
+              <a href="#projects" className="cosmic-button">
+                Mis proyectos
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </RevealOnScroll>
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-column items-center animate-bounce">
         <a href="#about">
           <ArrowDown className="h-5 w-5 text-primary" />
