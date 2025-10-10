@@ -13,6 +13,7 @@ Este proyecto es una landing page desarrollada con **React**, **TypeScript** y *
 ## 🛠️ Tecnologías
 
 - **React** – Librería principal para la interfaz
+- **EmailJS** - Para la feature del correo
 - **TypeScript** – Tipado estático para mayor robustez
 - **Tailwind CSS** – Estilos utilitarios y diseño visual refinado
 
@@ -27,7 +28,7 @@ Este proyecto es una landing page desarrollada con **React**, **TypeScript** y *
 
 ## 📬 Contacto
 Este portafolio refleja mi enfoque colaborativo y mi pasión por crear experiencias digitales claras, diferenciadas y funcionales.
-Si querés conectar o colaborar, podés escribirme a [tu-email@example.com].
+Si querés conectar o colaborar, podés escribirme a [leticia.m.aranda@gmail.com].
 
 
 ## 🚀 Instalación
