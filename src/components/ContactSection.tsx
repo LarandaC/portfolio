@@ -65,7 +65,7 @@ export const ContactSection = () => {
             ¿Quieres colaborar o simplemente saludar?
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg ">
+            <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg">
               <h3 className="text-2xl font-semibold mb-8 ">
                 Información de contacto
               </h3>
@@ -77,7 +77,7 @@ export const ContactSection = () => {
                   <h4 className="font-medium">Email:</h4>
                   <a
                     href="mailto:leticiaranda78@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300 break-all"
                   >
                     leticia.m.aranda@gmail.com
                   </a>
