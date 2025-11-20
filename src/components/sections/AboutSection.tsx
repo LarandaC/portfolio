@@ -1,5 +1,5 @@
 import { Briefcase, Code, User } from "lucide-react";
-import { RevealOnScroll } from "./RevealOnScroll";
+import { RevealOnScroll } from "../shared/RevealOnScroll";
 
 // Seccion sobre mi
 export const AboutSection = () => {
@@ -16,9 +16,9 @@ export const AboutSection = () => {
                 Passionate Web Developer
               </h3>
               <p className="text-muted-foreground">
-                Soy una desarrolladora junior, especializada en crear
-                aplicaciones web responsivas, accesibles y de alto rendimiento
-                utilizando tecnologías modernas
+                Soy desarrolladora especializada en crear aplicaciones web
+                responsivas, accesibles y de alto rendimiento utilizando
+                tecnologías modernas
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                 <a href="#contact" className="cosmic-button">
@@ -36,7 +36,7 @@ export const AboutSection = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 gap-6">
-              <div className="gradient-border p-6 card-hover">
+              <div className="bg-card p-6 rounded-lg shadow-md border border-border/70 card-hover">
                 <div className="flex items-start gap-4 ">
                   <div className="p-3 rounded-full bg-primary/10">
                     <Code className="h-6 w-6 text-primary" />
@@ -50,7 +50,7 @@ export const AboutSection = () => {
                   </div>
                 </div>
               </div>
-              <div className="gradient-border p-6 card-hover">
+              <div className="bg-card p-6 rounded-lg shadow-md border border-border/70 card-hover">
                 <div className="flex items-start gap-4 ">
                   <div className="p-3 rounded-full bg-primary/10">
                     <User className="h-6 w-6 text-primary" />
@@ -64,7 +64,7 @@ export const AboutSection = () => {
                   </div>
                 </div>
               </div>
-              <div className="gradient-border p-6 card-hover">
+              <div className="bg-card p-6 rounded-lg shadow-md border border-border/70 card-hover">
                 <div className="flex items-start gap-4 ">
                   <div className="p-3 rounded-full bg-primary/10">
                     <Briefcase className="h-6 w-6 text-primary" />

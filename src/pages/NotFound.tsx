@@ -1,7 +1,7 @@
-import { Footer } from "../components/Footer";
-import { NotFoundSection } from "../components/NotFoundSection";
-import { StarBackground } from "../components/StarBackground";
-import { ThemeToggle } from "../components/ThemeToggle";
+import { Footer } from "../components/layout/Footer";
+import { NotFoundSection } from "../components/sections/NotFoundSection";
+import { StarBackground } from "../components/shared/StarBackground";
+import { ThemeToggle } from "../components/shared/ThemeToggle";
 
 export const NotFound = () => {
   return (

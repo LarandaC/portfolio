@@ -1,5 +1,5 @@
 import { ArrowDown } from "lucide-react";
-import { RevealOnScroll } from "./RevealOnScroll";
+import { RevealOnScroll } from "../shared/RevealOnScroll";
 
 export const HeroSection = () => {
   return (
@@ -22,7 +22,7 @@ export const HeroSection = () => {
               aplicaciones web atractivas y funcionales, enfocadas en usabilidad
               y rendimiento
             </p>
-            <div className="pt-4 opacity-0 animate-fade-in-delay-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
               <a href="#projects" className="cosmic-button">
                 Mis proyectos
               </a>
@@ -31,7 +31,7 @@ export const HeroSection = () => {
         </div>
       </RevealOnScroll>
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-column items-center animate-bounce">
-        <a href="#about">
+        <a href="#about" className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
           <ArrowDown className="h-5 w-5 text-primary" />
         </a>
       </div>

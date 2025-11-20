@@ -1,9 +1,9 @@
 import { Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
-import { cn } from "../lib/utils";
-import { useToast } from "../hooks/use-toast";
+import { cn } from "../../lib/utils";
+import { useToast } from "../../hooks/use-toast";
 import type React from "react";
 import { useRef, useState } from "react";
-import { RevealOnScroll } from "./RevealOnScroll";
+import { RevealOnScroll } from "../shared/RevealOnScroll";
 import emailjs from "@emailjs/browser";
 
 export const ContactSection = () => {
@@ -65,7 +65,7 @@ export const ContactSection = () => {
             ¿Quieres colaborar o simplemente saludar?
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg">
+            <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg  border border-border/70">
               <h3 className="text-2xl font-semibold mb-8 ">
                 Información de contacto
               </h3>
@@ -112,14 +112,14 @@ export const ContactSection = () => {
                   <a
                     href="https://www.linkedin.com/in/leticia-aranda-871575238/"
                     target="_blank"
-                    className="hover:scale-110 transition-transform duration-300"
+                    className="hover:scale-110 transition-transform duration-300 "
                   >
                     <Linkedin />
                   </a>
                 </div>
               </div>
             </div>
-            <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg">
+            <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg  border border-border/70">
               <h3 className="text-2xl font-semibold mb-6">Envía un mensaje</h3>
               {/* Form start here */}
               <form
@@ -191,7 +191,7 @@ export const ContactSection = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className={cn(
-                    "cosmic-button w-full flex items-center justify-center gap-2",
+                    "cosmic-button w-full flex items-center justify-center gap-2 cursor-pointer",
                     ""
                   )}
                 >

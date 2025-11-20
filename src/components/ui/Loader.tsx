@@ -1,4 +1,4 @@
-import { LoaderSection } from "@/components/LoaderSection";
+import { LoaderSection } from "@/components/sections/LoaderSection";
 
 export const Loader = () => {
   return (
