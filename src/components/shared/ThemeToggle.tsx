@@ -1,6 +1,6 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 // ThemeToggle componente para cambiar de tema oscuro a light
 export const ThemeToggle = () => {
@@ -38,7 +38,7 @@ export const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed bottom-5 max-sm:hidden right-5 z-50 p-2 rounded-full transition-colors duration-300",
+        "fixed bottom-5 max-sm:hidden right-5 z-50 p-2 rounded-full transition-colors duration-300 cursor-pointer",
         "focus:outline-hidden"
       )}
     >

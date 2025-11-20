@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { cn } from "../lib/utils";
-import { RevealOnScroll } from "./RevealOnScroll";
+import { cn } from "../../lib/utils";
+import { RevealOnScroll } from "../shared/RevealOnScroll";
 
 // lista de habilidades
 const skills = [
@@ -13,6 +13,12 @@ const skills = [
     level: 90,
     category: "frontend",
     icon: "tailwind-icon",
+  },
+  {
+    name: "Material UI",
+    level: 80,
+    category: "frontend",
+    icon: "material-icon",
   },
   //{ name: "Next.js", level: 80, category: "frontend", icon: "next-icon" },
   { name: "TypeScript", level: 80, category: "frontend", icon: "next-icon" },
@@ -63,7 +69,7 @@ export const SkillsSection = () => {
                 key={key}
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "px-5 py-2 rounded-full transition-colors duration-300 capitalize font-semibold",
+                  "px-5 py-2 rounded-full transition-colors duration-300 capitalize font-semibold cursor-pointer border border-border/70",
                   activeCategory === category
                     ? "bg-primary-gradient text-secondary-foreground"
                     : "bg-secondary/70 text-foreground hover:bg-secondary"
@@ -79,7 +85,7 @@ export const SkillsSection = () => {
             {filteredSkills.map((skill, key) => (
               <div
                 key={key}
-                className="bg-card p-6 rounded-lg shadow-xs card-hover"
+                className="bg-card p-6 rounded-lg shadow-md card-hover  border border-border/70"
               >
                 <div className="text-left mb-4">
                   <h3 className="font-semibold text-lg">{skill.name}</h3>
