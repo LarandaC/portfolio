@@ -22,9 +22,8 @@ export const NavBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
-      if (isMenuOpen) {
-        setIsMenuOpen(false);
-      }
+      if (isMenuOpen) setIsMenuOpen(false);
+      
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -37,14 +36,7 @@ export const NavBar = () => {
     if (isMenuOpen) {
       setIsMenuOpen(false);
     } else {
-      // Si estamos desplazados, primero ir al principio
-      if (isScrolled) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        // Esperar a que termine el scroll antes de abrir el menú
-        setTimeout(() => setIsMenuOpen(true), 800);
-      } else {
-        setIsMenuOpen(true);
-      }
+      setIsMenuOpen(true);
     }
   };
 
@@ -67,6 +59,7 @@ export const NavBar = () => {
             Portafolio
           </span>
         </a>
+        
         {/* desktop*/}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item, key) => (
@@ -94,7 +87,7 @@ export const NavBar = () => {
 
         <div
           className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center transition-all duration-300",
+            "fixed top-0 left-0 w-screen h-screen bg-background/95 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-300",
             "md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto translate-y-0"

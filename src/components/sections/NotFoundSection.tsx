@@ -1,3 +1,5 @@
+import { Button } from "../ui/Button";
+
 export const NotFoundSection = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4">
@@ -13,9 +15,7 @@ export const NotFoundSection = () => {
             Sorry, the page you are looking for does not exist or has been moved
           </p>
           <div className="pt-4 opacity-0 animate-fade-in-delay-4">
-            <a href="/" className="cosmic-button">
-              Return to homepage
-            </a>
+            <Button href="/" text="Ir al inicio" />
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import { Briefcase, Code, User } from "lucide-react";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
+import { Button } from "../ui/Button";
+import { SecondaryButton } from "../ui/SecondaryButton";
 
 // Seccion sobre mi
 export const AboutSection = () => {
@@ -20,19 +22,13 @@ export const AboutSection = () => {
                 responsivas, accesibles y de alto rendimiento utilizando
                 tecnologías modernas
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-                <a href="#contact" className="cosmic-button">
-                  {" "}
-                  Ponte en contacto
-                </a>
-                <a
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button href="#contact" text="Ponte en contacto" />
+                <SecondaryButton
                   href="/files/CV-LeticiaAranda-2025.pdf"
-                  download
-                  className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-                >
-                  {" "}
-                  Descarga CV
-                </a>
+                  text="Descarga CV"
+                />
               </div>
             </div>
             <div className="grid grid-cols-1 gap-6">
