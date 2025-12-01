@@ -1,5 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
+import { Button } from "../ui/Button";
 
 export const HeroSection = () => {
   return (
@@ -13,7 +14,7 @@ export const HeroSection = () => {
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
               <span className="opacity-0 animate-fade-in">Hola, soy </span>
               <span className="text-primary opacity-0 animate-fade-in-delay-1">
-                {""}Leticia{" "}
+                Leticia
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-2-2xl opacity-0 animate-fade-in-delay-3">
@@ -22,16 +23,15 @@ export const HeroSection = () => {
               aplicaciones web atractivas y funcionales, enfocadas en usabilidad
               y rendimiento
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#projects" className="cosmic-button">
-                Mis proyectos
-              </a>
-            </div>
+            <Button text="Mis proyectos" href="#projects" />
           </div>
         </div>
       </RevealOnScroll>
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-column items-center animate-bounce">
-        <a href="#about" className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
+        <a
+          href="#about"
+          className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+        >
           <ArrowDown className="h-5 w-5 text-primary" />
         </a>
       </div>

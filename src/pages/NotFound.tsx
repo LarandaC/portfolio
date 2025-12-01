@@ -1,4 +1,3 @@
-import { Footer } from "../components/layout/Footer";
 import { NotFoundSection } from "../components/sections/NotFoundSection";
 import { StarBackground } from "../components/shared/StarBackground";
 import { ThemeToggle } from "../components/shared/ThemeToggle";
@@ -11,7 +10,6 @@ export const NotFound = () => {
       <main>
         <NotFoundSection />
       </main>
-      <Footer />
     </div>
   );
 };
