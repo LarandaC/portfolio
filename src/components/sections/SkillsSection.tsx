@@ -1,56 +1,30 @@
 import { useState } from "react";
 import { cn } from "../../lib/utils";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
+import { skills } from "@/lib/skills";
+import { motion, AnimatePresence } from "framer-motion";
+import { icons, type LucideProps } from "lucide-react";
 
-// lista de habilidades
-const skills = [
-  //frontend skills
-  { name: "HTML/CSS", level: 95, category: "frontend", icon: "js-icon" },
-  { name: "JavaScript", level: 90, category: "frontend", icon: "js-icon" },
-  { name: "React", level: 90, category: "frontend", icon: "react-icon" },
-  {
-    name: "Tailwind CSS",
-    level: 90,
-    category: "frontend",
-    icon: "tailwind-icon",
-  },
-  {
-    name: "Material UI",
-    level: 80,
-    category: "frontend",
-    icon: "material-icon",
-  },
-  //{ name: "Next.js", level: 80, category: "frontend", icon: "next-icon" },
-  { name: "TypeScript", level: 80, category: "frontend", icon: "next-icon" },
-
-  //backend skills
-  //{ name: "Node.js", level: 80, category: "backend", icon: "node-icon" },
-  { name: "Python", level: 80, category: "backend", icon: "python-icon" },
-  //{ name: "Express", level: 75, category: "backend", icon: "express-icon" },
-  { name: "PostgreSQL", level: 70, category: "backend", icon: "postgres-icon" },
-  {
-    name: "SQL Server",
-    level: 70,
-    category: "backend",
-    icon: "sqlserver-icon",
-  },
-
-  //tools
-  { name: "Git/GitHub", level: 90, category: "herramientas", icon: "git-icon" },
-  { name: "Figma", level: 80, category: "herramientas", icon: "figma-icon" },
-  { name: "VS Code", level: 80, category: "herramientas", icon: "vscode-icon" },
-  //{ name: "Docker", level: 60, category: "tools", icon: "docker-icon" },
-];
-
-// categorias de las habilidades
 const categories = ["todos", "frontend", "backend", "herramientas"];
 
-// para listar las habilidades, mostrar el procentaje y filtrar por categorias
+// obtener el componente de icono dinámicamente
+const DynamicIcon = ({
+  name,
+  ...props
+}: { name: keyof typeof icons } & LucideProps) => {
+  const IconComponent = icons[name];
+
+  if (!IconComponent) {
+    return null;
+  }
+
+  // Retorna el componente de Lucide
+  return <IconComponent {...props} />;
+};
+
 export const SkillsSection = () => {
-  // estado para la categoria
   const [activeCategory, setActiveCategory] = useState("todos");
 
-  // filtra la categoria segun el valor del estado, si es todos trae todo y si no solo trae lo que esta en activeCategoria
   const filteredSkills = skills.filter(
     (skill) => activeCategory === "todos" || skill.category === activeCategory
   );
@@ -63,47 +37,92 @@ export const SkillsSection = () => {
             Skills
           </h2>
 
+          {/* tabs */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category, key) => (
-              <button
-                key={key}
-                onClick={() => setActiveCategory(category)}
-                className={cn(
-                  "px-5 py-2 rounded-full transition-colors duration-300 capitalize font-semibold cursor-pointer border border-border/70",
-                  activeCategory === category
-                    ? "bg-primary-gradient text-secondary-foreground"
-                    : "bg-secondary/70 text-foreground hover:bg-secondary"
-                )}
-              >
-                {category}
-              </button>
-            ))}
+            <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-1 px-4 py-2 sm:px-2 border border-border/70 rounded-full shadow-none sm:shadow-md  bg-card">
+              {categories.map((category) => {
+                const isActive = activeCategory === category;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={cn(
+                      "relative py-1 px-1 sm:px-5 sm:py-2 transition-colors duration-300 font-semibold cursor-pointer outline-none z-10 rounded-full",
+                      isActive
+                        ? "text-primary-foreground"
+                        : "text-foreground hover:text-primary"
+                    )}
+                    style={{ WebkitTapHighlightColor: "transparent" }}
+                  >
+                    {/* motion si es activo */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeCategoryBackground"
+                        className="absolute inset-0 bg-primary-gradient rounded-full -z-10"
+                        transition={{
+                          type: "spring",
+                          stiffness: 200,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                    <span className="capitalize relative z-20 whitespace-nowrap">
+                      {category}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
+          {/* cards */}
+          <motion.div
+            layout
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {/* animacion */}
+            <AnimatePresence mode="popLayout">
+              {filteredSkills.map((skill) => (
+                <motion.div
+                  key={skill.name}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="bg-card p-6 rounded-lg shadow-md card-hover border border-border/70"
+                >
+                  <div className="grid grid-cols-[1fr_auto] gap-4 items-center">
+                    {/* skill */}
+                    <div className="text-left">
+                      <h3 className="font-semibold text-lg">{skill.name}</h3>
+                      <span className="text-sm text-muted-foreground">
+                        {skill.level}
+                      </span>
+                    </div>
 
-          {/* aca se aplica el filtro para que solo aparezca lo seleccionado */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredSkills.map((skill, key) => (
-              <div
-                key={key}
-                className="bg-card p-6 rounded-lg shadow-md card-hover  border border-border/70"
-              >
-                <div className="text-left mb-4">
-                  <h3 className="font-semibold text-lg">{skill.name}</h3>
-                </div>
-                <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                  <div
-                    className="bg-primary-gradient h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
-                    style={{ width: skill.level + "%" }}
-                  />
-                </div>
-                <div className="text-right mt-1">
-                  <span className="text-sm text-muted-foreground">
-                    {skill.level}%
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+                    {/* icon */}
+                    <div className="text-right">
+                      <motion.div
+                        initial={{ opacity: 0, rotate: -45 }}
+                        animate={{ opacity: 1, rotate: 0 }}
+                        transition={{
+                          delay: 0.3,
+                          duration: 0.5,
+                          type: "spring",
+                          stiffness: 150,
+                        }}
+                      >
+                        <DynamicIcon
+                          name={skill.icon}
+                          className="w-8 h-8 text-muted-foreground"
+                        />
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </RevealOnScroll>
     </section>

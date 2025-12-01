@@ -55,19 +55,6 @@
       transform: translateY(0);
     }
   }
-  @keyframes meteor {
-    0% {
-      transform: rotate(215deg) translateX(0);
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(215deg) translateX(-500px);
-      opacity: 0;
-    }
-  }
 
   @keyframes bounce-custom {
     0%,
@@ -180,14 +167,88 @@
 }
 
 .cosmic-button {
-  @apply px-6 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 active:scale-95;
+  @apply relative px-6 py-2 rounded-full font-medium transition-all duration-300 overflow-hidden hover:scale-105;
   background-image: linear-gradient(
     to right,
     hsl(var(--primary) / 0.9) 0%,
     hsl(250 65% 50%) 100%
   );
+  z-index: 1;
   color: hsl(var(--primary-foreground));
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.cosmic-button-secondary {
+  @apply relative border border-primary px-6 py-2 rounded-full font-medium transition-all duration-300 overflow-hidden text-primary hover:scale-105;
+  z-index: 1;
+}
+
+.cosmic-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    to right,
+    hsl(250 80% 60%) 0%,
+    hsl(250 65% 50%) 100%
+  );
+
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 0;
+}
+
+.cosmic-button-secondary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    to right,
+    hsl(250 65% 50%) 0%,
+    hsl(250 80% 60%) 100%
+  );
+
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 0;
+}
+
+/* Slide-in */
+.cosmic-button:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cosmic-button-secondary:hover {
+  border-color: transparent; 
+  color: hsl(var(--primary-foreground));
+}
+
+.cosmic-button-secondary:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cosmic-button span {
+  position: relative;
+  z-index: 2;
+}
+
+.cosmic-button-secondary span {
+  position: relative;
+  z-index: 2;
 }
 
 .reveal {

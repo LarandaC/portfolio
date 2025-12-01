@@ -1,10 +1,10 @@
-import { Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useToast } from "../../hooks/use-toast";
 import type React from "react";
 import { useRef, useState } from "react";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import emailjs from "@emailjs/browser";
+import { Button } from "../ui/Button";
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -121,7 +121,7 @@ export const ContactSection = () => {
             </div>
             <div className="space-y-10 bg-card p-8 rounded-xl shadow-lg  border border-border/70">
               <h3 className="text-2xl font-semibold mb-6">Envía un mensaje</h3>
-              {/* Form start here */}
+              {/* Form */}
               <form
                 ref={formRef}
                 action=""
@@ -187,17 +187,11 @@ export const ContactSection = () => {
                     }
                   />
                 </div>
-                <button
+                <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className={cn(
-                    "cosmic-button w-full flex items-center justify-center gap-2 cursor-pointer",
-                    ""
-                  )}
-                >
-                  {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-                  <Send size={16} />
-                </button>
+                  isSubmitting={isSubmitting}
+                  text="Enviar"
+                />
               </form>
             </div>
           </div>
