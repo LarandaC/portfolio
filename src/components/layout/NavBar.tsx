@@ -1,16 +1,7 @@
 import { cn } from "../../lib/utils";
-
+import { navItems } from "../../lib/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-
-// Para recorrer la lista de elementos del menú de navegación
-const navItems = [
-  { name: "Inicio", href: "#hero" },
-  { name: "Sobre mi", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Proyectos", href: "#projects" },
-  { name: "Contacto", href: "#contact" },
-];
 
 export const NavBar = () => {
   // Estado para manejar el estado de desplazamiento
@@ -20,11 +11,19 @@ export const NavBar = () => {
   // Efecto para manejar el evento de desplazamiento
   // Se agrega un listener al evento de scroll para cambiar el estado de isScrolled
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-      if (isMenuOpen) setIsMenuOpen(false);
-      
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 10);
+          if (isMenuOpen) setIsMenuOpen(false);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);

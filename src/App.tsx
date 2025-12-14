@@ -1,27 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Index } from "./pages/Index";
-import { NotFound } from "./pages/NotFound";
 import { Toaster } from "./components/ui/toaster";
-import { useEffect, useState } from "react";
+import { Suspense, lazy } from "react";
 import { Loader } from "./components/ui/Loader";
 
+const Index = lazy(() => import("./pages/Index").then(module => ({ default: module.Index })));
+const NotFound = lazy(() => import("./pages/NotFound").then(module => ({ default: module.NotFound })));
+
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) return <Loader />;
   return (
     <>
       <Toaster />
       <BrowserRouter>
-        <Routes>
-          <Route index element={<Index />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route index element={<Index />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );
