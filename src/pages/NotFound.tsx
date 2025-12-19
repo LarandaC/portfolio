@@ -1,6 +1,6 @@
 import { NotFoundSection } from "../components/sections/NotFoundSection";
 import { StarBackground } from "../components/shared/StarBackground";
-import { ThemeToggle } from "../components/shared/ThemeToggle";
+import { ThemeToggle } from "../theme/ThemeToggle";
 
 export const NotFound = () => {
   return (
