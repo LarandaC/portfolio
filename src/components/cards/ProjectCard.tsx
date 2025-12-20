@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { ProjectModal } from "../ui/ProjectModal";
-import { createPortal } from "react-dom";
+import {
+  alpha,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 
 interface Project {
   id: number;
@@ -17,7 +25,6 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = ({ projects }: ProjectCardProps) => {
-  // 1. Estado para el modal: cuál proyecto está activo y si es visible
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const openModal = (project: Project) => {
@@ -29,35 +36,83 @@ export const ProjectCard = ({ projects }: ProjectCardProps) => {
   };
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, key) => (
-          <div
-            key={key}
-            className="group bg-card rounded-xl overflow-hidden shadow-md border border-border/70 card-hover flex flex-col"
+      <Grid container spacing={4}>
+        {projects.map((project, index) => (
+          <Grid
+            size={{ xs: 12, md: 6, lg: 4 }}
+            key={index}
+            sx={{ display: "flex" }}
           >
-            <div
-              className="w-full overflow-hidden h-56 cursor-pointer"
-              onClick={() => openModal(project)} // Llama a openModal al hacer clic
+            <Card
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "background.paper",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: (theme) => theme.shadows[4],
+                border: "1px solid",
+                borderColor: (theme) => alpha(theme.palette.divider, 0.7),
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.02) translateY(-4px)",
+                  boxShadow: (theme) => theme.shadows[10],
+                  "& img": {
+                    transform: "scale(1.1)",
+                  },
+                },
+              }}
             >
-              <img
-                src={project.image}
-                alt={project.description}
-                className="w-full h-full object-cover transition-transform duration-300"
-              />
-            </div>
-            <div className="p-4 flex-grow">
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-            </div>
-          </div>
+              {/* Contenedor de Imagen */}
+              <Box
+                onClick={() => openModal(project)}
+                sx={{
+                  width: "100%",
+                  height: 224,
+                  overflow: "hidden",
+                  cursor: "pointer",
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  image={project.image}
+                  alt={project.description}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                />
+              </Box>
+
+              {/* Contenido de la Card */}
+              <CardContent sx={{ p: 2, flexGrow: 1 }}>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontSize: "1.25rem",
+                    fontWeight: 600,
+                    textAlign: "left",
+                  }}
+                >
+                  {project.title}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </div>
-      {/* Modal */}
-      {selectedProject &&
-        document.getElementById("modal-root") &&
-        createPortal(
-          <ProjectModal project={selectedProject} onClose={closeModal} />,
-          document.getElementById("modal-root")! // Renderiza el modal
-        )}
+      </Grid>
+
+      {/* Modal / Dialog de MUI */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          open={!!selectedProject}
+          onClose={closeModal}
+        />
+      )}
     </>
   );
 };

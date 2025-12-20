@@ -1,98 +1,57 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { Button as MuiButton, Box, alpha } from "@mui/material";
 
-interface buttonProps {
+interface SecondaryButtonProps {
   text: string;
   href: string;
 }
 
-interface Ripple {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-}
-
-export const SecondaryButton = ({ text, href }: buttonProps) => {
-  const [ripples, setRipples] = useState<Ripple[]>([]);
-
-  const calculateRippleSize = (target: HTMLElement) => {
-    const { width, height } = target.getBoundingClientRect();
-    const size = Math.max(width, height) * 2;
-    return size;
-  };
-
-  const handleCreateRipple = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    const button = event.currentTarget;
-    const { top, left } = button.getBoundingClientRect();
-
-    const x = event.clientX - left;
-    const y = event.clientY - top;
-
-    const size = calculateRippleSize(button);
-
-    const newRipple: Ripple = {
-      id: Date.now(),
-      x,
-      y,
-      size,
-    };
-
-    setRipples((prevRipples) => [...prevRipples, newRipple]);
-  };
-
-  const handleRippleComplete = (id: number) => {
-    setRipples((prevRipples) =>
-      prevRipples.filter((ripple) => ripple.id !== id)
-    );
-  };
-
+export const SecondaryButton = ({ text, href }: SecondaryButtonProps) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-      <motion.a
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
+        gap: 2,
+        pt: { xs: 0, sm: 4 },
+        justifyContent: "center",
+      }}
+    >
+      <MuiButton
+        component="a"
         href={href}
-        className="
-          cosmic-button-secondary 
-          relative cursor-pointer 
-        "
-        onClick={handleCreateRipple}
-        whileHover={{
-          boxShadow: "0 0 15px rgba(87, 57, 156, 0.9)",
-        }}
-        whileTap={{
-          scale: 0.98,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 400,
-          damping: 17,
-          boxShadow: { duration: 0.3 },
+        variant="outlined"
+        size="large"
+        target={href.endsWith(".pdf") ? "_blank" : "_self"}
+        rel="noopener noreferrer"
+        sx={{
+          px: 4,
+          py: 1.2,
+          borderRadius: "50px",
+          fontWeight: 600,
+          textTransform: "none",
+          fontSize: "1rem",
+
+          borderColor: "primary.main",
+          color: "primary.main",
+
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+
+          "&:hover": {
+            borderWidth: "1px",
+            borderColor: "primary.light",
+            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.08),
+            transform: "translateY(-2px)",
+            boxShadow: (theme) =>
+              `0 0 15px ${alpha(theme.palette.primary.main, 0.4)}`,
+          },
+
+          "&:active": {
+            transform: "scale(0.98)",
+          },
         }}
       >
-        <span className="relative z-10">{text}</span>
-
-        <div className="absolute inset-0 overflow-hidden rounded-full">
-          {ripples.map(({ id, x, y, size }) => (
-            <motion.span
-              key={id}
-              className="absolute rounded-full bg-white/50"
-              style={{
-                width: size,
-                height: size,
-                top: y,
-                left: x,
-                marginLeft: -size / 2,
-                marginTop: -size / 2,
-              }}
-              initial={{ scale: 0, opacity: 1 }}
-              animate={{ scale: 1, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              onAnimationComplete={() => handleRippleComplete(id)}
-            />
-          ))}
-        </div>
-      </motion.a>
-    </div>
+        {text}
+      </MuiButton>
+    </Box>
   );
 };

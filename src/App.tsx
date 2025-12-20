@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "./components/ui/toaster";
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import { Loader } from "./components/ui/Loader";
-
-const Index = lazy(() => import("./pages/Index").then(module => ({ default: module.Index })));
-const NotFound = lazy(() => import("./pages/NotFound").then(module => ({ default: module.NotFound })));
+import { Index } from "./pages/Index";
+import { NotFound } from "./pages/NotFound";
+import { ColorModeProvider } from "./theme/themeContext";
 
 function App() {
   return (
-    <>
+    <ColorModeProvider>
       <Toaster />
       <BrowserRouter>
         <Suspense fallback={<Loader />}>
@@ -18,7 +18,7 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </>
+    </ColorModeProvider>
   );
 }
 

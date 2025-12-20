@@ -10,7 +10,7 @@ export const ProgressBar = () => {
 
   return (
     <motion.div
-      style={{ scaleY }} 
+      style={{ scaleY }}
       className="
         fixed left-0 top-0 
         w-1.5 h-screen 
