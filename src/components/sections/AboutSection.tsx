@@ -28,7 +28,7 @@ export const AboutSection = () => {
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto">
           {/* Título */}
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-16 font-family-title">
             Sobre Mi
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4" />
           </h2>

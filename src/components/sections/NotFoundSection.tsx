@@ -7,14 +7,14 @@ export const NotFoundSection = () => {
       {/* Contenido principal */}
       <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center space-y-8 opacity-0 animate-fade-in">
         <div className="relative mb-4">
-          <h1 className="text-[10rem] md:text-[14rem] font-black text-primary select-none leading-none ">
+          <h1 className="text-[10rem] md:text-[14rem] font-black text-primary select-none leading-none font-family-title">
             <GradientText showBorder={false}>404</GradientText>
           </h1>
         </div>
 
         {/* Título y descripción */}
         <div className="space-y-6 opacity-0 animate-fade-in-delay-1">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight font-family-title">
             Houston, tenemos un problema
           </h2>
           <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">

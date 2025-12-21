@@ -7,7 +7,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="py-10 px-4 sm:px-8 md:px-28 border-t border-border bg-card flex flex-wrap justify-between items-center gap-2 relative">
+    <footer className="py-10 px-4 sm:px-8 md:px-28 border-t border-border bg-card flex flex-wrap sm:justify-between items-center gap-2 relative justify-center">
       <p className="text-sm text-muted-foreground">
         &copy; {new Date().getFullYear()} Leticia. Todos los derechos
         reservados.

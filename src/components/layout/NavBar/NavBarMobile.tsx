@@ -1,4 +1,5 @@
 import { navItems } from "@/lib/navigation";
+import { ThemeToggle } from "@/theme/ThemeToggle";
 import { Close } from "@mui/icons-material";
 import { Github, Linkedin, Mail } from "lucide-react";
 
@@ -87,6 +88,9 @@ export const NavBarMobile = ({
                 <social.icon className="w-5 h-5" />
               </a>
             ))}
+          </div>
+          <div className="sm:block fixed bottom-5 right-5 z-50">
+            <ThemeToggle />
           </div>
         </div>
       </div>

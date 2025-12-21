@@ -3,6 +3,7 @@ import { ProjectCard } from "../cards/ProjectCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { NextArrow, PrevArrow } from "./Arrows";
+import { useEffect, useState } from "react";
 
 interface Project {
   id: number;
@@ -19,15 +20,31 @@ interface ProjectCarouselProps {
 }
 
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: isMobile ? 1 : 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
     pauseOnHover: true,
+    arrows: !isMobile,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -41,6 +58,8 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          initialSlide: 0,
+          arrows: false,
         },
       },
     ],
@@ -52,7 +71,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
   return (
     <div className="project-carousel relative">
-      <Slider {...settings} nextArrow={<NextArrow />} prevArrow={<PrevArrow />}>
+      <Slider {...settings}>
         {projects.map((project) => (
           <div key={project.id} className="px-4">
             <ProjectCard

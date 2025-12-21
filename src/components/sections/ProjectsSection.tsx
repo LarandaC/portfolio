@@ -8,7 +8,7 @@ export const ProjectsSection = () => {
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto">
           {/* Título de la sección */}
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 font-family-title">
             Proyectos
           </h2>
 
