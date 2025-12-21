@@ -1,29 +1,54 @@
-import { Briefcase, Code, User } from "lucide-react";
+import { Code, PaintBucket, Rocket } from "lucide-react";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import { Button } from "../ui/Button";
 import { SecondaryButton } from "../ui/SecondaryButton";
+import SpotlightCard from "../shared/SpotlightCard";
 
-// Seccion sobre mi
 export const AboutSection = () => {
+  const services = [
+    {
+      icon: <Code />,
+      title: "Desarrollo web",
+      desc: "Experiencia en frontend y backend, desde React hasta Node.js y bases de datos.",
+    },
+    {
+      icon: <PaintBucket />,
+      title: "Diseño UI/UX",
+      desc: "Diseño interfaces intuitivas, enfocadas en la usabilidad y el atractivo visual.",
+    },
+    {
+      icon: <Rocket />,
+      title: "Optimización",
+      desc: "Mejora del rendimiento y escalabilidad de aplicaciones en producción..",
+    },
+  ];
+
   return (
-    <section id="about" className="p-24 px-4 relative">
+    <section id="about" className="py-28 px-4 relative">
       <RevealOnScroll>
-        <div className="container max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Sobre <span className="text-primary">Mi</span>
+        <div className="max-w-6xl mx-auto">
+          {/* Título */}
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-16">
+            Sobre Mi
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4" />
           </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            {/* Columna Izquierda */}
+            <div className="flex flex-col gap-6">
               <h3 className="text-2xl font-semibold">
                 Passionate Web Developer
               </h3>
-              <p className="text-muted-foreground">
-                Soy desarrolladora especializada en crear aplicaciones web
-                responsivas, accesibles y de alto rendimiento utilizando
-                tecnologías modernas
+              <p className="text-muted-foreground text-lg">
+                Soy una desarrolladora apasionada por crear soluciones
+                tecnológicas innovadoras. Me especializo en construir
+                aplicaciones escalables y eficientes. Mi enfoque combina la
+                excelencia técnica con un fuerte sentido del diseño, asegurando
+                que cada proyecto no solo funcione correctamente, sino que
+                también ofrezca una experiencia de usuario excepcional.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 mt-2 justify-center">
                 <Button href="#contact" text="Ponte en contacto" />
                 <SecondaryButton
                   href="/files/CV-LeticiaAranda-2025.pdf"
@@ -31,49 +56,25 @@ export const AboutSection = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-6">
-              <div className="bg-card p-6 rounded-lg shadow-md border border-border/70 card-hover">
-                <div className="flex items-start gap-4 ">
-                  <div className="p-3 rounded-full bg-primary/10">
-                    <Code className="h-6 w-6 text-primary" />
+
+            {/* Columna Derecha */}
+            <div className="flex flex-col gap-6">
+              {services.map((service, index) => (
+                <SpotlightCard
+                  key={index}
+                  spotlightColor="rgba(102, 36, 168, 0.2)"
+                >
+                  <div className="flex gap-4 p-6 text-left">
+                    <div className="p-4 rounded-full flex items-center justify-center bg-primary/10">
+                      {service.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">{service.title}</h4>
+                      <p className="text-foreground/70">{service.desc}</p>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-lg">Desarrollo web</h4>
-                    <p className="text-muted-foreground">
-                      Aplicaciones web dinámicas y responsivas usando frameworks
-                      y librerías modernas
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-card p-6 rounded-lg shadow-md border border-border/70 card-hover">
-                <div className="flex items-start gap-4 ">
-                  <div className="p-3 rounded-full bg-primary/10">
-                    <User className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-lg">Diseño UI/UX</h4>
-                    <p className="text-muted-foreground">
-                      Diseño interfaces intuitivas, enfocadas en la usabilidad y
-                      el atractivo visual
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-card p-6 rounded-lg shadow-md border border-border/70 card-hover">
-                <div className="flex items-start gap-4 ">
-                  <div className="p-3 rounded-full bg-primary/10">
-                    <Briefcase className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-lg">Copy y UI</h4>
-                    <p className="text-muted-foreground">
-                      Combinando texto, diseño y funcionalidad para destacar el
-                      valor del producto en cada componente
-                    </p>
-                  </div>
-                </div>
-              </div>
+                </SpotlightCard>
+              ))}
             </div>
           </div>
         </div>

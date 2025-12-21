@@ -3,96 +3,112 @@ import type { IconNames } from "../hooks/use-icon";
 // Definición de la estructura de una habilidad
 export type Skill = {
   name: string;
-  level: string; // Tu nivel sigue siendo un string ('Avanzado', etc.)
+  level: string;
   category: string;
-  icon: IconNames; // Ahora espera uno de los nombres válidos de Lucide
+  icon: IconNames;
 };
 
-export const skills: Skill[] = [
-  //frontend skills
+export const skills = [
+  // frontend
   {
     name: "HTML/CSS",
     level: "Avanzado",
     category: "frontend",
-    icon: "Code",
+    icon: "HtmlRounded",
   },
   {
     name: "JavaScript",
     level: "Avanzado",
     category: "frontend",
-    icon: "FileJson",
+    icon: "JavascriptRounded",
   },
   {
     name: "React",
     level: "Avanzado",
     category: "frontend",
-    icon: "Code",
-  },
-  {
-    name: "Tailwind CSS",
-    level: "Avanzado",
-    category: "frontend",
-    icon: "Code",
+    icon: "CodeRounded",
   },
   {
     name: "Material UI",
     level: "Avanzado",
     category: "frontend",
-    icon: "Code",
+    icon: "DashboardRounded",
   },
-  //{ name: "Next.js", level: "Avanzado", category: "frontend", icon: "next-icon" },
   {
     name: "TypeScript",
     level: "Avanzado",
     category: "frontend",
-    icon: "Code",
+    icon: "JavascriptRounded",
   },
 
-  //backend skills
+  {
+    name: "Angular",
+    level: "Intermedio",
+    category: "frontend",
+    icon: "CodeRounded",
+  },
+
+  // backend
   {
     name: "Node.js",
     level: "Intermedio",
     category: "backend",
-    icon: "Code",
+    icon: "JavascriptRounded",
+  },
+  {
+    name: "Express",
+    level: "Intermedio",
+    category: "backend",
+    icon: "JavascriptRounded",
   },
   {
     name: "Python",
     level: "Intermedio",
     category: "backend",
-    icon: "Code",
+    icon: "CodeRounded",
   },
-  //{ name: "Express", level: 75, category: "backend", icon: "express-icon" },
   {
     name: "PostgreSQL",
     level: "Intermedio",
     category: "backend",
-    icon: "Database",
+    icon: "DatasetRounded",
   },
   {
     name: "SQL Server",
     level: "Intermedio",
     category: "backend",
-    icon: "Database",
+    icon: "DatasetRounded",
   },
 
-  //tools
+  // herramientas
   {
     name: "Git/GitHub",
     level: "Avanzado",
     category: "herramientas",
-    icon: "Github",
-  },
-  {
-    name: "Figma",
-    level: "Avanzado",
-    category: "herramientas",
-    icon: "Code",
+    icon: "GitHub",
   },
   {
     name: "VS Code",
     level: "Avanzado",
     category: "herramientas",
-    icon: "Code",
+    icon: "CodeRounded",
   },
-  //{ name: "Docker", level: 60, category: "tools", icon: "docker-icon" },
+  {
+    name: "Cursor",
+    level: "Avanzado",
+    category: "herramientas",
+    icon: "CodeRounded",
+  },
+  {
+    name: "Antigravity",
+    level: "Avanzado",
+    category: "herramientas",
+    icon: "CodeRounded",
+  },
+  {
+    name: "Figma",
+    level: "Avanzado",
+    category: "herramientas",
+    icon: "BrushRounded",
+  },
 ];

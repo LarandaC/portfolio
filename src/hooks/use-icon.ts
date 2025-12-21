@@ -1,3 +1,3 @@
-import { icons } from "lucide-react";
+import * as MuiIcons from "@mui/icons-material";
 
-export type IconNames = keyof typeof icons;
+export type IconNames = keyof typeof MuiIcons;
