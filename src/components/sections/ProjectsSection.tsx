@@ -1,29 +1,30 @@
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import { projects } from "@/lib/projects";
-import { ProjectCard } from "@/components/cards/ProjectCard";
-import { Button } from "../ui/Button";
+import { ProjectCarousel } from "../ui/ProjectCarousel";
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 px-4 relative">
+    <section id="projects" className="relative py-28 px-4">
       <RevealOnScroll>
-        <div className="container mx-auto max-w-5xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+        <div className="max-w-6xl mx-auto">
+          {/* Título de la sección */}
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
             Proyectos
           </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+
+          {/* Descripción subtítulo */}
+          <p className="text-center text-muted-foreground mb-4 max-w-2xl mx-auto">
             Estos son algunos de mis proyectos recientes. Cada uno fue
             desarrollado con atención al detalle, rendimiento y experiencia de
             usuario.
           </p>
-
-          <ProjectCard projects={projects} />
-
-          <div className="text-center mt-16">
-            <Button href="https://github.com/LarandaC" text="Mira mi GitHub" />
-          </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-12" />
+          {/* Grid de Proyectos */}
+          <ProjectCarousel projects={projects} />
         </div>
       </RevealOnScroll>
     </section>
   );
 };
+
+export default ProjectsSection;

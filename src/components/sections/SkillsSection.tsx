@@ -1,128 +1,90 @@
 import { useState } from "react";
-import { cn } from "../../lib/utils";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import { skills } from "@/lib/skills";
-import { motion, AnimatePresence } from "framer-motion";
-import { icons, type LucideProps } from "lucide-react";
+import * as MuiIcons from "@mui/icons-material";
+import SpotlightCard from "../shared/SpotlightCard";
 
 const categories = ["todos", "frontend", "backend", "herramientas"];
 
-// obtener el componente de icono dinámicamente
-const DynamicIcon = ({
+const DynamicMuiIcon = ({
   name,
-  ...props
-}: { name: keyof typeof icons } & LucideProps) => {
-  const IconComponent = icons[name];
+  fontSize = 24,
+}: {
+  name: string;
+  fontSize?: number;
+}) => {
+  let IconComponent = (MuiIcons as any)[name];
 
-  if (!IconComponent) {
-    return null;
+  if (name.toLowerCase() === "github") {
+    IconComponent = MuiIcons.GitHub;
   }
 
-  // Retorna el componente de Lucide
-  return <IconComponent {...props} />;
+  if (!IconComponent) {
+    return <MuiIcons.CodeRounded sx={{ fontSize, color: "text.primary" }} />;
+  }
+
+  return <IconComponent sx={{ fontSize }} />;
 };
 
 export const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState("todos");
-
+  const [activeCategory, setActiveCategory] = useState(0);
+  const currentCategoryName = categories[activeCategory];
   const filteredSkills = skills.filter(
-    (skill) => activeCategory === "todos" || skill.category === activeCategory
+    (skill) =>
+      currentCategoryName === "todos" || skill.category === currentCategoryName
   );
 
   return (
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30">
+    <section id="skills" className="relative py-28 px-4 ">
       <RevealOnScroll>
-        <div className="container max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
             Skills
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-10" />
           </h2>
 
-          {/* tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-1 px-4 py-2 sm:px-2 border border-border/70 rounded-full shadow-none sm:shadow-md  bg-card">
-              {categories.map((category) => {
-                const isActive = activeCategory === category;
-                return (
-                  <button
-                    key={category}
-                    onClick={() => setActiveCategory(category)}
-                    className={cn(
-                      "relative py-1 px-1 sm:px-5 sm:py-2 transition-colors duration-300 font-semibold cursor-pointer outline-none z-10 rounded-full",
-                      isActive
-                        ? "text-primary-foreground"
-                        : "text-foreground hover:text-primary"
-                    )}
-                    style={{ WebkitTapHighlightColor: "transparent" }}
-                  >
-                    {/* motion si es activo */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeCategoryBackground"
-                        className="absolute inset-0 bg-primary-gradient rounded-full -z-10"
-                        transition={{
-                          type: "spring",
-                          stiffness: 200,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                    <span className="capitalize relative z-20 whitespace-nowrap">
-                      {category}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+          {/* Tabs Tailwind */}
+          <div className="flex justify-center mb-8 flex-wrap gap-2">
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveCategory(index)}
+                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer
+                  ${
+                    activeCategory === index
+                      ? "text-primary-foreground shadow-lg  bg-gradient-to-r from-primary to-secondary-foreground"
+                      : "bg-card border border-border text-text hover:bg-primary/10"
+                  }`}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
+            ))}
           </div>
-          {/* cards */}
-          <motion.div
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {/* animacion */}
-            <AnimatePresence mode="popLayout">
-              {filteredSkills.map((skill) => (
-                <motion.div
-                  key={skill.name}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="bg-card p-6 rounded-lg shadow-md card-hover border border-border/70"
-                >
-                  <div className="grid grid-cols-[1fr_auto] gap-4 items-center">
-                    {/* skill */}
-                    <div className="text-left">
-                      <h3 className="font-semibold text-lg">{skill.name}</h3>
-                      <span className="text-sm text-muted-foreground">
-                        {skill.level}
-                      </span>
-                    </div>
 
-                    {/* icon */}
-                    <div className="text-right">
-                      <motion.div
-                        initial={{ opacity: 0, rotate: -45 }}
-                        animate={{ opacity: 1, rotate: 0 }}
-                        transition={{
-                          delay: 0.3,
-                          duration: 0.5,
-                          type: "spring",
-                          stiffness: 150,
-                        }}
-                      >
-                        <DynamicIcon
-                          name={skill.icon}
-                          className="w-8 h-8 text-muted-foreground"
-                        />
-                      </motion.div>
-                    </div>
+          {/* Grid de skills */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {filteredSkills.map((skill, index) => (
+              <SpotlightCard
+                key={index}
+                spotlightColor="rgba(102, 36, 168, 0.2)"
+              >
+                <div className="flex items-center justify-between p-3">
+                  <div className="flex flex-col">
+                    <h3 className="font-semibold mb-1 text-left">
+                      {skill.name}
+                    </h3>
+                    <p className="text-sm text-foreground/70 text-left">
+                      {skill.level}
+                    </p>
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+
+                  <div className="p-2.5 rounded-full flex items-center justify-center bg-primary/10 transition-all duration-300 skill-icon">
+                    <DynamicMuiIcon name={skill.icon} fontSize={42} />
+                  </div>
+                </div>
+              </SpotlightCard>
+            ))}
+          </div>
         </div>
       </RevealOnScroll>
     </section>

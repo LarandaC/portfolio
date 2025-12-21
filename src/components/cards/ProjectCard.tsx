@@ -1,63 +1,79 @@
-import { useState } from "react";
-import { ProjectModal } from "../ui/ProjectModal";
-import { createPortal } from "react-dom";
+import { ExternalLink, Github } from "lucide-react";
 
-interface Project {
-  id: number;
+interface ProjectCardProps {
   title: string;
   description: string;
   image: string;
   tags: string[];
-  demoUrl: string;
-  githubUrl: string;
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
-interface ProjectCardProps {
-  projects: Project[];
-}
-
-export const ProjectCard = ({ projects }: ProjectCardProps) => {
-  // 1. Estado para el modal: cuál proyecto está activo y si es visible
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const openModal = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  const closeModal = () => {
-    setSelectedProject(null);
-  };
+export function ProjectCard({
+  title,
+  description,
+  image,
+  tags,
+  githubUrl,
+  liveUrl,
+}: ProjectCardProps) {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, key) => (
-          <div
-            key={key}
-            className="group bg-card rounded-xl overflow-hidden shadow-md border border-border/70 card-hover flex flex-col"
-          >
-            <div
-              className="w-full overflow-hidden h-56 cursor-pointer"
-              onClick={() => openModal(project)} // Llama a openModal al hacer clic
-            >
-              <img
-                src={project.image}
-                alt={project.description}
-                className="w-full h-full object-cover transition-transform duration-300"
-              />
-            </div>
-            <div className="p-4 flex-grow">
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-            </div>
+      <div className="group relative bg-card border border-border rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+        <div className="relative overflow-hidden h-48">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 transition-opacity duration-300" />
+        </div>
+
+        <div className="p-6">
+          <h3 className="mb-2 font-bold text-foreground">{title}</h3>
+          <p className="text-muted-foreground mb-4">{description}</p>
+
+          <div className="flex flex-wrap gap-2 mb-4 justify-center">
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className="px-3 py-1 bg-transparent text-primary border border-primary rounded-full text-sm"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
-        ))}
+
+          <div
+            className={`flex justify-end ${
+              githubUrl && liveUrl ? "gap-4" : "gap-2"
+            }`}
+          >
+            {githubUrl && (
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Github size={20} />
+                <span>Código</span>
+              </a>
+            )}
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <ExternalLink size={20} />
+                <span>Demo</span>
+              </a>
+            )}
+          </div>
+        </div>
       </div>
-      {/* Modal */}
-      {selectedProject &&
-        document.getElementById("modal-root") &&
-        createPortal(
-          <ProjectModal project={selectedProject} onClose={closeModal} />,
-          document.getElementById("modal-root")! // Renderiza el modal
-        )}
     </>
   );
-};
+}

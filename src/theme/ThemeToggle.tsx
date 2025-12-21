@@ -1,6 +1,6 @@
 import { Moon, Sun } from "lucide-react";
-import { cn } from "../../lib/utils";
-import { useTheme } from "../../hooks/useTheme";
+import { cn } from "../lib/utils";
+import { useTheme } from "../hooks/useTheme";
 
 // ThemeToggle componente para cambiar de tema oscuro a light
 export const ThemeToggle = () => {
