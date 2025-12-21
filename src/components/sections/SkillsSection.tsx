@@ -38,7 +38,7 @@ export const SkillsSection = () => {
     <section id="skills" className="relative py-28 px-4 ">
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 font-family-title">
             Skills
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-10" />
           </h2>
