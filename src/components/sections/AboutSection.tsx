@@ -1,148 +1,84 @@
+import { Code, PaintBucket, Rocket } from "lucide-react";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import { Button } from "../ui/Button";
 import { SecondaryButton } from "../ui/SecondaryButton";
-import { Box, Card, Container, Grid, Typography, alpha } from "@mui/material";
-import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
+import SpotlightCard from "../shared/SpotlightCard";
 
 export const AboutSection = () => {
+  const services = [
+    {
+      icon: <Code />,
+      title: "Desarrollo web",
+      desc: "Experiencia en frontend y backend, desde React hasta Node.js y bases de datos.",
+    },
+    {
+      icon: <PaintBucket />,
+      title: "Diseño UI/UX",
+      desc: "Diseño interfaces intuitivas, enfocadas en la usabilidad y el atractivo visual.",
+    },
+    {
+      icon: <Rocket />,
+      title: "Optimización",
+      desc: "Mejora del rendimiento y escalabilidad de aplicaciones en producción..",
+    },
+  ];
+
   return (
-    <Box
-      component="section"
-      id="about"
-      sx={{ py: { xs: 8, md: 12 }, px: 2, relative: "true" }}
-    >
+    <section id="about" className="py-28 px-4 relative">
       <RevealOnScroll>
-        <Container maxWidth="lg">
-          {/* Título de la sección */}
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: "2rem", md: "2.5rem" },
-              fontWeight: 700,
-              textAlign: "center",
-              mb: 8,
-            }}
-          >
-            Sobre{" "}
-            <Box component="span" sx={{ color: "primary.main" }}>
-              Mi
-            </Box>
-          </Typography>
+        <div className="max-w-6xl mx-auto">
+          {/* Título */}
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-16">
+            Sobre Mi
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4" />
+          </h2>
 
-          <Grid container spacing={6} alignItems="center">
-            {/* Columna Izquierda: Texto y Botones */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                <Typography
-                  variant="h3"
-                  sx={{ fontSize: "1.75rem", fontWeight: 600 }}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Columna Izquierda */}
+            <div className="flex flex-col gap-6">
+              <h3 className="text-2xl font-semibold">
+                Passionate Web Developer
+              </h3>
+              <p className="text-muted-foreground text-lg">
+                Soy una desarrolladora apasionada por crear soluciones
+                tecnológicas innovadoras. Me especializo en construir
+                aplicaciones escalables y eficientes. Mi enfoque combina la
+                excelencia técnica con un fuerte sentido del diseño, asegurando
+                que cada proyecto no solo funcione correctamente, sino que
+                también ofrezca una experiencia de usuario excepcional.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mt-2 justify-center">
+                <Button href="#contact" text="Ponte en contacto" />
+                <SecondaryButton
+                  href="/files/CV-LeticiaAranda-2025.pdf"
+                  text="Descarga CV"
+                />
+              </div>
+            </div>
+
+            {/* Columna Derecha */}
+            <div className="flex flex-col gap-6">
+              {services.map((service, index) => (
+                <SpotlightCard
+                  key={index}
+                  spotlightColor="rgba(102, 36, 168, 0.2)"
                 >
-                  Passionate Web Developer
-                </Typography>
-                <Typography
-                  sx={{ color: "text.secondary", fontSize: "1.1rem" }}
-                >
-                  Soy desarrolladora especializada en crear aplicaciones web
-                  responsivas, accesibles y de alto rendimiento utilizando
-                  tecnologías modernas.
-                </Typography>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", sm: "row" },
-                    gap: 2,
-                    mt: 2,
-                  }}
-                >
-                  <Button href="#contact" text="Ponte en contacto" />
-                  <SecondaryButton
-                    href="/files/CV-LeticiaAranda-2025.pdf"
-                    text="Descarga CV"
-                  />
-                </Box>
-              </Box>
-            </Grid>
-
-            {/* Columna Derecha: Tarjetas de Servicios */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                {[
-                  {
-                    icon: <CodeRoundedIcon />,
-                    title: "Desarrollo web",
-                    desc: "Aplicaciones web dinámicas y responsivas usando frameworks y librerías modernas.",
-                  },
-                  {
-                    icon: <PersonRoundedIcon />,
-                    title: "Diseño UI/UX",
-                    desc: "Diseño interfaces intuitivas, enfocadas en la usabilidad y el atractivo visual.",
-                  },
-                  {
-                    icon: <WorkRoundedIcon />,
-                    title: "Copy y UI",
-                    desc: "Combinando texto, diseño y funcionalidad para destacar el valor del producto.",
-                  },
-                ].map((service, index) => (
-                  <Card
-                    key={index}
-                    sx={{
-                      p: 3,
-                      display: "flex",
-                      gap: 2,
-                      border: "1px solid",
-                      borderColor: (theme) => alpha(theme.palette.divider, 0.7),
-                      backgroundColor: "background.paper",
-                      borderRadius: 2,
-                      /*
-                      boxShadow: (theme) => theme.shadows[1],
-                      */
-
-                      transition:
-                        "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-
-                      "&:hover": {
-                        transform: "scale(1.02) translateY(-4px)",
-                        boxShadow: (theme) => theme.shadows[10],
-                      },
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        p: 1.5,
-                        borderRadius: "50%",
-                        display: "flex",
-                        backgroundColor: (theme) =>
-                          alpha(theme.palette.primary.main, 0.1),
-                        color: "primary.main",
-                        height: "fit-content",
-                      }}
-                    >
+                  <div className="flex gap-4 p-6 text-left">
+                    <div className="p-4 rounded-full flex items-center justify-center bg-primary/10">
                       {service.icon}
-                    </Box>
-                    <Box>
-                      <Typography
-                        variant="h6"
-                        sx={{ fontWeight: 600, mb: 0.5, textAlign: "left" }}
-                      >
-                        {service.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "text.secondary", textAlign: "left" }}
-                      >
-                        {service.desc}
-                      </Typography>
-                    </Box>
-                  </Card>
-                ))}
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">{service.title}</h4>
+                      <p className="text-foreground/70">{service.desc}</p>
+                    </div>
+                  </div>
+                </SpotlightCard>
+              ))}
+            </div>
+          </div>
+        </div>
       </RevealOnScroll>
-    </Box>
+    </section>
   );
 };

@@ -1,24 +1,34 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster } from "./components/ui/toaster";
 import { Suspense } from "react";
-import { Loader } from "./components/ui/Loader";
+import { Toaster } from "./components/ui/toaster";
 import { Index } from "./pages/Index";
 import { NotFound } from "./pages/NotFound";
-import { ColorModeProvider } from "./theme/themeContext";
+import ClickSpark from "./components/shared/ClickSpark";
+import { Loader } from "@/components/ui/Loader";
 
 function App() {
   return (
-    <ColorModeProvider>
+    <>
       <Toaster />
       <BrowserRouter>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route index element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <div className="relative min-h-screen w-full">
+          <ClickSpark
+            sparkSize={10}
+            sparkRadius={20}
+            sparkCount={8}
+            duration={500}
+            easing="ease-out"
+          >
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route index element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </ClickSpark>
+        </div>
       </BrowserRouter>
-    </ColorModeProvider>
+    </>
   );
 }
 

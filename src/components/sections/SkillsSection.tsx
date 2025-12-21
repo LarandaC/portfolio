@@ -1,17 +1,8 @@
 import { useState } from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Tabs,
-  Tab,
-  Card,
-  Grid,
-  alpha,
-} from "@mui/material";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import { skills } from "@/lib/skills";
 import * as MuiIcons from "@mui/icons-material";
+import SpotlightCard from "../shared/SpotlightCard";
 
 const categories = ["todos", "frontend", "backend", "herramientas"];
 
@@ -37,11 +28,6 @@ const DynamicMuiIcon = ({
 
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState(0);
-
-  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
-    setActiveCategory(newValue);
-  };
-
   const currentCategoryName = categories[activeCategory];
   const filteredSkills = skills.filter(
     (skill) =>
@@ -49,141 +35,58 @@ export const SkillsSection = () => {
   );
 
   return (
-    <Box
-      component="section"
-      id="skills"
-      sx={{
-        py: 12,
-        px: 2,
-        backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.05),
-        position: "relative",
-      }}
-    >
+    <section id="skills" className="relative py-28 px-4 ">
       <RevealOnScroll>
-        <Container maxWidth="lg">
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: "2rem", md: "2.5rem" },
-              fontWeight: 700,
-              textAlign: "center",
-              mb: 6,
-            }}
-          >
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
             Skills
-          </Typography>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-10" />
+          </h2>
 
-          {/* Tabs / Categorías */}
-          <Box sx={{ display: "flex", justifyContent: "center", mb: 8 }}>
-            <Tabs
-              value={activeCategory}
-              onChange={handleTabChange}
-              variant="scrollable"
-              scrollButtons="auto"
-              sx={{
-                backgroundColor: "background.paper",
-                borderRadius: "50px",
-                p: 0.5,
-                boxShadow: (theme) => theme.shadows[2],
-                border: "1px solid",
-                borderColor: "divider",
-                "& .MuiTabs-indicator": {
-                  height: "100%",
-                  borderRadius: "50px",
-                  height: "calc(100% - 6px)",
-                  bottom: "3px",
-                  transform: "scaleX(0.9)",
-                  backgroundColor: "primary.main",
-                },
-              }}
-            >
-              {categories.map((category, index) => (
-                <Tab
-                  key={index}
-                  label={category}
-                  sx={{
-                    zIndex: 1,
-                    textTransform: "capitalize",
-                    fontWeight: 600,
-                    minHeight: "48px",
-                    px: 4,
-                    fontSize: "1rem",
-                    borderRadius: "50px",
-                    transition: "0.3s",
-                    color: "text.primary",
-                    "&.Mui-selected": {
-                      color: "primary.contrastText",
-                    },
-                  }}
-                />
-              ))}
-            </Tabs>
-          </Box>
-
-          {/* Grid de Skills */}
-          <Grid container spacing={3}>
-            {filteredSkills.map((skill, index) => (
-              <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={index}>
-                <Card
-                  sx={{
-                    p: 3,
-                    display: "flex",
-                    gap: 2,
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    border: "1px solid",
-                    borderColor: (theme) => alpha(theme.palette.divider, 0.7),
-                    backgroundColor: "background.paper",
-                    borderRadius: 2,
-                    transition:
-                      "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                    "&:hover": {
-                      transform: "scale(1.02) translateY(-4px)",
-                      boxShadow: (theme) => theme.shadows[10],
-                      "& .skill-icon": {
-                        color: "primary.main",
-                        transform: "scale(1.1) rotate(5deg)",
-                      },
-                    },
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: 600, mb: 0.5, textAlign: "left" }}
-                    >
-                      {skill.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary", textAlign: "left" }}
-                    >
-                      {skill.level}
-                    </Typography>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      p: 1.5,
-                      borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: (theme) =>
-                        alpha(theme.palette.primary.main, 0.1),
-                      color: "text.primary",
-                      transition: "all 0.3s ease",
-                      height: "fit-content",
-                    }}
-                  >
-                    <DynamicMuiIcon name={skill.icon} fontSize={48} />
-                  </Box>
-                </Card>
-              </Grid>
+          {/* Tabs Tailwind */}
+          <div className="flex justify-center mb-8 flex-wrap gap-2">
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveCategory(index)}
+                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer
+                  ${
+                    activeCategory === index
+                      ? "text-primary-foreground shadow-lg  bg-gradient-to-r from-primary to-secondary-foreground"
+                      : "bg-card border border-border text-text hover:bg-primary/10"
+                  }`}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
             ))}
-          </Grid>
-        </Container>
+          </div>
+
+          {/* Grid de skills */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {filteredSkills.map((skill, index) => (
+              <SpotlightCard
+                key={index}
+                spotlightColor="rgba(102, 36, 168, 0.2)"
+              >
+                <div className="flex items-center justify-between p-3">
+                  <div className="flex flex-col">
+                    <h3 className="font-semibold mb-1 text-left">
+                      {skill.name}
+                    </h3>
+                    <p className="text-sm text-foreground/70 text-left">
+                      {skill.level}
+                    </p>
+                  </div>
+
+                  <div className="p-2.5 rounded-full flex items-center justify-center bg-primary/10 transition-all duration-300 skill-icon">
+                    <DynamicMuiIcon name={skill.icon} fontSize={42} />
+                  </div>
+                </div>
+              </SpotlightCard>
+            ))}
+          </div>
+        </div>
       </RevealOnScroll>
-    </Box>
+    </section>
   );
 };

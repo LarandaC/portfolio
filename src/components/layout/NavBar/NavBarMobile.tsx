@@ -1,88 +1,95 @@
-import {
-  alpha,
-  Box,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
-import Close from "@mui/icons-material/Close";
 import { navItems } from "@/lib/navigation";
+import { Close } from "@mui/icons-material";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 interface NavBarMobileProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
 }
 
+const socialLinks = [
+  {
+    name: "GitHub",
+    href: "https://github.com/LarandaC",
+    icon: Github,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/leticia-aranda-871575238/",
+    icon: Linkedin,
+  },
+  {
+    name: "Email",
+    href: "mailto:leticia.m.aranda@gmail.com",
+    icon: Mail,
+  },
+];
+
 export const NavBarMobile = ({
   isMenuOpen,
   setIsMenuOpen,
 }: NavBarMobileProps) => {
   return (
-    <Drawer
-      anchor="right"
-      open={isMenuOpen}
-      onClose={() => setIsMenuOpen(false)}
-      slotProps={{
-        paper: {
-          sx: {
-            width: { xs: "280px", sm: "350px" },
-            height: "100%",
-            backgroundColor: (theme) =>
-              alpha(theme.palette.background.default, 0.98),
-            backdropFilter: "blur(10px)",
-            display: "flex",
-            flexDirection: "column",
-            p: 3,
-            borderLeft: "1px solid",
-            borderColor: "divider",
-            backgroundImage: "none",
-          },
-        },
-      }}
-    >
-      {/* Botón Cerrar */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-        <IconButton
-          onClick={() => setIsMenuOpen(false)}
-          sx={{ color: (theme) => theme.palette.text.primary }}
-        >
-          <Close />
-        </IconButton>
-      </Box>
+    <>
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300 ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
 
-      {/* Lista de Navegación */}
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding sx={{ mb: 1 }}>
-            <ListItemButton
-              component="a"
-              href={item.href}
+      {/* Drawer */}
+      <div
+        className={`fixed top-0 right-0 h-full w-72 sm:w-80 bg-background/95 backdrop-blur-md z-50 p-6 flex flex-col justify-between transition-transform duration-300 border border-l-1 border-l-border ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div>
+          {/* Close Button */}
+          <div className="flex justify-end mb-4">
+            <button
               onClick={() => setIsMenuOpen(false)}
-              sx={{ borderRadius: 2 }}
+              className="text-foreground p-2 rounded-full hover:bg-foreground/10 transition"
+              aria-label="Cerrar menú"
             >
-              <ListItemText
-                primary={item.name}
-                slotProps={{
-                  primary: {
-                    sx: {
-                      fontSize: "1.2rem",
-                      fontWeight: 400,
-                      color: "text.primary",
-                      transition: "color 0.2s",
-                      "&:hover": {
-                        color: "primary.main",
-                      },
-                    },
-                  },
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
+              <Close />
+            </button>
+          </div>
+
+          {/* Navigation Items */}
+          <nav className="flex flex-col gap-3 text-left">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-lg text-foreground hover:text-primary transition-colors rounded-md px-2 py-1 font-semibold"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Social Links */}
+        <div className="pt-6 mt-6">
+          <div className="flex gap-3 justify-left">
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-foreground/10"
+                aria-label={social.name}
+              >
+                <social.icon className="w-5 h-5" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };

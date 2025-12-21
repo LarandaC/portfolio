@@ -1,110 +1,60 @@
-import { Box, Container, Fade, IconButton, Typography } from "@mui/material";
+import { Face } from "@mui/icons-material";
 import { RevealOnScroll } from "../shared/RevealOnScroll";
 import { Button } from "../ui/Button";
-import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
+import { ArrowDown } from "lucide-react";
+import TextType from "../shared/TextType";
+import GradientText from "../shared/GradientText";
 
 export const HeroSection = () => {
   return (
-    <Box
-      component="section"
+    <section
       id="hero"
-      sx={{
-        position: "relative",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        px: 2,
-        overflow: "hidden",
-      }}
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
       <RevealOnScroll>
-        <Container maxWidth="md" sx={{ textAlign: "center", zIndex: 10 }}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-            {/* Título Principal */}
-            <Typography
-              variant="h1"
-              sx={{
-                fontSize: { xs: "2.5rem", md: "4rem" },
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                lineHeight: 1.2,
-              }}
-            >
-              <Fade in timeout={1000}>
-                <span>Hola, soy </span>
-              </Fade>
-              <Fade in timeout={1500}>
-                <Box component="span" sx={{ color: "primary.main" }}>
-                  Leticia
-                </Box>
-              </Fade>
-            </Typography>
+        {/* Chip */}
+        <div className="inline-flex items-center gap-2 border border-primary text-primary px-4 py-1 mb-4 rounded-full text-base">
+          <Face className="w-5 h-5" />
+          <span>Disponible</span>
+        </div>
+        <div className="max-w-3xl mx-auto text-center z-10 flex flex-col gap-4">
+          {/* Título principal */}
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-snug flex flex-wrap justify-center">
+            <span className="block mr-3">Desarrolladora</span>
+            <GradientText showBorder={false}>Full Stack</GradientText>
+          </h1>
 
-            {/* Descripción */}
-            <Fade in timeout={2000}>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: { xs: "1.1rem", md: "1.25rem" },
-                  color: "text.secondary",
-                  maxWidth: "700px",
-                  mx: "auto",
-                  lineHeight: 1.6,
-                }}
-              >
-                Desarrolladora Frontend con pasión por crear soluciones
-                innovadoras y mejorar la experiencia del usuario. Diseño
-                aplicaciones web atractivas y funcionales, enfocadas en
-                usabilidad y rendimiento.
-              </Typography>
-            </Fade>
+          {/* Descripción */}
+          <p className="text-lg md:text-xl text-foreground max-w-2xl mx-auto leading-relaxed">
+            Transformo ideas en experiencias digitales excepcionales.
+            Especializada en crear aplicaciones web y móviles modernas con
+            código limpio y diseño centrado en el usuario.
+          </p>
 
-            {/* Acción */}
-            <Fade in timeout={2500}>
-              <Box sx={{ mt: 2 }}>
-                <Button text="Mis proyectos" href="#projects" />
-              </Box>
-            </Fade>
-          </Box>
-        </Container>
+          {/* Botón de acción */}
+          <Button text="Mis proyectos" href="#projects" />
+
+          <TextType
+            text={["Clean Code", "UI/UX Design", "Fast Delivery"]}
+            typingSpeed={105}
+            pauseDuration={2000}
+            showCursor={true}
+            cursorCharacter="|"
+          />
+        </div>
       </RevealOnScroll>
 
-      {/* Indicador de Scroll hacia abajo */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 32,
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          "@keyframes bounce": {
-            "0%, 100%": { transform: "translate(-50%, 0)" },
-            "50%": { transform: "translate(-50%, -10px)" },
-          },
-          animation: "bounce 2s infinite",
-        }}
+      {/* Indicador de scroll */}
+      <a
+        href="#about"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce"
       >
-        <IconButton
-          component="a"
-          href="#about"
-          sx={{
-            backgroundColor: (theme) =>
-              `alpha(${theme.palette.primary.main}, 0.1)`,
-            color: "primary.main",
-            "&:hover": {
-              backgroundColor: (theme) =>
-                `alpha(${theme.palette.primary.main}, 0.2)`,
-            },
-            p: 1.5,
-          }}
-        >
-          <ArrowDownwardRoundedIcon />
-        </IconButton>
-      </Box>
-    </Box>
+        <div className="bg-primary/10 text-primary p-3 rounded-full hover:bg-primary/20 transition-colors">
+          <ArrowDown className="w-6 h-6" />
+        </div>
+      </a>
+    </section>
   );
 };
+
+export default HeroSection;

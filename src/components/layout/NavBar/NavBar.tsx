@@ -1,23 +1,17 @@
-import { navItems } from "../../../lib/navigation";
 import { useEffect, useState } from "react";
-import {
-  AppBar,
-  useTheme as useMuiTheme,
-  alpha,
-  Container,
-  Toolbar,
-  Box,
-  IconButton,
-  Link as MuiLink,
-} from "@mui/material";
+import { navItems } from "../../../lib/navigation";
 import { NavBarMobile } from "./NavBarMobile";
-import Close from "@mui/icons-material/Close";
-import Menu from "@mui/icons-material/Menu";
-import { ThemeToggle } from "@/theme/ThemeToggle";
+import { Menu } from "lucide-react";
+import { Close } from "@mui/icons-material";
+import icon from "../../../assets/icon/icon-2.png";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 export const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const sectionIds = navItems.map((item) => item.href.replace("#", ""));
+  const activeSection = useScrollSpy(sectionIds);
 
   useEffect(() => {
     let ticking = false;
@@ -34,101 +28,65 @@ export const NavBar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isMenuOpen]);
 
-  const handleMenuToggle = () => {
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    } else {
-      setIsMenuOpen(true);
-    }
-  };
-  const muiTheme = useMuiTheme();
+  const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        elevation={isScrolled ? 2 : 0}
-        sx={{
-          transition: "all 0.3s ease-in-out",
-          py: isScrolled ? 0 : 1,
-          backgroundColor: isScrolled
-            ? alpha(muiTheme.palette.background.default, 0.8)
-            : "transparent",
-          backdropFilter: isScrolled ? "blur(10px)" : "none",
-          color: "text.primary",
-          borderBottom: isScrolled ? "1px solid" : "none",
-          borderColor: "divider",
-        }}
+      <header
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-background/80 backdrop-blur-md shadow-md py-4 border-b border-border/50"
+            : "bg-transparent py-4"
+        } text-foreground`}
       >
-        <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-between">
             {/* Logo */}
-            <MuiLink
-              component="a"
+            <a
               href="#hero"
-              underline="none"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                fontWeight: 700,
-                fontSize: "1.5rem",
-                color: "text.primary",
-                "& span": { color: "primary.main", ml: 1 },
-              }}
+              className="flex items-center font-bold text-lg md:text-xl"
             >
-              EleTech <span>Portafolio</span>
-            </MuiLink>
+              <img src={icon} alt="Icono" className="w-10 h-10" />
+              <span className="ml-2">Leticia Aranda</span>
+            </a>
 
             {/* Desktop Navigation */}
-            <Box
-              sx={{
-                display: { xs: "none", md: "flex" },
-                gap: 4,
-                alignItems: "center", // Asegura que el switch y los textos estén en la misma línea
-              }}
-            >
-              {navItems.map((item) => (
-                <MuiLink
-                  component="a"
-                  key={item.name}
-                  href={item.href}
-                  underline="none"
-                  sx={{
-                    fontWeight: 600,
-                    color: "text.primary",
-                    opacity: 0.8,
-                    transition: "0.3s",
-                    "&:hover": {
-                      opacity: 1,
-                      color: "primary.main",
-                    },
-                  }}
-                >
-                  {item.name}
-                </MuiLink>
-              ))}
+            <div className="hidden md:flex items-center gap-10">
+              {navItems.map((item) => {
+                const sectionId = item.href.replace("#", "");
+                const isActive = activeSection === sectionId;
 
-              {/* El Switch ahora estará alineado con los links */}
-              <ThemeToggle />
-            </Box>
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={`font-semibold transition-opacity ${
+                      isActive
+                        ? "text-primary border-b border-primary "
+                        : "text-foreground hover:text-primary"
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                );
+              })}
+            </div>
 
             {/* Mobile Menu Button */}
-            <IconButton
-              edge="end"
+            <button
               onClick={handleMenuToggle}
-              sx={{ display: { md: "none" }, color: "text.primary" }}
+              className="md:hidden text-foreground"
               aria-label="menu"
             >
               {isMenuOpen ? <Close /> : <Menu />}
-            </IconButton>
-          </Toolbar>
-        </Container>
-      </AppBar>
+            </button>
+          </div>
+        </div>
+      </header>
+
       {/* Mobile Menu Drawer */}
       <NavBarMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </>

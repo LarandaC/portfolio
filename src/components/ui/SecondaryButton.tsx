@@ -1,57 +1,29 @@
-import { Button as MuiButton, Box, alpha } from "@mui/material";
-
 interface SecondaryButtonProps {
   text: string;
   href: string;
 }
 
 export const SecondaryButton = ({ text, href }: SecondaryButtonProps) => {
+  const isPdf = href.endsWith(".pdf");
+  const Tag = "a";
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", sm: "row" },
-        gap: 2,
-        pt: { xs: 0, sm: 4 },
-        justifyContent: "center",
-      }}
-    >
-      <MuiButton
-        component="a"
+    <div className="flex flex-col sm:flex-row gap-2 pt-0 sm:pt-4 justify-center">
+      <Tag
         href={href}
-        variant="outlined"
-        size="large"
-        target={href.endsWith(".pdf") ? "_blank" : "_self"}
+        target={isPdf ? "_blank" : "_self"}
         rel="noopener noreferrer"
-        sx={{
-          px: 4,
-          py: 1.2,
-          borderRadius: "50px",
-          fontWeight: 600,
-          textTransform: "none",
-          fontSize: "1rem",
-
-          borderColor: "primary.main",
-          color: "primary.main",
-
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-
-          "&:hover": {
-            borderWidth: "1px",
-            borderColor: "primary.light",
-            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.08),
-            transform: "translateY(-2px)",
-            boxShadow: (theme) =>
-              `0 0 15px ${alpha(theme.palette.primary.main, 0.4)}`,
-          },
-
-          "&:active": {
-            transform: "scale(0.98)",
-          },
-        }}
+        className="
+          px-16 py-3 rounded-full font-semibold text-base
+          border border-primary text-primary
+          transition-all duration-300 ease-in-out
+          hover:bg-primary/10 hover:border-primary/70
+          hover:-translate-y-0.5 hover:shadow-lg
+          active:scale-95
+        "
       >
         {text}
-      </MuiButton>
-    </Box>
+      </Tag>
+    </div>
   );
 };

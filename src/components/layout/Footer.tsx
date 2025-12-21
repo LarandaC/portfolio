@@ -1,4 +1,3 @@
-import { Box, IconButton, Typography } from "@mui/material";
 import { ArrowUp } from "lucide-react";
 
 export const Footer = () => {
@@ -8,47 +7,19 @@ export const Footer = () => {
   };
 
   return (
-    <Box
-      component="footer"
-      sx={{
-        py: 5,
-        px: { xs: 2, sm: 4, md: 7 },
-        backgroundColor: "background.paper",
-        position: "relative",
-        borderTop: "1px solid",
-        borderColor: "divider",
-        mt: 12,
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 2,
-      }}
-    >
-      <Typography variant="body2" sx={{ color: "text.secondary" }}>
+    <footer className="py-10 px-4 sm:px-8 md:px-28 border-t border-border bg-card flex flex-wrap justify-between items-center gap-2 relative">
+      <p className="text-sm text-muted-foreground">
         &copy; {new Date().getFullYear()} Leticia. Todos los derechos
         reservados.
-      </Typography>
+      </p>
 
-      <IconButton
-        component="a"
-        href="#hero"
+      <button
         onClick={scrollToTop}
-        sx={{
-          backgroundColor: (theme) =>
-            `alpha(${theme.palette.primary.main}, 0.1)`,
-          color: "primary.main",
-          transition: "all 0.3s ease",
-          "&:hover": {
-            backgroundColor: (theme) =>
-              `alpha(${theme.palette.primary.main}, 0.2)`,
-            transform: "translateY(-3px)",
-          },
-        }}
         aria-label="Volver arriba"
+        className="bg-primary/10 text-primary p-2 rounded-full transition-all hover:bg-primary/20 cursor-pointer"
       >
         <ArrowUp size={22} />
-      </IconButton>
-    </Box>
+      </button>
+    </footer>
   );
 };

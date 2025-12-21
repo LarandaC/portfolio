@@ -1,69 +1,50 @@
-import { Button as MuiButton, Box, CircularProgress } from "@mui/material";
-
 interface ButtonProps {
   text: string;
   href?: string;
   type?: "submit" | "button" | "reset";
-  isSubmitting?: boolean;
 }
 
-export const Button = ({
-  text,
-  href,
-  isSubmitting = false,
-  type = "submit",
-}: ButtonProps) => {
+export const Button = ({ text, href, type = "button" }: ButtonProps) => {
+  const Tag = href ? "a" : "button";
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", sm: "row" },
-        gap: 2,
-        pt: 4,
-        justifyContent: "center",
-      }}
-    >
-      <MuiButton
-        component={href ? "a" : "button"}
+    <div className="flex flex-col sm:flex-row gap-2 pt-4 justify-center">
+      <Tag
         href={href}
-        type={type}
-        disabled={isSubmitting}
-        variant="contained"
-        // El loader interno opcional si está enviando
-        startIcon={
-          isSubmitting ? <CircularProgress size={20} color="inherit" /> : null
-        }
-        sx={{
-          px: 4,
-          py: 1.2,
-          borderRadius: "50px",
-          fontWeight: 600,
-          textTransform: "none",
-          fontSize: "1rem",
-          backgroundColor: "primary.main",
-          color: "primary.contrastText",
-          transition: "all 0.2s ease-in-out",
-
-          "&:hover": {
-            backgroundColor: "primary.main",
-            transform: "scale(1.03)",
-            boxShadow: (theme) =>
-              `0 4px 14px 0 rgba(0,0,0,0.2) ${theme.palette.primary.main}66`,
-          },
-
-          "&:active": {
-            transform: "scale(0.97)",
-          },
-
-          "&.Mui-disabled": {
-            backgroundColor: "primary.main",
-            opacity: 0.6,
-            color: "primary.contrastText",
-          },
-        }}
+        type={!href ? type : undefined}
+        className="
+          group relative overflow-hidden px-16 py-3 rounded-full
+          font-semibold text-base text-primary-foreground
+          cursor-pointer isolate
+          transition-all duration-300
+          hover:-translate-y-0.5 hover:shadow-xl
+        "
       >
-        {isSubmitting ? "Enviando..." : text}
-      </MuiButton>
-    </Box>
+        {/* Gradiente animado */}
+        <span
+          className="
+            absolute inset-0 -z-10
+            bg-gradient-to-r from-primary via-secondary-foreground to-primary
+            bg-[length:200%_auto] bg-left
+            transition-all duration-700 ease-in-out
+            group-hover:bg-right
+          "
+        />
+
+        <span
+          className="
+            absolute inset-0 bg-white/10 opacity-0
+            group-hover:opacity-100
+            transition-opacity duration-500
+            pointer-events-none
+          "
+        />
+
+        {/* Texto */}
+        <span className="relative flex items-center justify-center gap-2">
+          {text}
+        </span>
+      </Tag>
+    </div>
   );
 };
