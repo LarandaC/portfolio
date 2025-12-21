@@ -19,13 +19,13 @@ export const HeroSection = () => {
         </div>
         <div className="max-w-3xl mx-auto text-center z-10 flex flex-col gap-4">
           {/* Título principal */}
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-snug flex flex-wrap justify-center">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-snug flex flex-wrap justify-center font-family-title">
             <span className="block mr-3">Desarrolladora</span>
             <GradientText showBorder={false}>Full Stack</GradientText>
           </h1>
 
           {/* Descripción */}
-          <p className="text-lg md:text-xl text-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-lg text-foreground max-w-2xl mx-auto leading-relaxed">
             Transformo ideas en experiencias digitales excepcionales.
             Especializada en crear aplicaciones web y móviles modernas con
             código limpio y diseño centrado en el usuario.

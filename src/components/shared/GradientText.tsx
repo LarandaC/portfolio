@@ -52,7 +52,7 @@ export default function GradientText({
         </div>
       )}
       <div
-        className="inline-block relative z-2 text-transparent bg-gradient-to-r from-primary to-secondary-foreground bg-clip-text animate-gradient"
+        className="inline-block relative z-2 text-transparent bg-gradient-to-r from-primary to-secondary-foreground bg-clip-text animate-gradient "
         style={{
           ...gradientStyle,
           backgroundSize: "300% 100%",

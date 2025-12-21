@@ -35,7 +35,10 @@ export const Index = () => {
 
       <div className="relative z-10">
         <NavBar />
-        <ThemeToggle />
+        <div className="hidden sm:block fixed bottom-5 right-5 z-50">
+          <ThemeToggle />
+        </div>
+
         <main>
           <HeroSection />
           <AboutSection />

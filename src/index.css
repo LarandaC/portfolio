@@ -2,6 +2,9 @@
 
 /*Tema base y animaciones*/
 @theme {
+  --font-family-title: var(--font-family-title);
+  --font-family-body: var(--font-family-body);
+
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -62,6 +65,9 @@
 
 @layer base {
   :root {
+    --font-family-title: "Google Sans", sans-serif;
+    --font-family-body: "Inter", sans-serif;
+
     --background: 220 40% 98%;
     --foreground: 220 50% 12%;
 
@@ -102,7 +108,7 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground transition-colors duration-300 font-family-body;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
