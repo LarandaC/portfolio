@@ -1,5 +1,5 @@
+import GradientText from "../shared/GradientText";
 import { Button } from "../ui/Button";
-import { TitleGradient } from "../ui/TitleGradient";
 
 export const NotFoundSection = () => {
   return (
@@ -8,7 +8,7 @@ export const NotFoundSection = () => {
       <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center space-y-8 opacity-0 animate-fade-in">
         <div className="relative mb-4">
           <h1 className="text-[10rem] md:text-[14rem] font-black text-primary select-none leading-none ">
-            <TitleGradient text="404" />
+            <GradientText showBorder={false}>404</GradientText>
           </h1>
         </div>
 
