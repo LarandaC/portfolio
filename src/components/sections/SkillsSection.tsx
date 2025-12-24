@@ -1,19 +1,28 @@
 import { useState } from "react";
-import { RevealOnScroll } from "../shared/RevealOnScroll";
+import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { skills } from "@/lib/skills";
+import type { IconNames } from "@/hooks/use-icon";
 import * as MuiIcons from "@mui/icons-material";
 import SpotlightCard from "../shared/SpotlightCard";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 
-const categories = ["todos", "frontend", "backend", "herramientas"];
+// filtro
+const categoryData = [
+  { id: "todos", label: "skills.categories.all" },
+  { id: "frontend", label: "skills.categories.frontend" },
+  { id: "backend", label: "skills.categories.backend" },
+  { id: "herramientas", label: "skills.categories.tools" },
+];
 
 const DynamicMuiIcon = ({
   name,
   fontSize = 24,
 }: {
-  name: string;
+  name: IconNames;
   fontSize?: number;
 }) => {
-  let IconComponent = (MuiIcons as any)[name];
+  let IconComponent = MuiIcons[name];
 
   if (name.toLowerCase() === "github") {
     IconComponent = MuiIcons.GitHub;
@@ -27,8 +36,10 @@ const DynamicMuiIcon = ({
 };
 
 export const SkillsSection = () => {
+  const { t } = useTranslation();
+
   const [activeCategory, setActiveCategory] = useState(0);
-  const currentCategoryName = categories[activeCategory];
+  const currentCategoryName = categoryData[activeCategory].id;
   const filteredSkills = skills.filter(
     (skill) =>
       currentCategoryName === "todos" || skill.category === currentCategoryName
@@ -43,20 +54,21 @@ export const SkillsSection = () => {
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-10" />
           </h2>
 
-          {/* Tabs Tailwind */}
+          {/* Tabs  */}
           <div className="flex justify-center mb-8 flex-wrap gap-2">
-            {categories.map((category, index) => (
+            {categoryData.map((category, index) => (
               <button
-                key={index}
+                key={category.id}
                 onClick={() => setActiveCategory(index)}
-                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer
-                  ${
-                    activeCategory === index
-                      ? "text-primary-foreground shadow-lg  bg-gradient-to-r from-primary to-secondary-foreground"
-                      : "bg-card border border-border text-text hover:bg-primary/10"
-                  }`}
+                className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer
+        capitalize 
+        ${
+          activeCategory === index
+            ? "text-primary-foreground shadow-lg bg-gradient-to-r from-primary to-secondary-foreground"
+            : "bg-card border border-border text-foreground hover:bg-primary/10"
+        }`}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {t(category.label)}
               </button>
             ))}
           </div>
@@ -74,7 +86,7 @@ export const SkillsSection = () => {
                       {skill.name}
                     </h3>
                     <p className="text-sm text-foreground/70 text-left">
-                      {skill.level}
+                      {skill[i18n.language.includes("en") ? "en" : "es"]}
                     </p>
                   </div>
 

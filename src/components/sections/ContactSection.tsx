@@ -1,20 +1,22 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const ContactSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="contact" className="relative py-28 px-4 bg-card">
       <div className="max-w-3xl mx-auto text-center">
         {/* Encabezado */}
         <div className="mb-10 justify-center items-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-foreground font-family-title">
-            ¿Listo para trabajar juntos?
+            {t("contact.title")}
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4" />
         </div>
 
         <p className="text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-          Estoy siempre abierta a discutir nuevos proyectos, ideas creativas u
-          oportunidades para formar parte de tu visión.
+          {t("contact.description")}
         </p>
 
         {/* Botones de Contacto */}

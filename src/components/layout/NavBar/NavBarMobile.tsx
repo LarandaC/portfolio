@@ -2,6 +2,8 @@ import { navItems } from "@/lib/navigation";
 import { ThemeToggle } from "@/theme/ThemeToggle";
 import { Close } from "@mui/icons-material";
 import { Github, Linkedin, Mail } from "lucide-react";
+import i18n from "@/i18n";
+import { useTranslation } from "react-i18next";
 
 interface NavBarMobileProps {
   isMenuOpen: boolean;
@@ -30,6 +32,8 @@ export const NavBarMobile = ({
   isMenuOpen,
   setIsMenuOpen,
 }: NavBarMobileProps) => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* Overlay */}
@@ -52,7 +56,7 @@ export const NavBarMobile = ({
             <button
               onClick={() => setIsMenuOpen(false)}
               className="text-foreground p-2 rounded-full hover:bg-foreground/10 transition"
-              aria-label="Cerrar menú"
+              aria-label={t("nav.closeMenu")}
             >
               <Close />
             </button>
@@ -67,7 +71,7 @@ export const NavBarMobile = ({
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground hover:text-primary transition-colors rounded-md px-2 py-1 font-semibold"
               >
-                {item.name}
+                {item[i18n.language.includes("en") ? "en" : "es"]}
               </a>
             ))}
           </nav>
