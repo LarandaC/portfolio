@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "index": "Inicio",
+    "about": "Sobre mi",
+    "skills": "Skills",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "closeMenu": "Cerrar menú"
+  },
+  "hero": {
+    "chip": "Disponible",
+    "title": "Desarrolladora",
+    "subtitle": "Full Stack",
+    "description": "Transformo ideas en experiencias digitales excepcionales. Especializada en crear aplicaciones web y móviles modernas con código limpio y diseño centrado en el usuario.",
+    "button": "Mis proyectos"
+  },
+  "about": {
+    "title": "Sobre mi",
+    "subtitle": "Passionate Web Developer",
+    "description": "Soy una desarrolladora apasionada por crear soluciones tecnológicas innovadoras. Me especializo en construir aplicaciones escalables y eficientes. Mi enfoque combina la excelencia técnica con un fuerte sentido del diseño, asegurando que cada proyecto no solo funcione correctamente, sino que también ofrezca una experiencia de usuario excepcional.",
+    "buttonPrimary": "Ponte en contacto",
+    "buttonSecondary": "Descargar CV"
+  },
+  "aboutWebDevelopmentCard": {
+    "title": "Desarrollo web",
+    "description": "Experiencia en frontend y backend, desde React hasta Node.js y bases de datos."
+  },
+  "aboutDesignCard": {
+    "title": "Diseño UI/UX",
+    "description": "Diseño interfaces intuitivas, enfocadas en la usabilidad y el atractivo visual."
+  },
+  "aboutOptCard": {
+    "title": "Optimización",
+    "description": "Mejora del rendimiento y escalabilidad de aplicaciones en producción."
+  },
+
+  "projects": {
+    "title": "Proyectos",
+    "description": "Estos son algunos de mis proyectos recientes. Cada uno fue desarrollado con atención al detalle, rendimiento y experiencia de usuario."
+  },
+  "contact": {
+    "title": "¿Listo para trabajar juntos?",
+    "description": "Estoy siempre abierta a discutir nuevos proyectos, ideas creativas u oportunidades para formar parte de tu visión."
+  },
+  "404": {
+    "title": "Oh... something went wrong",
+    "description": "The page you're looking for has disappeared into the depths of space. Maybe it was abducted by aliens or simply doesn't exist in this universe.",
+    "button": "Back to home"
+  },
+  "skills": {
+    "categories": {
+      "all": "todos",
+      "frontend": "frontend",
+      "backend": "backend",
+      "tools": "herramientas"
+    }
+  },
+  "footer": {
+    "title": "Todos los derechos reservados."
+  }
+}

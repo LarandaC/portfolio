@@ -7,7 +7,8 @@ export const projects = [
   {
     id: 1,
     title: "SaaS Landing Page",
-    description: "Un landing page usando React y Tailwind",
+    descriptionEn: "Landing page with React and Tailwind",
+    descriptionEs: "Una landing page con React y Tailwind",
     image: saasImage,
     tags: ["React", "TailwindCSS", "TypeScript"],
     demoUrl: "",
@@ -16,7 +17,8 @@ export const projects = [
   {
     id: 2,
     title: "Bank Landing Page",
-    description: "Landing page para un banco usando React y Tailwind",
+    descriptionEn: "Landing page for a bank with React and Tailwind",
+    descriptionEs: "Landing page para un banco con React y Tailwind",
     image: bankImage,
     tags: ["React", "TailwindCSS", "TypeScript"],
     demoUrl: "",
@@ -25,7 +27,8 @@ export const projects = [
   {
     id: 3,
     title: "RESTEplorer",
-    description: "Sitio web conectada a la API REST Countries",
+    descriptionEn: "Website connected to the REST Countries API",
+    descriptionEs: "Sitio web conectado a la API REST Countries",
     image: restImage,
     tags: ["React", "React-router", "TailwindCSS", "TypeScript"],
     demoUrl: "",
@@ -34,7 +37,8 @@ export const projects = [
   {
     id: 4,
     title: "The Simpsons Blog",
-    description: "Blog de Los Simpsons usando The Simpsons API",
+    descriptionEn: "Blog about The Simpsons with The Simpsons API",
+    descriptionEs: "Blog sobre Los Simpsons con la API de The Simpsons",
     image: simpsonsImage,
     tags: ["React", "React-router", "TailwindCSS", "TypeScript"],
     demoUrl: "https://larandac.github.io/the-simpson-blog/",

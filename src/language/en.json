@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "index": "Home",
+    "about": "About me",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "chip": "Available",
+    "title": "Full Stack",
+    "subtitle": "Developer",
+    "description": "I transform ideas into exceptional digital experiences. Specialized in creating modern web and mobile applications with clean code and user-centered design.",
+    "button": "My projects"
+  },
+  "about": {
+    "title": "About me",
+    "subtitle": "Passionate Web Developer",
+    "description": "I am a developer passionate about creating innovative technological solutions. I specialize in building scalable and efficient applications. My approach combines technical excellence with a strong sense of design, ensuring that each project not only works correctly, but also offers an exceptional user experience.",
+    "buttonPrimary": "Get in touch",
+    "buttonSecondary": "Download CV"
+  },
+  "aboutWebDevelopmentCard": {
+    "title": "Web development",
+    "description": "Experience in frontend and backend, from React to Node.js and databases."
+  },
+  "aboutDesignCard": {
+    "title": "UI/UX Design",
+    "description": "I design intuitive interfaces, focused on usability and visual appeal."
+  },
+  "aboutOptCard": {
+    "title": "Optimization",
+    "description": "Improving performance and scalability of applications in production."
+  },
+  "skillLevel": {
+    "advanced": "Advanced",
+    "intermediate": "Intermediate",
+    "beginner": "Beginner"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience."
+  },
+  "contact": {
+    "title": "Ready to work together?",
+    "description": "I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision."
+  },
+  "404": {
+    "title": "Oh... parece que tenemos un problema",
+    "description": "La página que buscas se perdió en el espacio profundo. Tal vez fue abducida por alienígenas o simplemente no existe en este universo.",
+    "button": "Volver al inicio"
+  },
+  "skills": {
+    "categories": {
+      "all": "all",
+      "frontend": "frontend",
+      "backend": "backend",
+      "tools": "tools"
+    }
+  },
+  "footer": {
+    "title": "All rights reserved."
+  }
+}
