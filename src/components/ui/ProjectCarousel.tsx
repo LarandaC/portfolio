@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 interface Project {
   id: number;
   title: string;
-  description: string;
+  descriptionEn: string;
+  descriptionEs: string;
   image: string;
   tags: string[];
   demoUrl?: string;
@@ -64,7 +65,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
       },
     ],
 
-    customPaging: (_: number) => (
+    customPaging: () => (
       <div className="w-2 h-2 mt-8 rounded-full bg-gray-300 hover:bg-primary transition-all" />
     ),
   };
@@ -76,7 +77,8 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           <div key={project.id} className="px-4">
             <ProjectCard
               title={project.title}
-              description={project.description}
+              descriptionEn={project.descriptionEn}
+              descriptionEs={project.descriptionEs}
               image={project.image}
               tags={project.tags}
               githubUrl={project.githubUrl}

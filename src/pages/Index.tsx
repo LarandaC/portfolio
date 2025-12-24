@@ -5,13 +5,13 @@ import { SkillsSection } from "../components/sections/SkillsSection";
 import { ThemeToggle } from "@/theme/ThemeToggle";
 import { Footer } from "@/components/layout/Footer";
 
-const HeroSection = lazy(() => import("../components/sections/HeroSection"));
+const HeroSection = lazy(() => import("@/components/sections/HeroSection"));
 const ProjectsSection = lazy(
-  () => import("../components/sections/ProjectsSection")
+  () => import("@/components/sections/ProjectsSection")
 );
 const Particles = lazy(() => import("@/components/shared/Particles"));
 const ContactSection = lazy(
-  () => import("../components/sections/ContactSection")
+  () => import("@/components/sections/ContactSection")
 );
 
 export const Index = () => {
