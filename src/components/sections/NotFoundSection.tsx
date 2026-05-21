@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import GradientText from "../shared/GradientText";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 export const NotFoundSection = () => {
   const { t } = useTranslation();

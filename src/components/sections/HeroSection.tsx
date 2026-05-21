@@ -1,6 +1,6 @@
 import { ArrowDown, Smile } from "lucide-react";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import TextType from "@/components/shared/TextType";
 import GradientText from "@/components/shared/GradientText";
 import { useTranslation } from "react-i18next";

@@ -42,7 +42,8 @@
     "title": "Projects",
     "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience.",
     "viewCode": "View code",
-    "liveDemo": "Live demo"
+    "liveDemo": "Live demo",
+    "viewDetails": "View details"
   },
   "contact": {
     "title": "Ready to work together?",

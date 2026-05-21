@@ -8,17 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { ProjectCard } from "@/components/cards/ProjectCard";
-
-interface Project {
-  id: number;
-  title: string;
-  descriptionEn: string;
-  descriptionEs: string;
-  image: string;
-  tags: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-}
+import type { Project } from "@/data/projects";
 
 interface ProjectCarouselProps {
   projects: Project[];
@@ -30,28 +20,22 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   );
 
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      opts={{ loop: true }}
-      className="w-full"
-    >
-      <CarouselContent className="-ml-4">
-        {projects.map((project) => (
-          <CarouselItem key={project.id} className="pl-4 md:basis-1/2">
-            <ProjectCard
-              title={project.title}
-              descriptionEn={project.descriptionEn}
-              descriptionEs={project.descriptionEs}
-              image={project.image}
-              tags={project.tags}
-              githubUrl={project.githubUrl}
-              liveUrl={project.liveUrl}
-            />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="hidden sm:flex -left-10" />
-      <CarouselNext className="hidden sm:flex -right-10" />
-    </Carousel>
+    <div className="px-16">
+      <Carousel
+        plugins={[plugin.current]}
+        opts={{ loop: true }}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-4">
+          {projects.map((project) => (
+            <CarouselItem key={project.id} className="pl-4 md:basis-1/2">
+              <ProjectCard {...project} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="hidden cursor-pointer sm:flex -left-14" />
+        <CarouselNext className="hidden cursor-pointer sm:flex -right-14" />
+      </Carousel>
+    </div>
   );
 }

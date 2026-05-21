@@ -184,25 +184,24 @@
 }
 
 
-/* Botón gradiente animado */
+/* Botón gradiente */
 .btn-gradient {
   background: linear-gradient(
-    to right,
+    135deg,
     hsl(var(--primary)),
-    hsl(var(--secondary-foreground)),
-    hsl(var(--primary))
+    hsl(var(--secondary-foreground) / 0.85)
   );
-  background-size: 200% auto;
-  background-position: left center;
-  transition: background-position 0.7s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 12px hsl(var(--primary) / 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 .btn-gradient:hover {
-  background-position: right center;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px hsl(var(--primary) / 0.35);
+  box-shadow: 0 6px 22px hsl(var(--primary) / 0.5), 0 2px 8px hsl(var(--secondary-foreground) / 0.2);
+  filter: brightness(1.08);
 }
 .btn-gradient:active {
   transform: translateY(0);
+  filter: brightness(0.96);
 }
 
 /* Hero glow orb — decoración de fondo sin tocar el componente */
