@@ -40,7 +40,9 @@
   },
   "projects": {
     "title": "Projects",
-    "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience."
+    "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience.",
+    "viewCode": "View code",
+    "liveDemo": "Live demo"
   },
   "contact": {
     "title": "Ready to work together?",
@@ -60,6 +62,7 @@
     }
   },
   "footer": {
-    "title": "All rights reserved."
+    "title": "All rights reserved.",
+    "scrollToTop": "Back to top"
   }
 }

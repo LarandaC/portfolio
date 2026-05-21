@@ -1,148 +1,44 @@
-import type { IconNames } from "../hooks/useIcon";
+export type SkillIcon =
+  | "FileCode2"
+  | "Braces"
+  | "Atom"
+  | "LayoutDashboard"
+  | "Triangle"
+  | "Server"
+  | "Database"
+  | "Github"
+  | "Paintbrush"
+  | "MousePointer2"
+  | "Figma"
+  | "Code2";
 
 export type Skill = {
   name: string;
-  level: string;
   es: string;
   en: string;
   category: string;
-  icon: IconNames;
+  icon: SkillIcon;
 };
 
 export const skills: Skill[] = [
   // frontend
-  {
-    name: "HTML/CSS",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "frontend",
-    icon: "HtmlRounded",
-  },
-  {
-    name: "JavaScript",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "frontend",
-    icon: "JavascriptRounded",
-  },
-  {
-    name: "React",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "frontend",
-    icon: "CodeRounded",
-  },
-  {
-    name: "Material UI",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "frontend",
-    icon: "DashboardRounded",
-  },
-  {
-    name: "TypeScript",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "frontend",
-    icon: "JavascriptRounded",
-  },
-
-  {
-    name: "Angular",
-    level: "Intermedio",
-    es: "Intermedio",
-    en: "Intermediate",
-    category: "frontend",
-    icon: "CodeRounded",
-  },
+  { name: "HTML/CSS",     es: "Avanzado",    en: "Advanced",     category: "frontend",      icon: "FileCode2" },
+  { name: "JavaScript",   es: "Avanzado",    en: "Advanced",     category: "frontend",      icon: "Braces" },
+  { name: "TypeScript",   es: "Avanzado",    en: "Advanced",     category: "frontend",      icon: "Braces" },
+  { name: "React",        es: "Avanzado",    en: "Advanced",     category: "frontend",      icon: "Atom" },
+  { name: "Angular",      es: "Intermedio",  en: "Intermediate", category: "frontend",      icon: "Triangle" },
+  { name: "Material UI",  es: "Avanzado",    en: "Advanced",     category: "frontend",      icon: "LayoutDashboard" },
 
   // backend
-  {
-    name: "Node.js",
-    level: "Intermedio",
-    es: "Intermedio",
-    en: "Intermediate",
-    category: "backend",
-    icon: "JavascriptRounded",
-  },
-  {
-    name: "Express",
-    level: "Intermedio",
-    es: "Intermedio",
-    en: "Intermediate",
-    category: "backend",
-    icon: "JavascriptRounded",
-  },
-  {
-    name: "Python",
-    level: "Intermedio",
-    es: "Intermedio",
-    en: "Intermediate",
-    category: "backend",
-    icon: "CodeRounded",
-  },
-  {
-    name: "PostgreSQL",
-    level: "Intermedio",
-    es: "Intermedio",
-    en: "Intermediate",
-    category: "backend",
-    icon: "DatasetRounded",
-  },
-  {
-    name: "SQL Server",
-    level: "Intermedio",
-    es: "Intermedio",
-    en: "Intermediate",
-    category: "backend",
-    icon: "DatasetRounded",
-  },
+  { name: "Node.js",      es: "Intermedio",  en: "Intermediate", category: "backend",       icon: "Server" },
+  { name: "Express",      es: "Intermedio",  en: "Intermediate", category: "backend",       icon: "Server" },
+  { name: "Python",       es: "Intermedio",  en: "Intermediate", category: "backend",       icon: "Code2" },
+  { name: "PostgreSQL",   es: "Intermedio",  en: "Intermediate", category: "backend",       icon: "Database" },
+  { name: "SQL Server",   es: "Intermedio",  en: "Intermediate", category: "backend",       icon: "Database" },
 
   // herramientas
-  {
-    name: "Git/GitHub",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "herramientas",
-    icon: "GitHub",
-  },
-
-  {
-    name: "VS Code",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "herramientas",
-    icon: "CodeRounded",
-  },
-  {
-    name: "Cursor",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "herramientas",
-    icon: "CodeRounded",
-  },
-  {
-    name: "Antigravity",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "herramientas",
-    icon: "CodeRounded",
-  },
-  {
-    name: "Figma",
-    level: "Avanzado",
-    es: "Avanzado",
-    en: "Advanced",
-    category: "herramientas",
-    icon: "BrushRounded",
-  },
+  { name: "Git/GitHub",   es: "Avanzado",    en: "Advanced",     category: "herramientas",  icon: "Github" },
+  { name: "VS Code",      es: "Avanzado",    en: "Advanced",     category: "herramientas",  icon: "Code2" },
+  { name: "Cursor",       es: "Avanzado",    en: "Advanced",     category: "herramientas",  icon: "MousePointer2" },
+  { name: "Figma",        es: "Avanzado",    en: "Advanced",     category: "herramientas",  icon: "Figma" },
 ];

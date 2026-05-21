@@ -1,7 +1,6 @@
-import { Face } from "@mui/icons-material";
+import { ArrowDown, Smile } from "lucide-react";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Button } from "@/components/ui/Button";
-import { ArrowDown } from "lucide-react";
 import TextType from "@/components/shared/TextType";
 import GradientText from "@/components/shared/GradientText";
 import { useTranslation } from "react-i18next";
@@ -13,26 +12,30 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
+      {/* Glows de fondo */}
+      <div className="hero-glow w-96 h-96 bg-primary/20 -top-20 -left-20" />
+      <div className="hero-glow w-80 h-80 bg-secondary-foreground/15 bottom-10 right-0" />
+
       <RevealOnScroll>
         {/* Chip */}
-        <div className="inline-flex items-center gap-2 border border-primary text-primary px-4 py-1 mb-4 rounded-full text-base">
-          <Face className="w-5 h-5" />
+        <div className="inline-flex items-center gap-2 border border-primary/60 bg-primary/5 text-primary px-4 py-1.5 mb-6 rounded-full text-sm font-medium backdrop-blur-sm">
+          <Smile className="w-5 h-5" />
           <span>{t("hero.chip")}</span>
         </div>
         <div className="max-w-3xl mx-auto text-center z-10 flex flex-col gap-4">
           {/* Título principal */}
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-snug flex flex-wrap justify-center font-family-title">
-            <span className="block mr-3">{t("hero.title")}</span>
+          <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold tracking-tight leading-tight flex flex-wrap justify-center gap-x-3 font-family-title">
+            <span>{t("hero.title")}</span>
             <GradientText showBorder={false}>{t("hero.subtitle")}</GradientText>
           </h1>
 
-          {/* Descripción */}
-          <p className="text-lg md:text-lg text-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-foreground max-w-xl mx-auto leading-relaxed">
             {t("hero.description")}
           </p>
 
-          {/* Botón de acción */}
-          <Button text={t("hero.button")} href="#projects" />
+          <Button asChild variant="gradient" size="pill" className="self-center mt-2">
+            <a href="#projects">{t("hero.button")}</a>
+          </Button>
 
           <TextType
             text={["Clean Code", "UI/UX Design", "Fast Delivery"]}
@@ -40,6 +43,7 @@ export const HeroSection = () => {
             pauseDuration={2000}
             showCursor={true}
             cursorCharacter="|"
+            className="text-foreground"
           />
         </div>
       </RevealOnScroll>

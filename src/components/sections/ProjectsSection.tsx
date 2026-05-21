@@ -11,15 +11,13 @@ export const ProjectsSection = () => {
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto">
           {/* Título de la sección */}
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 font-family-title">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 font-family-title">
             {t("projects.title")}
           </h2>
-
-          {/* Descripción subtítulo */}
-          <p className="text-center text-muted-foreground mb-4 max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-3 mb-5" />
+          <p className="text-center text-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
             {t("projects.description")}
           </p>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-12" />
           {/* Grid de Proyectos */}
           <ProjectCarousel projects={projects} />
         </div>

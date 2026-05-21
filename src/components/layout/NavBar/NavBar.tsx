@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { navItems } from "@/lib/navigation";
 import { NavBarMobile } from "./NavBarMobile";
 import { Menu } from "lucide-react";
-import { Close } from "@mui/icons-material";
 import icon from "@/assets/icon/icon-2.png";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { LanguageSelector } from "../LanguageSelector";
@@ -83,11 +82,11 @@ export const NavBar = () => {
             </div>
 
             <button
-              onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="md:hidden text-foreground"
-              aria-label="Toggle menu"
+              onClick={() => setIsMenuOpen(true)}
+              className="md:hidden text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors"
+              aria-label="Abrir menú"
             >
-              {isMenuOpen ? <Close /> : <Menu />}
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>

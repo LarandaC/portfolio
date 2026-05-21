@@ -13,10 +13,10 @@ export const ContactSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-foreground font-family-title">
             {t("contact.title")}
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4" />
+          <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-3" />
         </div>
 
-        <p className="text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
           {t("contact.description")}
         </p>
 

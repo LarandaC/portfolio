@@ -1,9 +1,13 @@
-import Slider from "react-slick";
-import { ProjectCard } from "../cards/ProjectCard";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { NextArrow, PrevArrow } from "./Arrows";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { ProjectCard } from "@/components/cards/ProjectCard";
 
 interface Project {
   id: number;
@@ -12,7 +16,7 @@ interface Project {
   descriptionEs: string;
   image: string;
   tags: string[];
-  demoUrl?: string;
+  liveUrl?: string;
   githubUrl?: string;
 }
 
@@ -21,60 +25,19 @@ interface ProjectCarouselProps {
 }
 
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: isMobile ? 1 : 2,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
-    arrows: !isMobile,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 0,
-          arrows: false,
-        },
-      },
-    ],
-
-    customPaging: () => (
-      <div className="w-2 h-2 mt-8 rounded-full bg-gray-300 hover:bg-primary transition-all" />
-    ),
-  };
+  const plugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
 
   return (
-    <div className="project-carousel relative">
-      <Slider {...settings}>
+    <Carousel
+      plugins={[plugin.current]}
+      opts={{ loop: true }}
+      className="w-full"
+    >
+      <CarouselContent className="-ml-4">
         {projects.map((project) => (
-          <div key={project.id} className="px-4">
+          <CarouselItem key={project.id} className="pl-4 md:basis-1/2">
             <ProjectCard
               title={project.title}
               descriptionEn={project.descriptionEn}
@@ -84,9 +47,11 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
               githubUrl={project.githubUrl}
               liveUrl={project.liveUrl}
             />
-          </div>
+          </CarouselItem>
         ))}
-      </Slider>
-    </div>
+      </CarouselContent>
+      <CarouselPrevious className="hidden sm:flex -left-10" />
+      <CarouselNext className="hidden sm:flex -right-10" />
+    </Carousel>
   );
 }

@@ -1,4 +1,4 @@
-import { GithubIcon, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface SocialLink {
@@ -11,7 +11,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
     href: "https://github.com/LarandaC",
-    icon: GithubIcon,
+    icon: Github,
   },
   {
     name: "LinkedIn",

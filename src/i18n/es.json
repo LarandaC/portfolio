@@ -36,7 +36,9 @@
 
   "projects": {
     "title": "Proyectos",
-    "description": "Estos son algunos de mis proyectos recientes. Cada uno fue desarrollado con atención al detalle, rendimiento y experiencia de usuario."
+    "description": "Estos son algunos de mis proyectos recientes. Cada uno fue desarrollado con atención al detalle, rendimiento y experiencia de usuario.",
+    "viewCode": "Ver código",
+    "liveDemo": "Demo en vivo"
   },
   "contact": {
     "title": "¿Listo para trabajar juntos?",
@@ -56,6 +58,7 @@
     }
   },
   "footer": {
-    "title": "Todos los derechos reservados."
+    "title": "Todos los derechos reservados.",
+    "scrollToTop": "Volver arriba"
   }
 }

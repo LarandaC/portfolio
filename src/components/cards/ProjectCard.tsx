@@ -1,5 +1,12 @@
-import { ExternalLink, GithubIcon } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import { useActiveLang } from "@/hooks/useActiveLang";
+import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ProjectCardProps {
   title: string;
@@ -20,6 +27,7 @@ export function ProjectCard({
   githubUrl,
   liveUrl,
 }: ProjectCardProps) {
+  const { t } = useTranslation();
   const lang = useActiveLang();
   const description = lang === "en" ? descriptionEn : descriptionEs;
 
@@ -37,43 +45,50 @@ export function ProjectCard({
       <div className="p-6">
         <h3 className="mb-2 font-bold text-foreground">{title}</h3>
 
-        <p className="text-muted-foreground text-sm min-h-[3rem]">
+        <p className="text-foreground text-sm min-h-[3rem]">
           {description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-6 justify-center">
+        <div className="flex flex-wrap gap-2 my-4 justify-center">
           {tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 bg-primary/5 text-primary border border-primary/20 rounded-full text-xs font-medium"
-            >
+            <Badge key={tag} variant="tag">
               {tag}
-            </span>
+            </Badge>
           ))}
         </div>
 
         <div className="flex justify-end gap-4">
           {githubUrl && (
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${title} GitHub`}
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <GithubIcon size={18} />
-            </a>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${title} GitHub`}
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  <Github size={18} />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>{t("projects.viewCode")}</TooltipContent>
+            </Tooltip>
           )}
           {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${title} live demo`}
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <ExternalLink size={18} />
-            </a>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${title} live demo`}
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  <ExternalLink size={18} />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>{t("projects.liveDemo")}</TooltipContent>
+            </Tooltip>
           )}
         </div>
       </div>

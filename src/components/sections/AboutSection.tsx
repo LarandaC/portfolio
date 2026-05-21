@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { Code, PaintBucket, Rocket } from "lucide-react";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Button } from "@/components/ui/Button";
-import { SecondaryButton } from "@/components/ui/SecondaryButton";
 import SpotlightCard from "@/components/shared/SpotlightCard";
 import { useTranslation } from "react-i18next";
 
@@ -34,24 +33,33 @@ export const AboutSection = () => {
     <section id="about" className="py-28 px-4 relative">
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-16 font-family-title">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 font-family-title">
             {t("about.title")}
-            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4" />
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-3" />
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-6">
-              <h3 className="text-2xl font-semibold">{t("about.subtitle")}</h3>
-              <p className="text-muted-foreground text-lg">
+              <h3 className="text-2xl text-primary font-semibold">
+                {t("about.subtitle")}
+              </h3>
+              <p className="text-foreground text-lg">
                 {t("about.description")}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mt-2 justify-center">
-                <Button href="#contact" text={t("about.buttonPrimary")} />
-                <SecondaryButton
-                  href="/files/CV-LeticiaAranda-2025.pdf"
-                  text={t("about.buttonSecondary")}
-                />
+              <div className="flex flex-col sm:flex-row gap-4 mt-4 justify-center items-center">
+                <Button asChild variant="gradient" size="pill">
+                  <a href="#contact">{t("about.buttonPrimary")}</a>
+                </Button>
+                <Button asChild variant="outline" size="pill">
+                  <a
+                    href="/files/CV-LeticiaAranda-2025.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("about.buttonSecondary")}
+                  </a>
+                </Button>
               </div>
             </div>
 
