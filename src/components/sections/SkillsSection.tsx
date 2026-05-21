@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { skills } from "@/lib/skills";
-import type { IconNames } from "@/hooks/use-icon";
+import { skills } from "@/data/skills";
+import type { IconNames } from "@/hooks/useIcon";
 import * as MuiIcons from "@mui/icons-material";
 import SpotlightCard from "../shared/SpotlightCard";
 import { useTranslation } from "react-i18next";
-import i18n from "@/i18n";
+import { useActiveLang } from "@/hooks/useActiveLang";
 
-// filtro
 const categoryData = [
   { id: "todos", label: "skills.categories.all" },
   { id: "frontend", label: "skills.categories.frontend" },
@@ -22,11 +21,8 @@ const DynamicMuiIcon = ({
   name: IconNames;
   fontSize?: number;
 }) => {
-  let IconComponent = MuiIcons[name];
-
-  if (name.toLowerCase() === "github") {
-    IconComponent = MuiIcons.GitHub;
-  }
+  const IconComponent =
+    name.toLowerCase() === "github" ? MuiIcons.GitHub : MuiIcons[name];
 
   if (!IconComponent) {
     return <MuiIcons.CodeRounded sx={{ fontSize, color: "text.primary" }} />;
@@ -37,6 +33,7 @@ const DynamicMuiIcon = ({
 
 export const SkillsSection = () => {
   const { t } = useTranslation();
+  const lang = useActiveLang();
 
   const [activeCategory, setActiveCategory] = useState(0);
   const currentCategoryName = categoryData[activeCategory].id;
@@ -54,14 +51,13 @@ export const SkillsSection = () => {
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary-foreground mx-auto rounded-full mt-4 mb-10" />
           </h2>
 
-          {/* Tabs  */}
           <div className="flex justify-center mb-8 flex-wrap gap-2">
             {categoryData.map((category, index) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(index)}
                 className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer
-        capitalize 
+        capitalize
         ${
           activeCategory === index
             ? "text-primary-foreground shadow-lg bg-gradient-to-r from-primary to-secondary-foreground"
@@ -73,7 +69,6 @@ export const SkillsSection = () => {
             ))}
           </div>
 
-          {/* Grid de skills */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredSkills.map((skill, index) => (
               <SpotlightCard
@@ -86,7 +81,7 @@ export const SkillsSection = () => {
                       {skill.name}
                     </h3>
                     <p className="text-sm text-foreground/70 text-left">
-                      {skill[i18n.language.includes("en") ? "en" : "es"]}
+                      {skill[lang]}
                     </p>
                   </div>
 

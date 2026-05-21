@@ -1,6 +1,5 @@
-import type { IconNames } from "../hooks/use-icon";
+import type { IconNames } from "../hooks/useIcon";
 
-// Definición de la estructura de una habilidad
 export type Skill = {
   name: string;
   level: string;

@@ -1,5 +1,5 @@
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { projects } from "@/lib/projects";
+import { projects } from "@/data/projects";
 import { ProjectCarousel } from "@/components/ui/ProjectCarousel";
 import { useTranslation } from "react-i18next";
 

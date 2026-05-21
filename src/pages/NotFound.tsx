@@ -1,6 +1,6 @@
 import Particles from "@/components/shared/Particles";
 import { NotFoundSection } from "../components/sections/NotFoundSection";
-import { ThemeToggle } from "../theme/ThemeToggle";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
 export const NotFound = () => {
   return (

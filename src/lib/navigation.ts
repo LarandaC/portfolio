@@ -1,14 +1,13 @@
 export interface NavItem {
-  name: string;
+  id: string;
   href: string;
-  en: string;
-  es: string;
+  labelKey: string;
 }
 
 export const navItems: NavItem[] = [
-  { name: "Inicio", href: "#hero", en: "Home", es: "Inicio" },
-  { name: "Sobre mi", href: "#about", en: "About", es: "Sobre mi" },
-  { name: "Skills", href: "#skills", en: "Skills", es: "Skills" },
-  { name: "Proyectos", href: "#projects", en: "Projects", es: "Proyectos" },
-  { name: "Contacto", href: "#contact", en: "Contact", es: "Contacto" },
+  { id: "home", href: "#hero", labelKey: "nav.index" },
+  { id: "about", href: "#about", labelKey: "nav.about" },
+  { id: "skills", href: "#skills", labelKey: "nav.skills" },
+  { id: "projects", href: "#projects", labelKey: "nav.projects" },
+  { id: "contact", href: "#contact", labelKey: "nav.contact" },
 ];

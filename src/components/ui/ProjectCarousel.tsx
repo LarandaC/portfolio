@@ -82,7 +82,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
               image={project.image}
               tags={project.tags}
               githubUrl={project.githubUrl}
-              liveUrl={project.demoUrl}
+              liveUrl={project.liveUrl}
             />
           </div>
         ))}

@@ -1,5 +1,5 @@
-import { ExternalLink, Github } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { ExternalLink, GithubIcon } from "lucide-react";
+import { useActiveLang } from "@/hooks/useActiveLang";
 
 interface ProjectCardProps {
   title: string;
@@ -20,11 +20,8 @@ export function ProjectCard({
   githubUrl,
   liveUrl,
 }: ProjectCardProps) {
-  const { i18n } = useTranslation();
-
-  const currentDescription = i18n.language.includes("en")
-    ? descriptionEn
-    : descriptionEs;
+  const lang = useActiveLang();
+  const description = lang === "en" ? descriptionEn : descriptionEs;
 
   return (
     <div className="group relative bg-card border border-border rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
@@ -41,14 +38,13 @@ export function ProjectCard({
         <h3 className="mb-2 font-bold text-foreground">{title}</h3>
 
         <p className="text-muted-foreground text-sm min-h-[3rem]">
-          {currentDescription}
+          {description}
         </p>
 
-        {/* Etiquetas */}
         <div className="flex flex-wrap gap-2 mb-6 justify-center">
-          {tags.map((tag, index) => (
+          {tags.map((tag) => (
             <span
-              key={index}
+              key={tag}
               className="px-3 py-1 bg-primary/5 text-primary border border-primary/20 rounded-full text-xs font-medium"
             >
               {tag}
@@ -56,15 +52,16 @@ export function ProjectCard({
           ))}
         </div>
 
-        <div className={`flex justify-end gap-4`}>
+        <div className="flex justify-end gap-4">
           {githubUrl && (
             <a
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+              aria-label={`${title} GitHub`}
+              className="text-muted-foreground hover:text-primary transition-colors"
             >
-              <Github size={18} />
+              <GithubIcon size={18} />
             </a>
           )}
           {liveUrl && (
@@ -72,7 +69,8 @@ export function ProjectCard({
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+              aria-label={`${title} live demo`}
+              className="text-muted-foreground hover:text-primary transition-colors"
             >
               <ExternalLink size={18} />
             </a>

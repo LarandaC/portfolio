@@ -1,32 +1,13 @@
 import { navItems } from "@/lib/navigation";
-import { ThemeToggle } from "@/theme/ThemeToggle";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { Close } from "@mui/icons-material";
-import { Github, Linkedin, Mail } from "lucide-react";
-import i18n from "@/i18n";
 import { useTranslation } from "react-i18next";
+import { socialLinks } from "@/data/social";
 
 interface NavBarMobileProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
 }
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/LarandaC",
-    icon: Github,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/leticia-aranda-871575238/",
-    icon: Linkedin,
-  },
-  {
-    name: "Email",
-    href: "mailto:leticia.m.aranda@gmail.com",
-    icon: Mail,
-  },
-];
 
 export const NavBarMobile = ({
   isMenuOpen,
@@ -66,12 +47,12 @@ export const NavBarMobile = ({
           <nav className="flex flex-col gap-3 text-left">
             {navItems.map((item) => (
               <a
-                key={item.name}
+                key={item.id}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className="text-lg text-foreground hover:text-primary transition-colors rounded-md px-2 py-1 font-semibold"
               >
-                {item[i18n.language.includes("en") ? "en" : "es"]}
+                {t(item.labelKey)}
               </a>
             ))}
           </nav>

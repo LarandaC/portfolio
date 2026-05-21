@@ -1,13 +1,14 @@
-import { Github, Linkedin, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { socialLinks } from "@/data/social";
 
 export const ContactSection = () => {
   const { t } = useTranslation();
 
+  const [github, linkedin, email] = socialLinks;
+
   return (
     <section id="contact" className="relative py-28 px-4 bg-card">
       <div className="max-w-3xl mx-auto text-center">
-        {/* Encabezado */}
         <div className="mb-10 justify-center items-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-foreground font-family-title">
             {t("contact.title")}
@@ -19,36 +20,32 @@ export const ContactSection = () => {
           {t("contact.description")}
         </p>
 
-        {/* Botones de Contacto */}
         <div className="flex flex-wrap justify-center gap-4">
-          {/* GitHub Button */}
           <a
-            href="https://github.com"
+            href={github.href}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3 bg-card border border-border rounded-xl text-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <Github className="text-primary" size={20} />
+            <github.icon className="text-primary" size={20} />
             <span className="font-medium">GitHub</span>
           </a>
 
-          {/* LinkedIn Button */}
           <a
-            href="https://linkedin.com"
+            href={linkedin.href}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3 bg-card border border-border rounded-xl text-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <Linkedin className="text-primary" size={20} />
+            <linkedin.icon className="text-primary" size={20} />
             <span className="font-medium">LinkedIn</span>
           </a>
 
-          {/* Mail Button */}
           <a
-            href="mailto:leticia.m.aranda@gmail.com"
+            href={email.href}
             className="flex items-center gap-2 px-6 py-3 bg-secondary-foreground text-primary-foreground rounded-xl shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <Mail size={20} />
+            <email.icon size={20} />
             <span className="font-semibold">leticia.m.aranda@gmail.com</span>
           </a>
         </div>
@@ -56,4 +53,5 @@ export const ContactSection = () => {
     </section>
   );
 };
+
 export default ContactSection;

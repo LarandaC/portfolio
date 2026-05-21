@@ -11,7 +11,7 @@ export const projects = [
     descriptionEs: "Una landing page con React y Tailwind",
     image: saasImage,
     tags: ["React", "TailwindCSS", "TypeScript"],
-    demoUrl: "",
+    liveUrl: "",
     githubUrl: "https://github.com/LarandaC/landing-page",
   },
   {
@@ -21,7 +21,7 @@ export const projects = [
     descriptionEs: "Landing page para un banco con React y Tailwind",
     image: bankImage,
     tags: ["React", "TailwindCSS", "TypeScript"],
-    demoUrl: "",
+    liveUrl: "",
     githubUrl: "https://github.com/LarandaC/landing-page-bank",
   },
   {
@@ -31,7 +31,7 @@ export const projects = [
     descriptionEs: "Sitio web conectado a la API REST Countries",
     image: restImage,
     tags: ["React", "React-router", "TailwindCSS", "TypeScript"],
-    demoUrl: "",
+    liveUrl: "",
     githubUrl: "https://github.com/LarandaC/paises-react-route",
   },
   {
@@ -41,7 +41,7 @@ export const projects = [
     descriptionEs: "Blog sobre Los Simpsons con la API de The Simpsons",
     image: simpsonsImage,
     tags: ["React", "React-router", "TailwindCSS", "TypeScript"],
-    demoUrl: "https://larandac.github.io/the-simpson-blog/",
+    liveUrl: "https://larandac.github.io/the-simpson-blog/",
     githubUrl: "https://github.com/LarandaC/the-simpson-blog",
   },
 ];

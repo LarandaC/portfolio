@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { NavBar } from "../components/layout/NavBar/NavBar";
 import { AboutSection } from "../components/sections/AboutSection";
 import { SkillsSection } from "../components/sections/SkillsSection";
-import { ThemeToggle } from "@/theme/ThemeToggle";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { Footer } from "@/components/layout/Footer";
 
 const HeroSection = lazy(() => import("@/components/sections/HeroSection"));
