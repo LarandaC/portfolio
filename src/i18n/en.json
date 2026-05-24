@@ -40,7 +40,10 @@
   },
   "projects": {
     "title": "Projects",
-    "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience."
+    "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience.",
+    "viewCode": "View code",
+    "liveDemo": "Live demo",
+    "viewDetails": "View details"
   },
   "contact": {
     "title": "Ready to work together?",
@@ -56,10 +59,12 @@
       "all": "all",
       "frontend": "frontend",
       "backend": "backend",
-      "tools": "tools"
+      "tools": "tools",
+      "ia": "AI"
     }
   },
   "footer": {
-    "title": "All rights reserved."
+    "title": "All rights reserved.",
+    "scrollToTop": "Back to top"
   }
 }

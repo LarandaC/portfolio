@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import GradientText from "../shared/GradientText";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/ui/button";
 
 export const NotFoundSection = () => {
   const { t } = useTranslation();
@@ -27,7 +27,9 @@ export const NotFoundSection = () => {
 
         {/* Botón de retorno */}
         <div className="opacity-0 animate-fade-in-delay-3 pt-4">
-          <Button href="/" text={t("404.button")} />
+          <Button asChild variant="gradient" size="pill">
+            <a href="/">{t("404.button")}</a>
+          </Button>
         </div>
 
         {/* Información adicional */}
