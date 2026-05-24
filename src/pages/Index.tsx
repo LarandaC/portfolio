@@ -4,6 +4,8 @@ import { AboutSection } from "../components/sections/AboutSection";
 import { SkillsSection } from "../components/sections/SkillsSection";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { Footer } from "@/components/layout/Footer";
+import { useLenis } from "@/hooks/useLenis";
+import { ScrollProgress } from "@/components/shared/ScrollProgress";
 
 const HeroSection = lazy(() => import("@/components/sections/HeroSection"));
 const ProjectsSection = lazy(
@@ -15,8 +17,11 @@ const ContactSection = lazy(
 );
 
 export const Index = () => {
+  useLenis();
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+      <ScrollProgress />
       <div className="fixed inset-0 z-0 pointer-events-none">
         <Particles
           particleCount={200}

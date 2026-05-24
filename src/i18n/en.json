@@ -59,7 +59,8 @@
       "all": "all",
       "frontend": "frontend",
       "backend": "backend",
-      "tools": "tools"
+      "tools": "tools",
+      "ia": "AI"
     }
   },
   "footer": {
