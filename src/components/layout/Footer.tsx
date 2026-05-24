@@ -1,5 +1,10 @@
 import { ArrowUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -15,13 +20,18 @@ export const Footer = () => {
         &copy; {new Date().getFullYear()} Leticia Aranda. {t("footer.title")}
       </p>
 
-      <button
-        onClick={scrollToTop}
-        aria-label="Volver arriba"
-        className="bg-primary/10 text-primary p-2 rounded-full transition-all hover:bg-primary/20 cursor-pointer"
-      >
-        <ArrowUp size={22} />
-      </button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={scrollToTop}
+            aria-label="Volver arriba"
+            className="bg-primary/10 text-primary p-2 rounded-full transition-all hover:bg-primary/20 cursor-pointer"
+          >
+            <ArrowUp size={22} />
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="left">{t("footer.scrollToTop")}</TooltipContent>
+      </Tooltip>
     </footer>
   );
 };

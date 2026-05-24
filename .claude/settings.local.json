@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add carousel --yes)",
+      "Bash(npx shadcn@latest add carousel --overwrite)",
+      "Bash(npm install *)"
+    ]
+  }
+}

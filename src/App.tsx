@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 import { Toaster } from "./components/ui/toaster";
+import { TooltipProvider } from "./components/ui/tooltip";
 import { Index } from "./pages/Index";
 import { NotFound } from "./pages/NotFound";
 import ClickSpark from "./components/shared/ClickSpark";
@@ -8,7 +9,7 @@ import { Loader } from "@/components/ui/Loader";
 
 function App() {
   return (
-    <>
+    <TooltipProvider delayDuration={300}>
       <Toaster />
       <BrowserRouter>
         <div className="relative min-h-screen w-full">
@@ -28,7 +29,7 @@ function App() {
           </ClickSpark>
         </div>
       </BrowserRouter>
-    </>
+    </TooltipProvider>
   );
 }
 

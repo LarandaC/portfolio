@@ -1,4 +1,4 @@
-import { TranslateSharp } from "@mui/icons-material";
+import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const LanguageSelector = () => {
@@ -17,7 +17,7 @@ export const LanguageSelector = () => {
                  hover:bg-primary/10 transition-all duration-300 cursor-pointer"
     >
       <span className="relative z-10 flex items-center gap-2">
-        <TranslateSharp fontSize="small" />
+        <Languages className="w-4 h-4" />
         {i18n.language.includes("es") ? "EN" : "ES"}
       </span>
     </button>
