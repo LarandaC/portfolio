@@ -318,6 +318,7 @@
 
 /* Ghost numbers — barely visible, adapts to both modes */
 .about-ghost-number,
+.experience-ghost-number,
 .skills-ghost-number,
 .projects-ghost-number,
 .contact-ghost-number {
@@ -326,20 +327,21 @@
   letter-spacing: -0.04em;
   z-index: 0;
 }
-.about-ghost-number    { top: -0.05em; left:  -0.02em; }
-.projects-ghost-number { top: -0.05em; left:  -0.02em; }
-.skills-ghost-number   { top: -0.05em; right: -0.02em; }
-.contact-ghost-number  { top: -0.05em; right: -0.02em; }
+.about-ghost-number       { top: -0.05em; left:  -0.02em; }
+.experience-ghost-number  { top: -0.05em; right: -0.02em; }
+.projects-ghost-number    { top: -0.05em; left:  -0.02em; }
+.skills-ghost-number      { top: -0.05em; right: -0.02em; }
+.contact-ghost-number     { top: -0.05em; right: -0.02em; }
 
 /* Section title pattern shared across About / Skills / Projects */
-.about-label, .skills-label, .projects-label, .contact-label {
+.about-label, .experience-label, .skills-label, .projects-label, .contact-label {
   color: hsl(var(--accent) / 0.6);
 }
-.about-title, .skills-title, .projects-title {
+.about-title, .experience-title, .skills-title, .projects-title {
   font-size: clamp(2.2rem, 5vw, 3.5rem);
   color: hsl(var(--foreground));
 }
-.about-title-line, .skills-title-line, .projects-title-line {
+.about-title-line, .experience-title-line, .skills-title-line, .projects-title-line {
   height: 1px;
   width: 8rem;
   background: linear-gradient(to right, hsl(var(--accent) / 0.5), transparent);
@@ -392,6 +394,59 @@
 .about-service-title { color: hsl(var(--foreground)); }
 .about-service-index { color: hsl(var(--accent) / 0.35); }
 .about-service-desc  { color: hsl(var(--muted-foreground)); }
+
+/* ── Experience Section ──────────────────── */
+.experience-ambient-glow {
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(ellipse, hsl(var(--accent) / 0.05) 0%, transparent 70%);
+  filter: blur(40px);
+}
+
+.experience-item-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.5px solid hsl(var(--accent) / 0.45);
+  background: hsl(var(--background));
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.experience-item-connector {
+  flex: 1;
+  width: 1px;
+  margin-top: 4px;
+  background: linear-gradient(to bottom, hsl(var(--accent) / 0.25), transparent);
+}
+
+.experience-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.experience-type-work {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.2);
+}
+.experience-type-education {
+  background: hsl(var(--accent) / 0.1);
+  color: hsl(var(--accent));
+  border: 1px solid hsl(var(--accent) / 0.2);
+}
+.experience-type-freelance {
+  background: hsl(var(--foreground) / 0.05);
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsl(var(--border));
+}
 
 /* ── Skills Section ──────────────────────── */
 .skills-ambient-glow {
@@ -638,65 +693,27 @@
   gap: 10px;
 }
 
-/* Oval pill container */
+/* Pill container */
 .side-nav {
-  position: relative;
   width: 48px;
-  height: 256px;
   background: hsl(var(--card) / 0.9);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid hsl(var(--border));
   border-radius: 9999px;
-  overflow: hidden;
+  padding: 8px 0;
   box-shadow:
     0 4px 32px hsl(var(--primary) / 0.08),
     inset 0 1px 0 hsl(var(--foreground) / 0.04);
-  /* Fade items near the oval edges — drum/wheel feel */
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 16%,
-    black 84%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 16%,
-    black 84%,
-    transparent 100%
-  );
 }
 
-/* Center slot highlight */
-.side-nav-slot {
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 50%;
-  height: 40px;
-  transform: translateY(-50%);
-  background: hsl(var(--accent) / 0.08);
-  border-top: 1px solid hsl(var(--accent) / 0.18);
-  border-bottom: 1px solid hsl(var(--accent) / 0.18);
-  border-radius: 6px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Rotating list */
+/* Static list */
 .side-nav-list {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  transform: translateY(var(--nav-ty, 104px));
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Each nav item slot */
+/* Each nav item */
 .side-nav-item {
   display: flex;
   align-items: center;
@@ -705,11 +722,10 @@
   width: 100%;
   text-decoration: none;
   color: hsl(var(--muted-foreground));
-  opacity: max(0.15, calc(1 - var(--distance, 0) * 0.42));
-  transform: scale(max(0.65, calc(1 - var(--distance, 0) * 0.1)));
-  transition: opacity 0.45s ease, transform 0.45s ease, color 0.2s;
+  opacity: 0.4;
+  transition: opacity 0.2s, color 0.2s;
 }
-.side-nav-item:hover { color: hsl(var(--foreground)); }
+.side-nav-item:hover { color: hsl(var(--foreground)); opacity: 1; }
 .side-nav-item.active { color: hsl(var(--accent)); }
 
 /* Footer: small circular buttons below the oval */
@@ -761,4 +777,37 @@
 .side-nav-mobile-btn:hover {
   color: hsl(var(--accent));
   border-color: hsl(var(--accent) / 0.4);
+}
+
+/* ── Not Found Page ──────────────────────── */
+.not-found-ghost {
+  font-size: clamp(14rem, 45vw, 32rem);
+  color: hsl(var(--foreground) / 0.04);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.not-found-glow {
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, hsl(var(--primary) / 0.09) 0%, transparent 65%);
+  filter: blur(60px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.not-found-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  color: hsl(var(--foreground));
+  line-height: 1.2;
 }

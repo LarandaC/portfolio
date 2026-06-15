@@ -14,7 +14,7 @@ export function HeroContent({ contentRef }: HeroContentProps) {
       className="relative z-10 flex flex-col items-center text-center px-6 select-none will-change-transform"
     >
       <p className="text-xs font-mono tracking-[0.38em] uppercase mb-10 hero-overline">
-        DESARROLLADORA FULL STACK
+        {t("hero.subtitle")}
       </p>
 
       <h1 className="font-family-display font-bold hero-name hero-name-solid">

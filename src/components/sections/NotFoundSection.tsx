@@ -1,44 +1,38 @@
 import { useTranslation } from "react-i18next";
-import GradientText from "../shared/GradientText";
-import { Button } from "@/components/ui/button";
 
 export const NotFoundSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
-      {/* Contenido principal */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center space-y-8 opacity-0 animate-fade-in">
-        <div className="relative mb-4">
-          <h1 className="text-[10rem] md:text-[14rem] font-black text-primary select-none leading-none font-family-title">
-            <GradientText showBorder={false}>404</GradientText>
-          </h1>
-        </div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden bg-background">
+      <span aria-hidden className="not-found-ghost font-family-display font-bold">
+        404
+      </span>
+      <div aria-hidden className="not-found-glow" />
 
-        {/* Título y descripción */}
-        <div className="space-y-6 opacity-0 animate-fade-in-delay-1">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight font-family-title">
-            {t("404.title")}
-          </h2>
-          <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-            {t("404.description")}
-          </p>
-        </div>
+      <div className="relative z-10 text-center max-w-2xl mx-auto flex flex-col items-center gap-7">
+        <p className="font-mono text-xs tracking-[0.32em] uppercase text-accent/60">
+          ERR · 404
+        </p>
 
-        {/* Botón de retorno */}
-        <div className="opacity-0 animate-fade-in-delay-3 pt-4">
-          <Button asChild variant="gradient" size="pill">
-            <a href="/">{t("404.button")}</a>
-          </Button>
-        </div>
+        <h1 className="not-found-title font-family-display font-bold">
+          {t("404.title")}
+        </h1>
 
-        {/* Información adicional */}
-        <div className="opacity-0 animate-fade-in-delay-4 pt-8">
-          <p className="text-sm text-foreground/50">
-            Error Code:{" "}
-            <span className="font-mono text-primary">PAGE_NOT_FOUND</span>
-          </p>
-        </div>
+        <p className="text-base leading-relaxed text-muted-foreground max-w-md">
+          {t("404.description")}
+        </p>
+
+        <a
+          href="/"
+          className="inline-flex items-center justify-center font-mono text-xs tracking-[0.2em] uppercase px-8 py-3 mt-2 about-contact-btn"
+        >
+          {t("404.button")}
+        </a>
+
+        <p className="font-mono text-xs text-muted-foreground/35 tracking-[0.08em] mt-4">
+          Error Code: <span className="text-primary/50">PAGE_NOT_FOUND</span>
+        </p>
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ export function ProjectsHeader() {
   return (
     <>
       <p className="font-mono text-xs tracking-[0.32em] uppercase mb-3 projects-label">
-        03 · {t("projects.title")}
+        04 · {t("projects.title")}
       </p>
       <h2 className="font-family-display font-bold leading-tight mb-2 projects-title">
         {t("projects.title")}

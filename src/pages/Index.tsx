@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { SideNav } from "../components/layout/SideNav/SideNav";
 import { AboutSection } from "../components/sections/about";
+import { ExperienceSection } from "../components/sections/experience";
 import { SkillsSection } from "../components/sections/skills";
 import { Footer } from "@/components/layout/Footer";
 import { useLenis } from "@/hooks/useLenis";
@@ -55,6 +56,7 @@ export const Index = () => {
         <main>
           <HeroSection />
           <AboutSection />
+          <ExperienceSection />
           <SkillsSection />
           <ProjectsSection />
           <ContactSection />

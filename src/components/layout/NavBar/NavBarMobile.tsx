@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/sheet";
 import { navItems } from "@/lib/navigation";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { useTranslation } from "react-i18next";
 import { socialLinks } from "@/data/social";
 
@@ -69,7 +70,10 @@ export const NavBarMobile = ({
               </a>
             ))}
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageSelector />
+            <ThemeToggle />
+          </div>
         </div>
       </SheetContent>
     </Sheet>

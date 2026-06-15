@@ -2,16 +2,14 @@
   "nav": {
     "index": "Inicio",
     "about": "Sobre mi",
+    "experience": "Experiencia",
     "skills": "Skills",
     "projects": "Proyectos",
     "contact": "Contacto",
     "closeMenu": "Cerrar menú"
   },
   "hero": {
-    "chip": "Disponible",
-    "title": "Desarrolladora",
-    "subtitle": "Full Stack",
-    "description": "Transformo ideas en experiencias digitales excepcionales. Especializada en crear aplicaciones web y móviles modernas con código limpio y diseño centrado en el usuario.",
+    "title": "DESARROLLADORA",
     "button": "Mis proyectos"
   },
   "about": {
@@ -34,6 +32,32 @@
     "description": "Mejora del rendimiento y escalabilidad de aplicaciones en producción."
   },
 
+  "experience": {
+    "title": "Experiencia",
+    "columnWork": "Laboral",
+    "columnEducation": "Formación",
+    "typeWork": "Trabajo",
+    "typeEducation": "Educación",
+    "typeFreelance": "Freelance",
+    "entries": {
+      "clt": {
+        "role": "Desarrolladora Frontend",
+        "description": "Desarrollo y mantenimiento de interfaces web con Next.js y TypeScript. Diseño e implementación de componentes reutilizables en equipo ágil, optimización de rendimiento y colaboración estrecha con QA y backend para garantizar una experiencia de usuario de alta calidad."
+      },
+      "guadalupe": {
+        "role": "Desarrolladora",
+        "description": "Sistema de gestión de recursos humanos a medida: módulos de alta y baja de empleados, control de asistencia, liquidación de sueldos y panel de reportes. Frontend desarrollado en Next.js con integración a Supabase."
+      },
+      "uaa": {
+        "role": "Ingeniería en Informática",
+        "description": "Énfasis en sistemas informáticos. Actualmente en proceso de trabajo de grado."
+      },
+      "fullstack": {
+        "role": "Curso de Desarrollo Web Full Stack",
+        "description": "Formación en desarrollo web frontend, backend y bases de datos."
+      }
+    }
+  },
   "projects": {
     "title": "Proyectos",
     "description": "Estos son algunos de mis proyectos recientes. Cada uno fue desarrollado con atención al detalle, rendimiento y experiencia de usuario.",
@@ -46,9 +70,9 @@
     "description": "Estoy siempre abierta a discutir nuevos proyectos, ideas creativas u oportunidades para formar parte de tu visión."
   },
   "404": {
-    "title": "Oh... something went wrong",
-    "description": "The page you're looking for has disappeared into the depths of space. Maybe it was abducted by aliens or simply doesn't exist in this universe.",
-    "button": "Back to home"
+    "title": "Oh... parece que tenemos un problema",
+    "description": "La página que buscas se perdió en el espacio profundo. Tal vez fue abducida por alienígenas o simplemente no existe en este universo.",
+    "button": "Volver al inicio"
   },
   "skills": {
     "categories": {
