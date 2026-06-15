@@ -2,11 +2,11 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export const LoaderSection = () => {
-  const wrapRef  = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const ring1Ref = useRef<HTMLDivElement>(null);
   const ring2Ref = useRef<HTMLDivElement>(null);
   const ring3Ref = useRef<HTMLDivElement>(null);
-  const textRef  = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -38,7 +38,7 @@ export const LoaderSection = () => {
       gsap.fromTo(
         textRef.current,
         { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.9, delay: 0.5, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 0.9, delay: 0.5, ease: "power3.out" },
       );
     }, wrapRef);
 
@@ -52,12 +52,8 @@ export const LoaderSection = () => {
       <div className="absolute w-64 h-64 rounded-full bg-secondary-foreground/8 blur-[80px] bottom-1/4 right-1/4 pointer-events-none" />
 
       <div ref={wrapRef} className="flex flex-col items-center gap-12 z-10">
-
         {/* Giroscopio 3D */}
-        <div
-          className="relative w-40 h-40"
-          style={{ perspective: "560px" }}
-        >
+        <div className="relative w-40 h-40" style={{ perspective: "560px" }}>
           {/* Halo interior pulsante */}
           <div className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-primary/15 blur-xl animate-pulse pointer-events-none" />
 
@@ -94,14 +90,13 @@ export const LoaderSection = () => {
 
         {/* Nombre y rol */}
         <div ref={textRef} className="text-center space-y-2 opacity-0">
-          <h1 className="text-2xl font-bold font-family-title bg-gradient-to-r from-primary to-secondary-foreground bg-clip-text text-transparent tracking-tight">
+          <h1 className="text-2xl font-mono hero-overline bg-gradient-to-r from-primary to-secondary-foreground bg-clip-text text-transparent tracking-tight">
             Leticia Aranda
           </h1>
           <p className="text-xs text-muted-foreground tracking-[0.25em] uppercase">
             Developer
           </p>
         </div>
-
       </div>
     </section>
   );

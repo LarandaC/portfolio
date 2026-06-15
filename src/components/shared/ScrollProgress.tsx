@@ -26,7 +26,7 @@ export function ScrollProgress() {
   return (
     <div
       ref={barRef}
-      className="fixed top-0 left-0 w-full h-[3px] z-[9999] bg-gradient-to-r from-primary to-secondary-foreground"
+      className="fixed top-0 left-0 w-full h-[3px] z-[9999] bg-gradient-to-r from-accent to-primary"
       style={{ transform: "scaleX(0)", transformOrigin: "left center" }}
     />
   );

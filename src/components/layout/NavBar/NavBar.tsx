@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { navItems } from "@/lib/navigation";
 import { NavBarMobile } from "./NavBarMobile";
 import { Menu } from "lucide-react";
-import icon from "@/assets/icon/icon-2.png";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { LanguageSelector } from "../LanguageSelector";
 import { useTranslation } from "react-i18next";
@@ -26,14 +25,13 @@ export const NavBar = () => {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 10);
+          setIsScrolled(window.scrollY > 30);
           if (isMenuOpenRef.current) setIsMenuOpen(false);
           ticking = false;
         });
         ticking = true;
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -41,52 +39,42 @@ export const NavBar = () => {
   return (
     <>
       <header
-        className={`fixed w-full z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-background/80 backdrop-blur-md shadow-md py-4 border-b border-border/50"
-            : "bg-transparent py-4"
-        } text-foreground`}
+        className={`navbar-header fixed w-full z-50 transition-all duration-500 py-5${isScrolled ? " is-scrolled" : ""}`}
       >
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between">
             <a
               href="#hero"
-              className="flex items-center font-bold text-lg md:text-xl"
+              className="navbar-logo font-family-display font-bold tracking-[0.12em] uppercase text-sm"
             >
-              <img src={icon} alt="Icono" className="w-10 h-10" />
-              <span className="ml-2">Leticia Aranda</span>
+              LETICIA ARANDA
             </a>
 
-            <div className="flex items-center gap-5">
-              <nav className="hidden md:flex items-center gap-5">
-                {navItems.map((item) => {
-                  const sectionId = item.href.replace("#", "");
-                  const isActive = activeSection === sectionId;
+            <nav className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.replace("#", "");
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    className={`navbar-link font-mono text-xs tracking-[0.2em] uppercase transition-colors${isActive ? " is-active" : ""}`}
+                  >
+                    {t(item.labelKey)}
+                  </a>
+                );
+              })}
+            </nav>
 
-                  return (
-                    <a
-                      key={item.id}
-                      href={item.href}
-                      className={`font-semibold transition-opacity ${
-                        isActive
-                          ? "text-primary border-b border-primary"
-                          : "text-foreground hover:text-primary"
-                      }`}
-                    >
-                      {t(item.labelKey)}
-                    </a>
-                  );
-                })}
-              </nav>
+            <div className="hidden md:flex items-center gap-5">
               <LanguageSelector />
             </div>
 
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="md:hidden text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors"
+              className="navbar-menu-btn md:hidden p-1 transition-colors"
               aria-label="Abrir menú"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
