@@ -1,25 +1,18 @@
 import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export const LanguageSelector = () => {
+export const LanguageSelector = ({ className = "" }: { className?: string }) => {
   const { i18n } = useTranslation();
-
-  const toggleLanguage = () => {
-    const newLang = i18n.language.includes("es") ? "en" : "es";
-    i18n.changeLanguage(newLang);
-  };
+  const isEs = i18n.language.includes("es");
 
   return (
     <button
-      onClick={toggleLanguage}
-      className="relative overflow-hidden px-4 py-2 rounded-full font-medium 
-                 text-sm border border-border bg-card/50 backdrop-blur-sm
-                 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+      onClick={() => i18n.changeLanguage(isEs ? "en" : "es")}
+      className={`inline-flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-xs font-semibold transition-colors duration-[250ms] hover:border-brand-soft ${className}`}
+      aria-label={isEs ? "Switch to English" : "Cambiar a español"}
     >
-      <span className="relative z-10 flex items-center gap-2">
-        <Languages className="w-4 h-4" />
-        {i18n.language.includes("es") ? "EN" : "ES"}
-      </span>
+      <Languages size={14} />
+      {isEs ? "EN" : "ES"}
     </button>
   );
 };

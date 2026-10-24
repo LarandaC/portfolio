@@ -1,58 +1,52 @@
-import { lazy } from "react";
-import { NavBar } from "../components/layout/NavBar/NavBar";
-import { AboutSection } from "../components/sections/AboutSection";
-import { SkillsSection } from "../components/sections/SkillsSection";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { lazy, Suspense, useCallback, useState } from "react";
+import { NavBar } from "@/components/layout/NavBar/NavBar";
 import { Footer } from "@/components/layout/Footer";
-import { useLenis } from "@/hooks/useLenis";
-import { ScrollProgress } from "@/components/shared/ScrollProgress";
+import { HeroSection } from "@/components/sections/hero";
+import { AboutSection } from "@/components/sections/about";
+import { ProjectsSection } from "@/components/sections/projects";
+import { OnMount } from "@/components/shared/OnMount";
+import { usePageMotion } from "@/hooks/usePageMotion";
+import { HERO_POSTER } from "@/lib/media";
 
-const HeroSection = lazy(() => import("@/components/sections/HeroSection"));
-const ProjectsSection = lazy(
-  () => import("@/components/sections/ProjectsSection")
-);
-const Particles = lazy(() => import("@/components/shared/Particles"));
-const ContactSection = lazy(
-  () => import("@/components/sections/ContactSection")
-);
+// Below-the-fold sections are split out; they download while the intro plays.
+const SkillsSection = lazy(() => import("@/components/sections/skills"));
+const ExperienceSection = lazy(() => import("@/components/sections/experience"));
+const ContactSection = lazy(() => import("@/components/sections/contact"));
 
 export const Index = () => {
-  useLenis();
+  const [sectionsReady, setSectionsReady] = useState(false);
+  const introDone = usePageMotion(sectionsReady);
+  const markSectionsReady = useCallback(() => setSectionsReady(true), []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-      <ScrollProgress />
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <Particles
-          particleCount={200}
-          particleSpread={12}
-          speed={0.5}
-          particleColors={["#ffffff", "#8B5CF6", "#D946EF"]}
-          particleHoverFactor={2}
-          alphaParticles={true}
-          particleBaseSize={100}
-          sizeRandomness={0.5}
-          cameraDistance={25}
-          disableRotation={true}
-          className="w-full h-full"
+    <>
+      {/* Blurred landscape the page zooms out of on load */}
+      {!introDone && (
+        <div
+          className="fixed -inset-10 z-0 scale-[1.3] bg-cover bg-[position:center_70%] blur-[18px] saturate-[1.1]"
+          style={{ backgroundImage: `url(${HERO_POSTER})` }}
+          aria-hidden
         />
-      </div>
+      )}
 
-      <div className="relative z-10">
+      <div
+        id="app"
+        className="relative z-1 origin-[50%_50vh] overflow-clip bg-surface intro:rounded-[28px] intro:[transform:scale(.9)]"
+      >
         <NavBar />
-        <div className="hidden sm:block fixed bottom-5 right-5 z-50">
-          <ThemeToggle />
-        </div>
-
         <main>
           <HeroSection />
           <AboutSection />
-          <SkillsSection />
           <ProjectsSection />
-          <ContactSection />
+          <Suspense fallback={null}>
+            <SkillsSection />
+            <ExperienceSection />
+            <ContactSection />
+            <OnMount onMount={markSectionsReady} />
+          </Suspense>
         </main>
         <Footer />
       </div>
-    </div>
+    </>
   );
 };

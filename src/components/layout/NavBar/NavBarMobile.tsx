@@ -1,47 +1,44 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetClose,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetClose, SheetTitle } from "@/components/ui/sheet";
 import { navItems } from "@/lib/navigation";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { LanguageSelector } from "@/components/layout/LanguageSelector";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useTranslation } from "react-i18next";
 import { socialLinks } from "@/data/social";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 
 interface NavBarMobileProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
 }
 
-export const NavBarMobile = ({
-  isMenuOpen,
-  setIsMenuOpen,
-}: NavBarMobileProps) => {
+export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) => {
   const { t } = useTranslation();
 
   return (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-      <SheetContent
-        side="right"
-        className="w-72 sm:w-80 bg-background/95 backdrop-blur-md flex flex-col justify-between border-l border-border p-6"
-      >
+      <SheetContent side="right" className="flex w-80 flex-col overflow-hidden border-l border-line bg-surface p-0">
         <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
 
-        <nav className="flex flex-col gap-1 text-left mt-6">
-          {navItems.map((item) => (
+        <div className="flex items-center gap-1.5 px-6 pt-6 pb-2 text-[19px] font-medium tracking-[-.04em] whitespace-nowrap max-tablet:text-[17px]">
+          <BrandLogo />
+          leticia aranda
+        </div>
+
+        <nav className="flex flex-col flex-1 px-6 pt-4">
+          {navItems.map((item, index) => (
             <SheetClose asChild key={item.id}>
               <a
                 href={item.href}
-                className="text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 transition-colors rounded-lg px-3 py-2"
+                className="flex items-baseline gap-3.5 border-b border-line py-3.5 text-[26px] tracking-[-.03em] transition-colors duration-[250ms] last:border-b-0 hover:text-brand"
               >
+                <span className="text-xs font-semibold text-brand-bright">{String(index + 1).padStart(2, "0")}</span>
                 {t(item.labelKey)}
               </a>
             </SheetClose>
           ))}
         </nav>
 
-        <div className="border-t border-border pt-5 flex items-center justify-between">
+        <div className="flex items-center justify-between border-t border-line px-6 py-5">
           <div className="flex gap-2">
             {socialLinks.map((social) => (
               <a
@@ -50,13 +47,16 @@ export const NavBarMobile = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10"
+                className="icon-btn"
               >
-                <social.icon className="w-5 h-5" />
+                <social.icon size={15} />
               </a>
             ))}
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-1.5">
+            <ThemeToggle />
+            <LanguageSelector />
+          </div>
         </div>
       </SheetContent>
     </Sheet>
