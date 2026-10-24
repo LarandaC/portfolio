@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import type { Skill } from "@/data/skills";
 import { useActiveLang } from "@/hooks/useActiveLang";
 import { iconMap, levelDots } from "../const/constants";
@@ -15,26 +14,20 @@ export function SkillCard({ skill, index }: SkillCardProps) {
 
   return (
     <div
-      className="animate-card-enter skill-card-wrapper"
-      style={{ "--delay": `${index * 45}ms` } as CSSProperties}
+      className="animate-card-enter motion-reduce:animate-none"
+      style={{ animationDelay: `${index * 45}ms` }}
     >
-      <div className="flex flex-col items-center gap-3 p-5 text-center skill-card">
-        <div className="w-11 h-11 flex items-center justify-center skill-card-icon">
-          <Icon size={24} />
+      <div className="flex h-full flex-col items-center gap-2.5 rounded-[18px] border border-line bg-surface/85 px-3 pt-5 pb-4 text-center backdrop-blur-[6px] transition-[translate,border-color,box-shadow] duration-300 hover:-translate-y-[3px] hover:border-pill-hover hover:shadow-lift">
+        <div className="flex size-11 items-center justify-center rounded-xl bg-pill text-brand">
+          <Icon size={22} />
         </div>
-        <h3 className="font-semibold text-sm leading-tight skill-card-name">
-          {skill.name}
-        </h3>
-        <div className="flex flex-col items-center gap-1.5">
-          <div className="flex gap-1.5 items-center">
-            {[1, 2, 3].map((d) => (
-              <span key={d} className={`block h-px w-4 skill-dash${d <= dots ? " active" : ""}`} />
-            ))}
-          </div>
-          <span className="text-xs font-mono skill-level-text">
-            {skill[lang]}
-          </span>
+        <h3 className="text-[13.5px] font-medium tracking-[-.01em]">{skill.name}</h3>
+        <div className="flex gap-1" aria-hidden>
+          {[1, 2, 3].map((d) => (
+            <span key={d} className={`h-[3px] w-3.5 rounded-[2px] ${d <= dots ? "bg-brand-bright" : "bg-line"}`} />
+          ))}
         </div>
+        <span className="text-[11px] text-stone">{skill[lang]}</span>
       </div>
     </div>
   );

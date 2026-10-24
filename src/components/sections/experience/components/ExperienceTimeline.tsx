@@ -1,39 +1,21 @@
-import { useTranslation } from "react-i18next";
 import type { ExperienceEntry } from "@/data/experience";
 import { ExperienceItem } from "./ExperienceItem";
 
-interface ExperienceTimelineProps {
-  entries: ExperienceEntry[];
-}
-
-function ExperienceColumn({ entries, label }: { entries: ExperienceEntry[]; label: string }) {
+/** Vertical timeline; the progress line fills in as the section scrolls. */
+export function ExperienceTimeline({ entries }: { entries: ExperienceEntry[] }) {
   return (
-    <div>
-      <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-accent/50 mb-6">
-        {label}
-      </p>
-      <div className="flex flex-col">
-        {entries.map((entry, index) => (
-          <ExperienceItem
-            key={entry.id}
-            entry={entry}
-            isLast={index === entries.length - 1}
-          />
-        ))}
+    <div className="timeline relative mt-[60px]">
+      <div
+        className="absolute inset-y-0 left-1/2 -ml-px w-0.5 overflow-hidden rounded-[2px] bg-line max-tablet:left-[7px] max-tablet:ml-0"
+        aria-hidden
+      >
+        <div className="timeline-progress absolute inset-0 origin-top bg-[linear-gradient(var(--color-brand-soft),var(--color-brand-bright))]" />
       </div>
-    </div>
-  );
-}
-
-export function ExperienceTimeline({ entries }: ExperienceTimelineProps) {
-  const { t } = useTranslation();
-  const laboral   = entries.filter((e) => e.type === "work" || e.type === "freelance");
-  const formacion = entries.filter((e) => e.type === "education");
-
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10">
-      <ExperienceColumn entries={laboral}   label={t("experience.columnWork")} />
-      <ExperienceColumn entries={formacion} label={t("experience.columnEducation")} />
+      <ol className="grid grid-cols-2 gap-y-9 max-tablet:grid-cols-1 max-tablet:gap-y-7">
+        {entries.map((entry, i) => (
+          <ExperienceItem key={entry.id} entry={entry} side={i % 2 === 0 ? "left" : "right"} />
+        ))}
+      </ol>
     </div>
   );
 }

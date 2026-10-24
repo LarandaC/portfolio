@@ -1,35 +1,19 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Suspense } from "react";
-import { Toaster } from "./components/ui/toaster";
-import { TooltipProvider } from "./components/ui/tooltip";
 import { Index } from "./pages/Index";
-import { NotFound } from "./pages/NotFound";
-import ClickSpark from "./components/shared/ClickSpark";
-import { Loader } from "@/components/ui/Loader";
+
+const NotFound = lazy(() => import("./pages/NotFound").then((m) => ({ default: m.NotFound })));
 
 function App() {
   return (
-    <TooltipProvider delayDuration={300}>
-      <Toaster />
-      <BrowserRouter>
-        <div className="relative min-h-screen w-full">
-          <ClickSpark
-            sparkSize={10}
-            sparkRadius={20}
-            sparkCount={8}
-            duration={500}
-            easing="ease-out"
-          >
-            <Suspense fallback={<Loader />}>
-              <Routes>
-                <Route index element={<Index />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </ClickSpark>
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
+    <BrowserRouter>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route index element={<Index />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 

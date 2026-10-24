@@ -1,6 +1,7 @@
 import { ExternalLink, Github, CheckCircle2 } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useActiveLang } from "@/hooks/useActiveLang";
+import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
 
 interface ProjectModalProps {
@@ -11,34 +12,31 @@ interface ProjectModalProps {
 
 export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
   const lang = useActiveLang();
+  const { t } = useTranslation();
 
   if (!project) return null;
 
   const description = lang === "en" ? project.longDescriptionEn : project.longDescriptionEs;
-  const highlights  = lang === "en" ? project.highlightsEn     : project.highlightsEs;
-  const labelCode   = lang === "en" ? "View code"              : "Ver código";
-  const labelLive   = lang === "en" ? "Live demo"              : "Demo en vivo";
-  const labelHighlights = lang === "en" ? "TECHNICAL HIGHLIGHTS" : "ASPECTOS TÉCNICOS";
+  const highlights = lang === "en" ? project.highlightsEn : project.highlightsEs;
+  const labelHighlights = lang === "en" ? "Technical highlights" : "Aspectos técnicos";
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-2xl p-0 gap-0 flex flex-col max-h-[90dvh] overflow-hidden w-[calc(100%-2rem)] sm:w-full project-modal">
-
-        {/* Image header */}
-        <div className="relative h-40 sm:h-56 flex-shrink-0 overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 project-modal-img-overlay" />
-          <div className="absolute bottom-3 left-5 right-10">
-            <DialogTitle className="font-family-display font-bold text-lg sm:text-xl leading-tight project-card-title">
-              {project.title}
+      <DialogContent
+        // Lets the modal body scroll natively instead of Lenis capturing the wheel.
+        data-lenis-prevent
+        className="flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-2xl flex-col gap-0 overflow-hidden rounded-[26px] border-line bg-surface p-0 shadow-[0_30px_60px_rgba(10,20,30,.18)] sm:w-full sm:rounded-[26px]"
+      >
+        <div className="relative h-[clamp(160px,28vh,230px)] shrink-0 overflow-hidden after:absolute after:inset-0 after:bg-[linear-gradient(to_top,color-mix(in_srgb,var(--color-scrim)_72%,transparent),transparent_65%)] after:content-['']">
+          <img className="size-full object-cover" src={project.image} alt={project.title} />
+          <div className="absolute right-12 bottom-4 left-[22px] z-1 text-white">
+            {/* Classes go on DialogTitle so tailwind-merge drops its default text-lg/font-semibold. */}
+            <DialogTitle asChild className="text-[clamp(20px,2.4vw,26px)] leading-none font-medium tracking-[-.03em]">
+              <h2>{project.title}</h2>
             </DialogTitle>
-            <div className="flex flex-wrap gap-1.5 mt-2">
+            <div className="force-light mt-2 flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
-                <span key={tag} className="font-mono text-xs px-2 py-0.5 project-modal-tag">
+                <span key={tag} className="pill bg-white/88">
                   {tag}
                 </span>
               ))}
@@ -46,52 +44,38 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
           </div>
         </div>
 
-        {/* Scrollable content */}
-        <div className="overflow-y-auto flex-1 px-5 py-5 flex flex-col gap-5">
-          <p className="text-sm leading-relaxed project-modal-desc">
-            {description}
-          </p>
+        <div className="flex flex-1 flex-col gap-5 overflow-y-auto p-[22px]">
+          <p className="text-sm leading-[1.55] text-body">{description}</p>
 
           <div>
-            <p className="font-mono text-xs tracking-[0.28em] uppercase mb-3 project-modal-highlights-label">
+            <p className="mb-2.5 text-[11px] font-semibold tracking-[.08em] text-brand uppercase">
               {labelHighlights}
             </p>
             <ul className="flex flex-col gap-2">
               {highlights.map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm text-foreground">
-                  <CheckCircle2 size={15} className="shrink-0 mt-0.5 project-modal-highlight-icon" />
+                <li key={i} className="flex items-start gap-2.5 text-sm leading-[1.4]">
+                  <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-brand-bright" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="flex flex-wrap gap-3 pt-1 pb-1">
+          <div className="flex flex-wrap gap-2.5">
             {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] uppercase px-4 py-2 project-modal-btn-code"
-              >
+              <a className="btn" href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github size={14} />
-                {labelCode}
+                {t("projects.viewCode")}
               </a>
             )}
             {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] uppercase px-4 py-2 project-modal-btn-live"
-              >
+              <a className="btn-ghost" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink size={14} />
-                {labelLive}
+                {t("projects.liveDemo")}
               </a>
             )}
           </div>
         </div>
-
       </DialogContent>
     </Dialog>
   );

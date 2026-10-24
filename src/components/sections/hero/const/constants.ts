@@ -1,28 +1,11 @@
-export const GOLD   = "38 80% 55%";
-export const VIOLET = "262 70% 60%";
-export const TICK_Y = [72, 105, 138] as const;
+/** [x%, y%] positions of the frosted squares over the hero video. */
+export const HERO_GLASS: [number, number][] = [
+  // left
+  [3, 64], [3, 71], [6.5, 71], [10, 71], [3, 78],
+  [-1, 70],
+  // center
+  [45.5, 76], [49, 80], [49, 76], [52.5, 76],
+  // right
+  [86, 58], [86, 67], [82, 76], [89.5, 76], [86, 84],
+];
 
-interface StarDatum {
-  id: number;
-  top: string;
-  left: string;
-  size: number;
-  opacity: number;
-  glow: boolean;
-}
-
-const mkStars = (n: number, sMin: number, sMax: number): StarDatum[] =>
-  Array.from({ length: n }, (_, i) => ({
-    id: i,
-    top:     `${(Math.random() * 96 + 2).toFixed(2)}%`,
-    left:    `${(Math.random() * 96 + 2).toFixed(2)}%`,
-    size:    +(sMin + Math.random() * (sMax - sMin)).toFixed(2),
-    opacity: +(0.25 + Math.random() * 0.75).toFixed(2),
-    glow:    Math.random() > 0.72,
-  }));
-
-export type { StarDatum };
-
-export const STARS_FAR  = mkStars(75, 0.5, 1.1);
-export const STARS_MID  = mkStars(38, 1.0, 2.0);
-export const STARS_NEAR = mkStars(14, 1.5, 3.0);

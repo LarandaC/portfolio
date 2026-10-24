@@ -1,68 +1,52 @@
-import { lazy } from "react";
-import { SideNav } from "../components/layout/SideNav/SideNav";
-import { AboutSection } from "../components/sections/about";
-import { ExperienceSection } from "../components/sections/experience";
-import { SkillsSection } from "../components/sections/skills";
+import { lazy, Suspense, useCallback, useState } from "react";
+import { NavBar } from "@/components/layout/NavBar/NavBar";
 import { Footer } from "@/components/layout/Footer";
-import { useLenis } from "@/hooks/useLenis";
-import { ScrollProgress } from "@/components/shared/ScrollProgress";
+import { HeroSection } from "@/components/sections/hero";
+import { AboutSection } from "@/components/sections/about";
+import { ProjectsSection } from "@/components/sections/projects";
+import { OnMount } from "@/components/shared/OnMount";
+import { usePageMotion } from "@/hooks/usePageMotion";
+import { HERO_POSTER } from "@/lib/media";
 
-const HeroSection = lazy(() => import("@/components/sections/hero"));
-const ProjectsSection = lazy(() => import("@/components/sections/projects"));
-const Particles = lazy(() => import("@/components/shared/Particles"));
+// Below-the-fold sections are split out; they download while the intro plays.
+const SkillsSection = lazy(() => import("@/components/sections/skills"));
+const ExperienceSection = lazy(() => import("@/components/sections/experience"));
 const ContactSection = lazy(() => import("@/components/sections/contact"));
 
 export const Index = () => {
-  useLenis();
+  const [sectionsReady, setSectionsReady] = useState(false);
+  const introDone = usePageMotion(sectionsReady);
+  const markSectionsReady = useCallback(() => setSectionsReady(true), []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-      <ScrollProgress />
-      {/* Grain overlay — fixed film grain across the whole page */}
-      <svg width="0" height="0" className="absolute" aria-hidden>
-        <defs>
-          <filter id="grain-filter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise" />
-            <feColorMatrix type="saturate" values="0" in="noise" />
-          </filter>
-        </defs>
-      </svg>
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{ filter: "url(#grain-filter)", opacity: 0.055, mixBlendMode: "overlay", background: "white", zIndex: 200 }}
-        aria-hidden
-      />
-
-      {/* Subtle particles — reduced count, updated palette to match retro theme */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <Particles
-          particleCount={90}
-          particleSpread={12}
-          speed={0.3}
-          particleColors={["#ffffff", "#7D3DEF", "#C8820A"]}
-          particleHoverFactor={1.5}
-          alphaParticles={true}
-          particleBaseSize={80}
-          sizeRandomness={0.6}
-          cameraDistance={28}
-          disableRotation={true}
-          className="w-full h-full"
+    <>
+      {/* Blurred landscape the page zooms out of on load */}
+      {!introDone && (
+        <div
+          className="fixed -inset-10 z-0 scale-[1.3] bg-cover bg-[position:center_70%] blur-[18px] saturate-[1.1]"
+          style={{ backgroundImage: `url(${HERO_POSTER})` }}
+          aria-hidden
         />
-      </div>
+      )}
 
-      <div className="relative z-10">
-        <SideNav />
-
+      <div
+        id="app"
+        className="relative z-1 origin-[50%_50vh] overflow-clip bg-surface intro:rounded-[28px] intro:[transform:scale(.9)]"
+      >
+        <NavBar />
         <main>
           <HeroSection />
           <AboutSection />
-          <ExperienceSection />
-          <SkillsSection />
           <ProjectsSection />
-          <ContactSection />
+          <Suspense fallback={null}>
+            <SkillsSection />
+            <ExperienceSection />
+            <ContactSection />
+            <OnMount onMount={markSectionsReady} />
+          </Suspense>
         </main>
         <Footer />
       </div>
-    </div>
+    </>
   );
 };

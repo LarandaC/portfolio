@@ -1,12 +1,13 @@
 import type { LucideIcon } from "lucide-react";
 
 interface ContactLinkProps {
-  href:  string;
-  icon:  LucideIcon;
-  label: string;
+  href:    string;
+  icon:    LucideIcon;
+  label:   string;
+  primary: boolean;
 }
 
-export function ContactLink({ href, icon: Icon, label }: ContactLinkProps) {
+export function ContactLink({ href, icon: Icon, label, primary }: ContactLinkProps) {
   const isMailto = href.startsWith("mailto");
 
   return (
@@ -14,11 +15,10 @@ export function ContactLink({ href, icon: Icon, label }: ContactLinkProps) {
       href={href}
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noopener noreferrer"}
-      className="flex items-center gap-2.5 font-mono text-xs tracking-[0.18em] uppercase group contact-link"
+      className={primary ? "btn" : "btn-ghost"}
     >
-      <Icon size={13} />
+      <Icon size={14} />
       {label}
-      <span className="block h-px w-0 group-hover:w-5 transition-all duration-300 contact-link-line" />
     </a>
   );
 }

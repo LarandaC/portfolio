@@ -3,7 +3,22 @@
     "allow": [
       "Bash(npx shadcn@latest add carousel --yes)",
       "Bash(npx shadcn@latest add carousel --overwrite)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(grep -oE \"\\\\.\\(hover\\\\\\\\\\\\\\\\:\\)?shadow-\\(lift-lg|lift|shot|btn\\)[^{]*\\\\{[^}]*\\\\}\")",
+      "Bash(node -e ' *)",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npx vite *)",
+      "Bash(sed -i 's#^await send\\(\"Page.enable\"\\);#await send\\(\"Page.enable\"\\);\\\\nawait send\\(\"Emulation.setEmulatedMedia\", { features: [{ name: \"prefers-color-scheme\", value: process.env.SCHEME || \"light\" }] }\\);#' C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/snap.mjs)",
+      "Bash(bash C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/shots.sh C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/light4)",
+      "Bash(node C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/diff_nonav.mjs C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/base4 C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/light4 C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/delta4)",
+      "Bash(NODE_PATH=C:/Users/User/AppData/Local/Temp/claude/d--User-Documents-Proyectos-React-portafolio/94de0477-73de-4b98-b659-c0acafff30a3/scratchpad/vis/node_modules node -e ' *)",
+      "Bash(rm -rf __TRACKED_VAR__/dark2 __TRACKED_VAR__/light7)",
+      "Bash(SCHEME=dark bash __TRACKED_VAR__/shots.sh __TRACKED_VAR__/dark2)",
+      "Bash(bash __TRACKED_VAR__/shots.sh __TRACKED_VAR__/light7)",
+      "Bash(node __TRACKED_VAR__/diff_nonav.mjs __TRACKED_VAR__/light6 __TRACKED_VAR__/light7 __TRACKED_VAR__/delta7)",
+      "Bash(powershell -NoProfile -Command 'Get-NetTCPConnection -LocalPort 4178 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }')",
+      "Bash(sed -i 's/\\(hero, tarjeta de Contacto, tags sobre la imagen del modal\\)/\\(hero, sección de Contacto completa, tags sobre la imagen del modal\\)/' \"C:/Users/User/.claude/projects/d--User-Documents-Proyectos-React-portafolio/memory/design_system.md\")"
     ]
   }
 }

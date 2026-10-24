@@ -1,63 +1,56 @@
 import { ArrowUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { navItems } from "@/lib/navigation";
+import { socialLinks } from "@/data/social";
+import { FooterLogo } from "./FooterLogo";
 
-const GOLD = "38 80% 55%";
-
+/** Single-row lime footer: logo + copyright, section links, socials. */
 export const Footer = () => {
   const { t } = useTranslation();
 
-  const scrollToTop = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer
-      className="py-8 px-6"
-      style={{ borderTop: "1px solid hsl(222 35% 10%)" }}
+      id="footer"
+      className="grid grid-cols-[1fr_auto_1fr] items-center gap-x-6 bg-brand-soft px-[4vw] py-4 max-tablet:grid-cols-1 max-tablet:justify-items-center max-tablet:gap-y-3.5 max-tablet:py-6"
     >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        {/* Logo */}
-        <span
-          className="font-family-display font-bold text-xs tracking-[0.18em] uppercase"
-          style={{ color: "hsl(220 15% 28%)" }}
-        >
-          LETICIA ARANDA
-        </span>
-
-        {/* Copyright */}
-        <p
-          className="font-mono text-xs"
-          style={{ color: "hsl(220 15% 28%)" }}
-        >
-          &copy; {new Date().getFullYear()} &middot; {t("footer.title")}
+      <div className="flex items-center gap-3 max-tablet:flex-col max-tablet:gap-2 max-tablet:text-center">
+        <FooterLogo />
+        <p className="text-[11px] leading-snug text-footer-text">
+          &copy; {new Date().getFullYear()} · Leticia Aranda.
+          <br />
+          {t("footer.title")}
         </p>
+      </div>
 
-        {/* Scroll to top */}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={scrollToTop}
-              aria-label="Volver arriba"
-              className="transition-colors duration-200 cursor-pointer"
-              style={{ color: "hsl(220 15% 28%)" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.color = `hsl(${GOLD} / 0.6)`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.color = "hsl(220 15% 28%)";
-              }}
-            >
-              <ArrowUp size={16} />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side="left">{t("footer.scrollToTop")}</TooltipContent>
-        </Tooltip>
+      <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[13px] text-footer-link max-tablet:gap-x-[18px]">
+        {navItems.slice(1).map((item) => (
+          <a key={item.id} href={item.href} className="hover:underline">
+            {t(item.labelKey)}
+          </a>
+        ))}
+      </nav>
+
+      <div className="flex items-center gap-4 justify-self-end text-deep-ink max-tablet:justify-self-center">
+        {socialLinks.map((social) => (
+          <a
+            key={social.name}
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={social.name}
+            className="transition-opacity duration-[250ms] hover:opacity-65"
+          >
+            <social.icon size={18} />
+          </a>
+        ))}
+        <a
+          href="#hero"
+          aria-label={t("footer.scrollToTop")}
+          title={t("footer.scrollToTop")}
+          className="icon-btn size-8 bg-surface/40 text-deep-ink hover:bg-deep-ink hover:text-brand-soft"
+        >
+          <ArrowUp size={15} />
+        </a>
       </div>
     </footer>
   );

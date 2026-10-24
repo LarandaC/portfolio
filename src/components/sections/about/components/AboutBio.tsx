@@ -1,29 +1,22 @@
 import { useTranslation } from "react-i18next";
+import cvUrl from "@/assets/files/CV-LeticiaAranda-2025.pdf";
 
 export function AboutBio() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-8">
-      <p className="text-lg leading-relaxed about-bio-text">
+    <>
+      <p className="reveal max-w-[660px] text-center text-[15px] leading-[1.55] text-body">
         {t("about.description")}
       </p>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <a
-          href="#contact"
-          className="inline-flex items-center justify-center gap-2 font-mono text-xs tracking-[0.2em] uppercase px-6 py-3 about-contact-btn"
-        >
+      <div className="reveal mb-1.5 flex flex-wrap justify-center gap-2.5">
+        <a className="btn" href="#contact">
           {t("about.buttonPrimary")}
         </a>
-        <a
-          href="/files/CV-LeticiaAranda-2025.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 font-mono text-xs tracking-[0.2em] uppercase px-6 py-3 about-cv-link"
-        >
+        <a className="btn-ghost" href={cvUrl} target="_blank" rel="noopener noreferrer">
           {t("about.buttonSecondary")} ↗
         </a>
       </div>
-    </div>
+    </>
   );
 }

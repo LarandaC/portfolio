@@ -1,26 +1,27 @@
-import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { ContactHeading } from "./components/ContactHeading";
-import { ContactSeparator } from "./components/ContactSeparator";
-import { ContactLinks } from "./components/ContactLinks";
+import { NIGHT } from "@/lib/media";
+import { SquareField } from "@/components/shared/SquareField";
+import { Petals } from "@/components/shared/Petals";
+import { ContactCard } from "./components/ContactCard";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative py-36 px-6 overflow-hidden bg-background">
-      <span aria-hidden className="absolute select-none pointer-events-none font-family-display font-bold leading-none contact-ghost-number">
-        05
-      </span>
-      <div aria-hidden className="absolute top-0 left-0 right-0 h-px pointer-events-none section-top-border" />
-      <div aria-hidden className="contact-ambient-glow" />
+    <section
+      id="contact"
+      className="force-light relative h-[110vh] min-h-[760px] overflow-hidden bg-surface max-tablet:h-auto max-tablet:min-h-0 max-tablet:pt-[60px]"
+    >
+      <SquareField count={16} />
 
-      <div className="max-w-5xl mx-auto relative z-[1] text-center">
-        <RevealOnScroll>
-          <ContactHeading />
-          <ContactSeparator />
-          <ContactLinks />
-        </RevealOnScroll>
+      <div className="absolute inset-x-0 bottom-0 h-[78%] [mask-image:linear-gradient(to_bottom,transparent_0,#000_24%)] max-tablet:relative max-tablet:h-[92vh] max-tablet:min-h-[640px]">
+        <img
+          id="ctaImg"
+          className="h-[118%] w-full object-cover object-[center_60%] max-tablet:object-[30%_60%]"
+          src={NIGHT}
+          alt="Moonlit cherry blossom valley"
+        />
       </div>
 
-      <div aria-hidden className="absolute bottom-0 left-0 right-0 h-px pointer-events-none contact-bottom-border" />
+      <Petals />
+      <ContactCard />
     </section>
   );
 }

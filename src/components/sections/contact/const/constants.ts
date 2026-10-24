@@ -1,7 +1,7 @@
 import { socialLinks } from "@/data/social";
 
 export const contactLinks = [
-  { ...socialLinks[0], label: "GITHUB" },
-  { ...socialLinks[1], label: "LINKEDIN" },
-  { ...socialLinks[2], label: "leticia.m.aranda@gmail.com" },
+  { ...socialLinks[2], label: "leticia.m.aranda@gmail.com", primary: true },
+  { ...socialLinks[0], label: "GitHub", primary: false },
+  { ...socialLinks[1], label: "LinkedIn", primary: false },
 ];

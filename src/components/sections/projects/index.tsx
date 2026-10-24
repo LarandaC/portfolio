@@ -1,23 +1,28 @@
-import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { ProjectCarousel } from "@/components/ui/ProjectCarousel";
+import { useTranslation } from "react-i18next";
 import { projects } from "@/data/projects";
-import { ProjectsHeader } from "./components/ProjectsHeader";
+import { SectionHeader } from "@/components/shared/SectionHeader";
+import { ProjectsCloud } from "./components/ProjectsCloud";
+import { ProjectsTrack } from "./components/ProjectsTrack";
 
 export function ProjectsSection() {
-  return (
-    <section id="projects" className="relative py-32 px-6 overflow-hidden bg-background">
-      <span aria-hidden className="absolute select-none pointer-events-none font-family-display font-bold leading-none projects-ghost-number">
-        04
-      </span>
-      <div aria-hidden className="absolute top-0 left-0 right-0 h-px pointer-events-none section-top-border" />
-      <div aria-hidden className="absolute bottom-0 right-0 pointer-events-none projects-ambient-glow" />
+  const { t } = useTranslation();
 
-      <div className="max-w-6xl mx-auto relative z-[1]">
-        <RevealOnScroll>
-          <ProjectsHeader />
-        </RevealOnScroll>
-        <ProjectCarousel projects={projects} />
-      </div>
+  return (
+    <section
+      id="projects"
+      className="relative h-screen min-h-[760px] overflow-hidden bg-surface max-tablet:h-auto max-tablet:min-h-0 max-tablet:pt-[14vh] max-tablet:pb-10"
+    >
+      <ProjectsCloud />
+      <SectionHeader
+        className="absolute top-[11vh] z-4 w-full px-4 max-tablet:relative max-tablet:top-auto"
+        label={`02 · ${t("projects.title")}`}
+        title={[t("projects.title")]}
+      >
+        <p className="reveal max-w-[540px] text-center text-sm leading-normal text-muted-ink short-desktop:hidden">
+          {t("projects.description")}
+        </p>
+      </SectionHeader>
+      <ProjectsTrack projects={projects} />
     </section>
   );
 }

@@ -9,7 +9,9 @@
     "closeMenu": "Close menu"
   },
   "hero": {
-    "subtitle": "DEVELOPER",
+    "role": "Frontend Developer",
+    "tagline": "From design to code.",
+    "intro": "I build web products with React, Next.js and TypeScript, with care for every design detail.",
     "button": "My projects"
   },
   "about": {
@@ -86,6 +88,10 @@
       "tools": "tools",
       "ia": "AI"
     }
+  },
+  "theme": {
+    "dark": "Switch to dark mode",
+    "light": "Switch to light mode"
   },
   "footer": {
     "title": "All rights reserved.",

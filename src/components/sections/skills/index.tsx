@@ -1,6 +1,8 @@
-import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
+import { CLOUD_B } from "@/lib/media";
+import { SectionHeader } from "@/components/shared/SectionHeader";
+import { SquareField } from "@/components/shared/SquareField";
+import { DriftCloud } from "@/components/shared/DriftCloud";
 import { useSkillsFilter } from "./hooks/useSkillsFilter";
-import { SkillsHeader } from "./components/SkillsHeader";
 import { CategoryFilter } from "./components/CategoryFilter";
 import { SkillGrid } from "./components/SkillGrid";
 
@@ -9,26 +11,21 @@ export function SkillsSection() {
     useSkillsFilter();
 
   return (
-    <section id="skills" className="relative py-32 px-6 overflow-hidden bg-background">
-      <span aria-hidden className="absolute select-none pointer-events-none font-family-display font-bold leading-none skills-ghost-number">
-        03
-      </span>
-      <div aria-hidden className="absolute top-0 left-0 right-0 h-px pointer-events-none section-top-border" />
-      <div aria-hidden className="absolute top-20 left-0 pointer-events-none skills-ambient-glow" />
+    <section
+      id="skills"
+      className="relative overflow-hidden bg-surface px-4 pt-[150px] pb-[130px] max-tablet:pt-[120px] max-tablet:pb-[90px]"
+    >
+      <SquareField count={16} />
+      <DriftCloud
+        src={CLOUD_B}
+        className="absolute top-10 -right-[6vw] z-1 w-[min(34vw,480px)] max-tablet:top-5 max-tablet:-right-[18vw] max-tablet:w-[60vw]"
+        drift="b"
+      />
 
-      <div className="max-w-6xl mx-auto relative z-[1]">
-        <RevealOnScroll>
-          <SkillsHeader />
-          <CategoryFilter
-            activeCategory={activeCategory}
-            onCategoryChange={handleCategoryChange}
-          />
-        </RevealOnScroll>
-        <SkillGrid
-          skills={filteredSkills}
-          animKey={animKey}
-          gridWrapperRef={gridWrapperRef}
-        />
+      <div className="relative z-2 mx-auto max-w-[1000px]">
+        <SectionHeader label="03 · Skills" title={["Skills"]} />
+        <CategoryFilter activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
+        <SkillGrid skills={filteredSkills} animKey={animKey} gridWrapperRef={gridWrapperRef} />
       </div>
     </section>
   );

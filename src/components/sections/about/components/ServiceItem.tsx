@@ -1,29 +1,24 @@
 import type { LucideIcon } from "lucide-react";
 
 interface ServiceItemProps {
-  icon:  LucideIcon;
+  icon: LucideIcon;
   title: string;
-  desc:  string;
+  desc: string;
   index: number;
 }
 
+/** Lime "ticket" card for one service. */
 export function ServiceItem({ icon: Icon, title, desc, index }: ServiceItemProps) {
   return (
-    <div className="about-service-item">
-      <div className="flex items-start justify-between mb-1.5">
-        <div className="flex items-center gap-3">
-          <Icon size={16} className="shrink-0 about-service-icon" />
-          <h4 className="font-family-display font-bold text-base about-service-title">
-            {title}
-          </h4>
-        </div>
-        <span className="font-mono text-xs shrink-0 about-service-index">
-          0{index + 1}
-        </span>
+    <article className="service-card ticket flex min-h-[168px] flex-col justify-between gap-3 px-6 pt-[18px] pb-5 text-deep-ink max-laptop:min-h-[150px]">
+      <header className="flex items-center justify-between">
+        <Icon size={18} />
+        <small className="text-[10.5px] font-semibold text-soft-ink tabular-nums">0{index + 1}</small>
+      </header>
+      <div>
+        <h3 className="text-[clamp(19px,1.8vw,23px)] font-semibold tracking-[-.03em]">{title}</h3>
+        <p className="text-[12.5px] leading-[1.4] text-soft-ink">{desc}</p>
       </div>
-      <p className="text-sm leading-relaxed about-service-desc">
-        {desc}
-      </p>
-    </div>
+    </article>
   );
 }

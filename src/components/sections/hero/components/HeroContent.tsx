@@ -1,47 +1,37 @@
-import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
+import cvUrl from "@/assets/files/CV-LeticiaAranda-2025.pdf";
+import { SplitWords } from "@/components/shared/SplitWords";
 
-interface HeroContentProps {
-  contentRef: RefObject<HTMLDivElement>;
-}
-
-export function HeroContent({ contentRef }: HeroContentProps) {
+export function HeroContent() {
   const { t } = useTranslation();
 
   return (
-    <div
-      ref={contentRef}
-      className="relative z-10 flex flex-col items-center text-center px-6 select-none will-change-transform"
-    >
-      <p className="text-xs font-mono tracking-[0.38em] uppercase mb-10 hero-overline">
-        {t("hero.subtitle")}
-      </p>
+    <div className="hero-content absolute inset-x-0 top-[17%] z-6 flex flex-col items-center gap-[18px] px-4 text-center max-tablet:top-[13%] max-tablet:gap-3.5">
+      <span className="pill hero-fade">{t("hero.role")}</span>
 
-      <h1 className="font-family-display font-bold hero-name hero-name-solid">
-        LETICIA
-      </h1>
-
-      <h1 className="font-family-display font-bold hero-name hero-name-outline">
-        ARANDA
-      </h1>
-
-      <div className="flex items-center gap-3 my-7 hero-separator">
-        <div className="h-px w-20 hero-separator-line-r" />
-        <span className="text-xs font-mono hero-separator-gem">✦</span>
-        <div className="h-px w-20 hero-separator-line-l" />
-      </div>
-
-      <p className="text-xs font-mono tracking-[0.22em] hero-stack">
-        NEXT · TYPESCRIPT · NODE.JS
-      </p>
-
-      <a
-        href="#projects"
-        className="mt-10 inline-flex items-center gap-3 text-xs font-mono tracking-[0.22em] uppercase hero-cta"
+      <h1
+        id="heroTitle"
+        className="split text-[clamp(36px,5vw,76px)] leading-[1.04] font-normal tracking-[-.045em]"
       >
-        {t("hero.button")}
-        <span className="tracking-normal">→</span>
-      </a>
+        <SplitWords text="Leticia Aranda" />
+        <br />
+        <em className="font-medium text-brand italic">
+          <SplitWords text={t("hero.tagline")} />
+        </em>
+      </h1>
+
+      <p className="hero-fade max-w-[500px] text-[clamp(14px,1.1vw,16px)] leading-normal text-nav">
+        {t("hero.intro")}
+      </p>
+
+      <div className="hero-fade flex flex-wrap justify-center gap-2.5">
+        <a className="btn" href="#projects">
+          {t("hero.button")} <span aria-hidden>→</span>
+        </a>
+        <a className="btn-ghost" href={cvUrl} target="_blank" rel="noopener noreferrer">
+          {t("about.buttonSecondary")} ↗
+        </a>
+      </div>
     </div>
   );
 }

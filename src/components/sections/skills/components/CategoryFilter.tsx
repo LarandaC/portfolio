@@ -11,7 +11,7 @@ export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFil
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-wrap gap-2 mb-12">
+    <div className="reveal mt-[34px] mb-[30px] flex flex-wrap justify-center gap-2">
       {categoryData.map((cat, index) => (
         <FilterButton
           key={cat.id}

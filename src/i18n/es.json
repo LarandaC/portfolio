@@ -9,7 +9,9 @@
     "closeMenu": "Cerrar menú"
   },
   "hero": {
-    "title": "DESARROLLADORA",
+    "role": "Desarrolladora Frontend",
+    "tagline": "Del diseño al código.",
+    "intro": "Construyo productos web con React, Next.js y TypeScript, cuidando cada detalle del diseño.",
     "button": "Mis proyectos"
   },
   "about": {
@@ -82,6 +84,10 @@
       "tools": "herramientas",
       "ia": "IA"
     }
+  },
+  "theme": {
+    "dark": "Activar modo oscuro",
+    "light": "Activar modo claro"
   },
   "footer": {
     "title": "Todos los derechos reservados.",

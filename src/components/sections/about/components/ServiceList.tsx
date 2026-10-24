@@ -1,38 +1,27 @@
-import { useMemo } from "react";
-import { Code, PaintBucket, Rocket } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SERVICES } from "../const/constants";
 import { ServiceItem } from "./ServiceItem";
 
 export function ServiceList() {
   const { t } = useTranslation();
 
-  const services = useMemo(
-    () => [
-      {
-        icon: Code as LucideIcon,
-        title: t("aboutWebDevelopmentCard.title"),
-        desc: t("aboutWebDevelopmentCard.description"),
-      },
-      {
-        icon: PaintBucket as LucideIcon,
-        title: t("aboutDesignCard.title"),
-        desc: t("aboutDesignCard.description"),
-      },
-      {
-        icon: Rocket as LucideIcon,
-        title: t("aboutOptCard.title"),
-        desc: t("aboutOptCard.description"),
-      },
-    ],
-    [t],
-  );
-
   return (
-    <div className="flex flex-col">
-      {services.map((service, index) => (
-        <ServiceItem key={index} {...service} index={index} />
-      ))}
-    </div>
+    <>
+      <div className="services relative z-4 grid w-[min(880px,100%)] grid-cols-3 gap-3 max-laptop:w-[min(480px,100%)] max-laptop:grid-cols-1">
+        {SERVICES.map(({ icon, key }, index) => (
+          <ServiceItem
+            key={key}
+            icon={icon}
+            title={t(`${key}.title`)}
+            desc={t(`${key}.description`)}
+            index={index}
+          />
+        ))}
+      </div>
+      <div
+        className="relative z-3 -mt-4 h-2.5 w-[min(820px,94%)] rounded-[50%] bg-[radial-gradient(closest-side,rgba(0,0,0,.08),transparent)]"
+        aria-hidden
+      />
+    </>
   );
 }

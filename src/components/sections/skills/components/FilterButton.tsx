@@ -12,11 +12,20 @@ export function FilterButton({ icon: Icon, label, count, isActive, onClick }: Fi
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 text-xs font-mono tracking-widest uppercase cursor-pointer skills-filter-btn${isActive ? " active" : ""}`}
+      aria-pressed={isActive}
+      className={`inline-flex h-[34px] items-center gap-2 rounded-full px-3.5 text-xs font-medium capitalize transition-colors duration-300 ${
+        isActive ? "bg-brand text-on-brand shadow-btn" : "bg-pill text-pill-ink hover:bg-pill-hover"
+      }`}
     >
-      <Icon size={12} />
+      <Icon size={13} />
       {label}
-      <span className="skills-filter-count">{count}</span>
+      <span
+        className={`rounded-full px-[7px] py-px text-[10.5px] font-semibold ${
+          isActive ? "bg-white/18" : "bg-surface/65"
+        }`}
+      >
+        {count}
+      </span>
     </button>
   );
 }

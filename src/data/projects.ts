@@ -1,7 +1,7 @@
-import saasImage from "../assets/projects/landing-page-saas.png";
-import bankImage from "../assets/projects/landing-page-banco.png";
-import restImage from "../assets/projects/react-route.png";
-import simpsonsImage from "../assets/projects/the-simpsons-blog.png";
+import saasImage from "../assets/projects/landing-page-saas.webp";
+import bankImage from "../assets/projects/landing-page-banco.webp";
+import restImage from "../assets/projects/react-route.webp";
+import simpsonsImage from "../assets/projects/the-simpsons-blog.webp";
 
 export interface Project {
   id: number;
