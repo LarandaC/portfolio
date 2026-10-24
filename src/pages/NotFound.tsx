@@ -1,33 +1,21 @@
-import Particles from "@/components/shared/Particles";
+import { useEffect } from "react";
 import { NotFoundSection } from "../components/sections/NotFoundSection";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { LanguageSelector } from "@/components/layout/LanguageSelector";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 export const NotFound = () => {
+  // The zoom-out intro only runs on the home page.
+  useEffect(() => {
+    document.body.classList.remove("intro");
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <Particles
-          particleCount={200}
-          particleSpread={12}
-          speed={0.1}
-          particleColors={["#ffffff", "#8B5CF6", "#D946EF"]}
-          particleHoverFactor={2}
-          alphaParticles={true}
-          particleBaseSize={150}
-          sizeRandomness={0.8}
-          cameraDistance={25}
-          disableRotation={false}
-          className="w-full h-full"
-        />
+    <main>
+      <NotFoundSection />
+      <div className="fixed right-[18px] bottom-[18px] z-50 flex items-center gap-1.5">
+        <ThemeToggle />
+        <LanguageSelector />
       </div>
-      <div className="relative z-10">
-        <div className="hidden sm:block fixed bottom-5 right-5 z-50">
-          <ThemeToggle />
-        </div>
-        <main>
-          <NotFoundSection />
-        </main>
-      </div>
-    </div>
+    </main>
   );
 };

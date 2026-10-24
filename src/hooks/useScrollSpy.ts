@@ -15,12 +15,26 @@ export const useScrollSpy = (sectionIds: string[]) => {
       }
     );
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    const observed = new Set<Element>();
+    const observePresent = () => {
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && !observed.has(el)) {
+          observed.add(el);
+          observer.observe(el);
+        }
+      });
+    };
+    observePresent();
 
-    return () => observer.disconnect();
+    // Some sections are lazy-loaded, so pick them up once they mount.
+    const mutations = new MutationObserver(observePresent);
+    mutations.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      mutations.disconnect();
+      observer.disconnect();
+    };
   }, [sectionIds]);
 
   return activeSection;
