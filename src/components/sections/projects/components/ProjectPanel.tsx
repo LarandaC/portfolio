@@ -52,8 +52,8 @@ export function ProjectPanel({ project, index, active, onActivate }: ProjectPane
           {index + 1}
         </span>
 
-        {/* Hidden until its panel opens. No transition on mobile: it would fight the GSAP fade-in. */}
-        <div className="pointer-events-none relative w-[min(440px,32vw)] -translate-x-6 pb-1 opacity-0 blur-[6px] [transition:opacity_.4s,translate_.5s,filter_.4s] group-data-[active=true]:pointer-events-auto group-data-[active=true]:translate-x-0 group-data-[active=true]:opacity-100 group-data-[active=true]:blur-none group-data-[active=true]:[transition:opacity_.7s_.4s,translate_.9s_.35s_cubic-bezier(.2,.8,.2,1),filter_.7s_.4s] max-tablet:pointer-events-auto max-tablet:w-auto max-tablet:translate-x-0 max-tablet:opacity-100 max-tablet:blur-none max-tablet:transition-none">
+        {/* Projects  */}
+        <div className="pointer-events-none relative w-[min(440px,32vw)] -translate-x-6 pb-1 opacity-0 blur-[6px] tablet:[transition:opacity_.4s,translate_.5s,filter_.4s] group-data-[active=true]:pointer-events-auto group-data-[active=true]:translate-x-0 group-data-[active=true]:opacity-100 group-data-[active=true]:blur-none tablet:group-data-[active=true]:[transition:opacity_.7s_.4s,translate_.9s_.35s_cubic-bezier(.2,.8,.2,1),filter_.7s_.4s] max-tablet:pointer-events-auto max-tablet:w-auto max-tablet:translate-x-0 max-tablet:opacity-100 max-tablet:blur-none">
           <div className="mb-4 aspect-video overflow-hidden rounded-[14px] border border-line bg-pill shadow-shot">
             <img className="size-full object-cover" src={project.image} alt={project.title} loading="lazy" />
           </div>

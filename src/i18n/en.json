@@ -1,4 +1,9 @@
 {
+  "404": {
+    "title": "Oh... something went wrong",
+    "description": "The page you're looking for has disappeared into the depths of space. Maybe it was abducted by aliens or simply doesn't exist in this universe.",
+    "button": "Back to home"
+  },
   "nav": {
     "index": "Home",
     "about": "About me",
@@ -48,11 +53,15 @@
     "entries": {
       "clt": {
         "role": "Frontend Developer",
-        "description": "Development and maintenance of web interfaces with Next.js and TypeScript. Design and implementation of reusable components in an agile team, performance optimization and close collaboration with QA and backend to ensure a high-quality user experience."
+        "description": "Responsive interfaces with React, Tailwind and Shadcn, turning design mockups into working products. RESTful API integration, state management with Zustand, reusable UI components, code reviews and close work with backend to define integration contracts."
       },
       "guadalupe": {
         "role": "Developer",
         "description": "Custom human resources management system: employee registration and termination modules, attendance tracking, payroll settlement and reports panel. Frontend built with Next.js integrated with Supabase."
+      },
+      "automovil": {
+        "role": "IT Support & Monitoring - HelpDesk",
+        "description": "Monitored systems, networks and links to keep them available. Resolved incidents on Linux and Windows, cutting downtime by 10%, and managed support tickets and documentation."
       },
       "uaa": {
         "role": "Computer Engineering",
@@ -60,7 +69,7 @@
       },
       "fullstack": {
         "role": "Full Stack Web Development Course",
-        "description": "Training in frontend and backend web development and databases."
+        "description": "Full stack web apps with React and Express.js, responsive and accessible interfaces with TailwindCSS and Shadcn UI, and building and consuming RESTful services."
       }
     }
   },
@@ -74,11 +83,6 @@
   "contact": {
     "title": "Ready to work together?",
     "description": "I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision."
-  },
-  "404": {
-    "title": "Oh... something went wrong",
-    "description": "The page you're looking for has disappeared into the depths of space. Maybe it was abducted by aliens or simply doesn't exist in this universe.",
-    "button": "Back to home"
   },
   "skills": {
     "categories": {
