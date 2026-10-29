@@ -1,4 +1,9 @@
 {
+  "404": {
+    "title": "Oh... parece que tenemos un problema",
+    "description": "La página que buscas se perdió en el espacio profundo. Tal vez fue abducida por alienígenas o simplemente no existe en este universo.",
+    "button": "Volver al inicio"
+  },
   "nav": {
     "index": "Inicio",
     "about": "Sobre mi",
@@ -33,7 +38,6 @@
     "title": "Optimización",
     "description": "Mejora del rendimiento y escalabilidad de aplicaciones en producción."
   },
-
   "experience": {
     "title": "Experiencia",
     "columnWork": "Laboral",
@@ -44,11 +48,15 @@
     "entries": {
       "clt": {
         "role": "Desarrolladora Frontend",
-        "description": "Desarrollo y mantenimiento de interfaces web con Next.js y TypeScript. Diseño e implementación de componentes reutilizables en equipo ágil, optimización de rendimiento y colaboración estrecha con QA y backend para garantizar una experiencia de usuario de alta calidad."
+        "description": "Interfaces responsivas con React, Tailwind y Shadcn, transformando mockups de diseño en productos funcionales. Integración de APIs RESTful, gestión de estado con Zustand, componentes UI reutilizables, revisiones de código y trabajo estrecho con backend para definir contratos de integración."
       },
       "guadalupe": {
         "role": "Desarrolladora",
         "description": "Sistema de gestión de recursos humanos a medida: módulos de alta y baja de empleados, control de asistencia, liquidación de sueldos y panel de reportes. Frontend desarrollado en Next.js con integración a Supabase."
+      },
+      "automovil": {
+        "role": "Soporte y Monitoreo - HelpDesk",
+        "description": "Monitoreo de sistemas, redes y enlaces para asegurar su disponibilidad. Resolución de incidencias en Linux y Windows, reduciendo los tiempos de inactividad en un 10%, y gestión de tickets y documentación de soporte."
       },
       "uaa": {
         "role": "Ingeniería en Informática",
@@ -56,7 +64,7 @@
       },
       "fullstack": {
         "role": "Curso de Desarrollo Web Full Stack",
-        "description": "Formación en desarrollo web frontend, backend y bases de datos."
+        "description": "Aplicaciones web fullstack con React y Express.js, interfaces responsivas y accesibles con TailwindCSS y Shadcn UI, y creación y consumo de servicios RESTful."
       }
     }
   },
@@ -70,11 +78,6 @@
   "contact": {
     "title": "¿Listo para trabajar juntos?",
     "description": "Estoy siempre abierta a discutir nuevos proyectos, ideas creativas u oportunidades para formar parte de tu visión."
-  },
-  "404": {
-    "title": "Oh... parece que tenemos un problema",
-    "description": "La página que buscas se perdió en el espacio profundo. Tal vez fue abducida por alienígenas o simplemente no existe en este universo.",
-    "button": "Volver al inicio"
   },
   "skills": {
     "categories": {

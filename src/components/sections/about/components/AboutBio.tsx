@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import cvUrl from "@/assets/files/CV-LeticiaAranda-2025.pdf";
+import { cvUrl } from "@/lib/cv";
 
 export function AboutBio() {
   const { t } = useTranslation();
