@@ -17,7 +17,7 @@ export const experiences: ExperienceEntry[] = [
     organization: "CLT S.A",
     period: "Ene 2026 – Actualidad",
     description:
-      "Desarrollo y mantenimiento de interfaces web con Next.js y TypeScript. Diseño e implementación de componentes reutilizables en equipo ágil, optimización de rendimiento y colaboración estrecha con QA y backend para garantizar una experiencia de usuario de alta calidad.",
+      "Interfaces responsivas con React, Tailwind y Shadcn, transformando mockups de diseño en productos funcionales. Integración de APIs RESTful, gestión de estado con Zustand, componentes UI reutilizables, revisiones de código y trabajo estrecho con backend para definir contratos de integración.",
   },
   {
     id: "guadalupe",
@@ -27,6 +27,15 @@ export const experiences: ExperienceEntry[] = [
     period: "2026",
     description:
       "Sistema de gestión de recursos humanos a medida: módulos de alta y baja de empleados, control de asistencia, liquidación de sueldos y panel de reportes. Frontend desarrollado en Next.js con integración a Supabase.",
+  },
+  {
+    id: "automovil",
+    type: "work",
+    role: "Soporte y Monitoreo - HelpDesk",
+    organization: "Automóvil Supply S.A",
+    period: "Sep 2024 – Ene 2026",
+    description:
+      "Monitoreo de sistemas, redes y enlaces para asegurar su disponibilidad. Resolución de incidencias en Linux y Windows, reduciendo los tiempos de inactividad en un 10%, y gestión de tickets y documentación de soporte.",
   },
   {
     id: "uaa",
@@ -41,9 +50,9 @@ export const experiences: ExperienceEntry[] = [
     id: "fullstack",
     type: "education",
     role: "Curso de Desarrollo Web Full Stack",
-    organization: "Instituto Técnico Superior - IDT",
-    period: "2025 – 2026",
+    organization: "Instituto de Diseño y Tecnología - IDT",
+    period: "Mar 2025 – Mar 2026",
     description:
-      "Curso sobre el desarrollo web tanto frontend como backend y bases de datos.",
+      "Aplicaciones web fullstack con React y Express.js, interfaces responsivas y accesibles con TailwindCSS y Shadcn UI, y creación y consumo de servicios RESTful.",
   },
 ];
