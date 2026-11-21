@@ -24,3 +24,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original 3D downloads (heavy, kept locally). Optimized copies go to public/models via `npm run models`.
+assets-src/**/*.glb
+assets-src/**/*.gltf
+assets-src/**/*.fbx
+assets-src/**/*.blend
+assets-src/**/*.blend1
