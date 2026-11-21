@@ -23,7 +23,7 @@ export function ExperienceItem({ entry, side }: ExperienceItemProps) {
   });
 
   return (
-    <li className={`timeline-item relative max-tablet:mt-0 max-tablet:pr-0 max-tablet:pl-9 ${SIDE[side].item}`}>
+    <li data-side={side} className={`timeline-item relative max-tablet:mt-0 max-tablet:pr-0 max-tablet:pl-9 ${SIDE[side].item}`}>
       {/* `is-reached` is toggled by the scroll animation when the line gets here. */}
       <span
         className={`timeline-dot absolute top-[26px] z-1 size-4 rounded-full border-2 border-dot-border bg-surface shadow-[0_0_0_5px_var(--color-surface)] transition-[background-color,border-color] duration-400 max-tablet:right-auto max-tablet:left-0 [&.is-reached]:border-brand [&.is-reached]:bg-brand-soft ${SIDE[side].dot}`}

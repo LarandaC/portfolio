@@ -7,7 +7,8 @@ export function HeroGlass() {
   const ref = useRef<HTMLDivElement>(null);
   const [squares] = useState(() => {
     const isMobile = window.innerWidth <= 760;
-    return HERO_GLASS.filter((_, i) => !(isMobile && i % 2 === 1));
+    // On phones the copy fills the lower band, so only squares above it remain.
+    return HERO_GLASS.filter(([, y], i) => !(isMobile && (i % 2 === 1 || y > 66)));
   });
 
   useEffect(() => {

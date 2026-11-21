@@ -105,7 +105,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 /* While the page zooms out of the backdrop on first load. */
 @custom-variant intro (.intro &);
-/* The About section only pins when there's room for all of its content. */
+/* Screens too narrow or short for the About section to fit in one viewport. */
 @custom-variant unpinned (@media (max-width: 900px), (max-height: 699px));
 /* Short desktop screens, where the Projects intro line would hit the panels. */
 @custom-variant short-desktop (@media (min-width: 761px) and (max-height: 820px));
