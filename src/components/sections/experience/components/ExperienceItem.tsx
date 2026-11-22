@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import type { ExperienceEntry } from "@/data/experience";
 import { TYPE_ICONS, TYPE_KEYS } from "../const/constants";
+import { Pill } from "@/components/common/Pill";
+import { Card } from "@/components/common/Card";
 
 interface ExperienceItemProps {
   entry: ExperienceEntry;
@@ -30,18 +32,18 @@ export function ExperienceItem({ entry, side }: ExperienceItemProps) {
         aria-hidden
       />
       {/* No transform transition: GSAP slides the card in. */}
-      <article className="timeline-card rounded-[22px] border border-line bg-surface/88 px-6 pt-[22px] pb-6 backdrop-blur-[6px] transition-[border-color,box-shadow] duration-300 hover:border-pill-hover hover:shadow-lift-lg">
+      <Card as="article" variant="frosted" className="timeline-card px-6 pt-[22px] pb-6">
         <div className="mb-3 flex flex-wrap items-center gap-2.5">
-          <span className="pill">
+          <Pill>
             <Icon size={11} />
             {t(TYPE_KEYS[entry.type])}
-          </span>
+          </Pill>
           <span className="text-xs font-medium text-sage tabular-nums">{entry.period}</span>
         </div>
         <h3 className="mb-1 text-[clamp(19px,1.6vw,23px)] font-medium tracking-[-.03em]">{role}</h3>
         <p className="mb-2.5 text-[13px] font-semibold text-brand">{entry.organization}</p>
         <p className="text-sm leading-normal text-body">{description}</p>
-      </article>
+      </Card>
     </li>
   );
 }

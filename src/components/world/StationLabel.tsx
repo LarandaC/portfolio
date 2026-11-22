@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import type { StationId } from "./const/worldLayout";
 import { mapStore } from "./mapStore";
 import { useMapStore } from "./useMapStore";
+import { Pill } from "@/components/common/Pill";
 
 type StationLabelProps = {
   id: StationId;
@@ -20,18 +21,18 @@ export function StationLabel({ id, labelKey, position }: StationLabelProps) {
     <Html position={position} center zIndexRange={[20, 0]}>
       {/* stopPropagation: the label lives inside the canvas' container, so without it the same click
           also reaches the scene as a click on the ground behind it and sends Amaru there instead. */}
-      <button
-        type="button"
+      <Pill
+        tone={here ? "active" : "default"}
         onPointerDown={(e) => e.stopPropagation()}
         onPointerUp={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.stopPropagation();
           mapStore.goTo(id);
         }}
-        className={`pill cursor-pointer whitespace-nowrap shadow-nav transition-transform hover:scale-105 ${here ? "bg-brand text-on-brand" : ""}`}
+        className="whitespace-nowrap shadow-nav transition-transform hover:scale-105"
       >
         {t(labelKey)}
-      </button>
+      </Pill>
     </Html>
   );
 }

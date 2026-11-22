@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { MeshToonMaterial } from "three";
-import { createToonGradient } from "@/components/shared/three/three/createToonGradient";
+import { createToonGradient } from "@/lib/three/createToonGradient";
 import { STATIONS } from "./const/worldLayout";
 import { terrainHeight } from "./three/terrainHeight";
 

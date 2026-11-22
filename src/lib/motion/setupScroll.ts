@@ -7,7 +7,7 @@ import { setupProjectsScroll } from "@/components/sections/projects/animations/s
 import { setupExperienceScroll } from "@/components/sections/experience/animations/setupExperienceScroll";
 import { setupContactScroll } from "@/components/sections/contact/animations/setupContactScroll";
 import { setupFooterLogo } from "./setupFooterLogo";
-import { setupPetalWind } from "@/components/shared/three/animations/setupPetalWind";
+import { setupPetalWind } from "@/components/common/PetalLayer";
 
 /** All scroll-driven motion; runs once the intro has finished. Returns a cleanup. */
 export function setupScroll() {

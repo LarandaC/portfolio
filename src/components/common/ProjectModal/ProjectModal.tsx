@@ -3,6 +3,8 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useActiveLang } from "@/hooks/useActiveLang";
 import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
+import { Button } from "@/components/common/Button";
+import { Pill } from "@/components/common/Pill";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -36,9 +38,9 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
             </DialogTitle>
             <div className="force-light mt-2 flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
-                <span key={tag} className="pill bg-white/88">
+                <Pill key={tag} tone="onImage">
                   {tag}
-                </span>
+                </Pill>
               ))}
             </div>
           </div>
@@ -63,16 +65,16 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
 
           <div className="flex flex-wrap gap-2.5">
             {project.githubUrl && (
-              <a className="btn" href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+              <Button href={project.githubUrl} external>
                 <Github size={14} />
                 {t("projects.viewCode")}
-              </a>
+              </Button>
             )}
             {project.liveUrl && (
-              <a className="btn-ghost" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" href={project.liveUrl} external>
                 <ExternalLink size={14} />
                 {t("projects.liveDemo")}
-              </a>
+              </Button>
             )}
           </div>
         </div>

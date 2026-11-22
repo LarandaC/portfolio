@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Color, DoubleSide, ShaderMaterial, Vector3 } from "three";
-import { createPetalGeometry } from "@/components/shared/three/three/createPetalGeometry";
-import { petalFragmentShader } from "@/components/shared/three/three/petalShaders";
+import { createPetalGeometry } from "@/components/common/PetalLayer/three/createPetalGeometry";
+import { petalFragmentShader } from "@/components/common/PetalLayer/three/petalShaders";
 import { GROUND_LEVEL } from "./const/worldLayout";
 import { mapPetalVertexShader } from "./three/mapPetalShader";
 import { nightAmount } from "./three/nightAmount";

@@ -1,14 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { credits } from "@/data/credits";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/common/Button";
 
 /** "Credits" link that opens the list of 3D models and their authors (CC BY requires it). */
-export function CreditsDialog({ className = "" }: { className?: string }) {
+export function CreditsDialog({ variant = "link" }: { variant?: "link" | "chip" }) {
   const { t } = useTranslation();
 
   return (
     <Dialog>
-      <DialogTrigger className={className}>{t("credits.button")}</DialogTrigger>
+      <DialogTrigger asChild>
+        <Button variant={variant}>{t("credits.button")}</Button>
+      </DialogTrigger>
       <DialogContent
         // Lets the list scroll natively instead of Lenis capturing the wheel (classic page).
         data-lenis-prevent

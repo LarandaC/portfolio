@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 import { useInView } from "@/hooks/useInView";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useCssColors } from "@/hooks/useCssColors";
-import { Petals } from "@/components/shared/Petals";
-import { hasWebGL } from "./three/hasWebGL";
+import { Petals } from "@/components/common/Petals";
+import { hasWebGL } from "@/lib/three/hasWebGL";
 import type { SceneProps } from "./three/types";
 
 const DefaultScene = lazy(() => import("./PetalScene"));

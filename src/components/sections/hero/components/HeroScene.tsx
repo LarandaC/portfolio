@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
-import { PetalSwarm } from "@/components/shared/three/PetalSwarm";
-import type { SceneProps } from "@/components/shared/three/three/types";
+import { PetalSwarm } from "@/components/common/PetalLayer";
+import type { SceneProps } from "@/components/common/PetalLayer";
 import { HeroCameraRig } from "./HeroCameraRig";
 
 /** Hero scene: petals over the video, with a camera that follows the mouse for a touch of depth. */

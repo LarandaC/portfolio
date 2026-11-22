@@ -4,7 +4,8 @@ import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useTranslation } from "react-i18next";
 import { socialLinks } from "@/data/social";
-import { BrandLogo } from "@/components/shared/BrandLogo";
+import { BrandLogo } from "@/components/common/BrandLogo";
+import { Button } from "@/components/common/Button";
 
 interface NavBarMobileProps {
   isMenuOpen: boolean;
@@ -41,16 +42,9 @@ export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) =
         <div className="flex items-center justify-between border-t border-line px-6 py-5">
           <div className="flex gap-2">
             {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                className="icon-btn"
-              >
+              <Button key={social.name} variant="icon" href={social.href} external aria-label={social.name}>
                 <social.icon size={15} />
-              </a>
+              </Button>
             ))}
           </div>
           <div className="flex items-center gap-1.5">

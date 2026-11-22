@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { GlassSquare } from "@/components/common/GlassSquare";
 import { HERO_GLASS } from "../const/constants";
 
 /** Flickering frosted squares laid over the hero video. */
@@ -35,9 +36,8 @@ export function HeroGlass() {
   return (
     <div ref={ref} className="pointer-events-none absolute inset-0 z-5" id="heroGlass" aria-hidden>
       {squares.map(([x, y]) => (
-        <span
+        <GlassSquare
           key={`${x}-${y}`}
-          className="glass"
           style={{
             left: `${x}%`,
             top: `${y}%`,

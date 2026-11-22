@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
 import { ProjectsSection } from "@/components/sections/projects";
-import { OnMount } from "@/components/shared/OnMount";
+import { OnMount } from "@/components/common/OnMount";
 import { usePageMotion } from "@/hooks/usePageMotion";
 import { HERO_POSTER } from "@/lib/media";
 

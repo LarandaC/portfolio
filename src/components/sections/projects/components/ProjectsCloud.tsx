@@ -1,4 +1,5 @@
 import { CLOUD_A } from "@/lib/media";
+import { GlassSquare } from "@/components/common/GlassSquare";
 import { CLOUD_GLASS } from "../const/constants";
 
 export function ProjectsCloud() {
@@ -9,9 +10,9 @@ export function ProjectsCloud() {
     >
       <img className="w-full animate-drift-a motion-reduce:animate-none" src={CLOUD_A} alt="" />
       {CLOUD_GLASS.map(([left, top, width]) => (
-        <span
+        <GlassSquare
           key={`${left}-${top}`}
-          className="glass aspect-square"
+          className="aspect-square"
           style={{ left: `${left}%`, top: `${top}%`, width: `${width}%` }}
         />
       ))}

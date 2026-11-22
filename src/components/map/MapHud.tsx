@@ -1,12 +1,12 @@
 import { Maximize2, Minus, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { STATIONS } from "@/components/world/const/worldLayout";
 import { mapStore, ZOOM } from "@/components/world/mapStore";
 import { useMapStore } from "@/components/world/useMapStore";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { LanguageSelector } from "@/components/layout/LanguageSelector";
-import { CreditsDialog } from "@/components/shared/CreditsDialog";
+import { CreditsDialog } from "@/components/common/CreditsDialog";
+import { Button } from "@/components/common/Button";
 
 /**
  * Everything around the map: controls hint, simple version and credits (bottom left),
@@ -44,24 +44,24 @@ export function MapHud() {
           {touch ? t("map.controlsTouch") : t("map.controls")}
         </p>
         <div className="flex gap-2">
-          <Link to="/simple" className="rounded-full bg-surface/85 px-3 py-1.5 text-xs text-body underline shadow-nav backdrop-blur-[6px]">
+          <Button variant="chip" to="/simple">
             {t("map.simple")}
-          </Link>
-          <CreditsDialog className="cursor-pointer rounded-full bg-surface/85 px-3 py-1.5 text-xs text-body underline shadow-nav backdrop-blur-[6px]" />
+          </Button>
+          <CreditsDialog variant="chip" />
         </div>
       </div>
 
       {/* Zoom: above theme/language on desktop; top right on phones, where the bottom belongs to the cards. */}
       <div className="fixed right-4 bottom-[72px] z-20 flex flex-col gap-1.5 max-tablet:top-4 max-tablet:right-3 max-tablet:bottom-auto">
-        <button type="button" className="icon-btn bg-surface/90 shadow-nav" onClick={() => mapStore.zoomBy(1 / 1.3)} aria-label={t("map.zoomIn")}>
+        <Button variant="icon" className="bg-surface/90 shadow-nav" onClick={() => mapStore.zoomBy(1 / 1.3)} aria-label={t("map.zoomIn")}>
           <Plus className="size-4" />
-        </button>
-        <button type="button" className="icon-btn bg-surface/90 shadow-nav" onClick={() => mapStore.zoomBy(1.3)} aria-label={t("map.zoomOut")}>
+        </Button>
+        <Button variant="icon" className="bg-surface/90 shadow-nav" onClick={() => mapStore.zoomBy(1.3)} aria-label={t("map.zoomOut")}>
           <Minus className="size-4" />
-        </button>
-        <button type="button" className="icon-btn bg-surface/90 shadow-nav" onClick={() => mapStore.set({ zoom: ZOOM.overview })} aria-label={t("map.overview")}>
+        </Button>
+        <Button variant="icon" className="bg-surface/90 shadow-nav" onClick={() => mapStore.set({ zoom: ZOOM.overview })} aria-label={t("map.overview")}>
           <Maximize2 className="size-4" />
-        </button>
+        </Button>
       </div>
 
       <div className="fixed right-4 bottom-4 z-20 flex items-center gap-1.5 rounded-full bg-surface/90 p-[5px] shadow-nav backdrop-blur-[8px] max-tablet:right-3">

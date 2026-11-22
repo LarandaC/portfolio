@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { Color, CylinderGeometry, IcosahedronGeometry, Matrix4, MeshToonMaterial, Quaternion, Vector3, type InstancedMesh } from "three";
-import { createToonGradient } from "@/components/shared/three/three/createToonGradient";
+import { createToonGradient } from "@/lib/three/createToonGradient";
 import { scatterTrees } from "./three/scatterTrees";
 
 /** Canopy colors: cherry pinks, and a few plain greens so the blossoms stand out. */

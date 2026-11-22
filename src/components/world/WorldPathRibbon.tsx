@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { BufferAttribute, BufferGeometry, MeshToonMaterial, Vector3 } from "three";
-import { createToonGradient } from "@/components/shared/three/three/createToonGradient";
+import { createToonGradient } from "@/lib/three/createToonGradient";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { PLAZA } from "./const/worldLayout";
 import { getWorldPath } from "./three/getWorldPath";

@@ -123,38 +123,6 @@
   button { cursor: pointer; }
 }
 
-@layer components {
-  .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-pill px-2.5 py-[5px] text-[11px] font-medium tracking-[.01em] text-pill-ink;
-  }
-  .section-title {
-    @apply text-center text-[clamp(26px,3.1vw,44px)] leading-[1.12] font-normal tracking-[-.03em];
-  }
-  .btn,
-  .btn-ghost {
-    @apply inline-flex h-9 items-center justify-center gap-2 rounded-full px-4 text-[13px] font-semibold tracking-[-.01em] whitespace-nowrap transition-[translate,background-color,border-color] duration-300 hover:-translate-y-px;
-  }
-  .btn {
-    @apply bg-brand text-on-brand shadow-btn hover:bg-brand-hover;
-  }
-  .btn-ghost {
-    @apply border border-pill-border bg-surface/70 text-pill-ink hover:border-brand-soft hover:bg-surface;
-  }
-  .icon-btn {
-    @apply inline-flex size-[34px] items-center justify-center rounded-full bg-pill text-brand transition-colors duration-[250ms] hover:bg-brand hover:text-on-brand;
-  }
-  .glass {
-    @apply absolute rounded-xl border border-white/55 bg-white/16 shadow-[inset_0_1px_0_rgba(255,255,255,.4)] backdrop-blur-[10px] backdrop-saturate-[1.2];
-  }
-  /* Soft-brand card with two semicircular notches cut from the sides. */
-  .ticket {
-    @apply rounded-[22px] bg-brand-soft;
-    mask:
-      radial-gradient(circle 17px at 0 55%, #0000 97%, #000) left / 51% 100% no-repeat,
-      radial-gradient(circle 17px at 100% 55%, #0000 97%, #000) right / 51% 100% no-repeat;
-  }
-}
-
 /* Dark palette: same roles, night-time values. Components only use tokens, so nothing else changes. */
 @layer base {
   .dark {

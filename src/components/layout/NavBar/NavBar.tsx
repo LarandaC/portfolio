@@ -3,9 +3,10 @@ import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "@/lib/navigation";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { BrandLogo } from "@/components/shared/BrandLogo";
+import { BrandLogo } from "@/components/common/BrandLogo";
 import { LanguageSelector } from "../LanguageSelector";
 import { ThemeToggle } from "../ThemeToggle";
+import { Button } from "@/components/common/Button";
 
 // The mobile sheet (Radix Dialog) is only downloaded the first time the menu opens.
 const NavBarMobile = lazy(() =>
@@ -65,16 +66,17 @@ export const NavBar = () => {
         <div className="flex items-center gap-1.5">
           <ThemeToggle />
           <LanguageSelector />
-          <button
+          <Button
+            variant="icon"
             onClick={() => {
               setMenuLoaded(true);
               setIsMenuOpen(true);
             }}
-            className="hidden size-9 items-center justify-center rounded-full bg-pill text-pill-ink max-desktop:inline-flex"
+            className="hidden size-9 text-pill-ink max-desktop:inline-flex"
             aria-label="Abrir menú"
           >
             <Menu size={18} />
-          </button>
+          </Button>
         </div>
       </nav>
 

@@ -3,7 +3,7 @@ import { HeroContent } from "./components/HeroContent";
 import { HeroMedia } from "./components/HeroMedia";
 import { HeroGlass } from "./components/HeroGlass";
 import { lazy } from "react";
-import { PetalLayer } from "@/components/shared/three/PetalLayer";
+import { PetalLayer } from "@/components/common/PetalLayer";
 
 // Petals scene with mouse parallax; lazy so three.js stays out of the main chunk.
 const HeroScene = lazy(() => import("./components/HeroScene"));

@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 import { useActiveLang } from "@/hooks/useActiveLang";
 import type { Project } from "@/data/projects";
 import { NUM_COLORS } from "../const/constants";
+import { Button } from "@/components/common/Button";
+import { Pill } from "@/components/common/Pill";
 
 // The detail modal (Radix Dialog) is only downloaded once it is first opened.
 const ProjectModal = lazy(() =>
-  import("@/components/cards/ProjectModal").then((m) => ({ default: m.ProjectModal }))
+  import("@/components/common/ProjectModal").then((m) => ({ default: m.ProjectModal }))
 );
 
 interface ProjectPanelProps {
@@ -59,9 +61,9 @@ export function ProjectPanel({ project, index, active, onActivate }: ProjectPane
           </div>
           <div className="mb-3 flex flex-wrap gap-1.5">
             {project.tags.map((tag) => (
-              <span key={tag} className="pill">
+              <Pill key={tag}>
                 {tag}
-              </span>
+              </Pill>
             ))}
           </div>
           <h3 className="mb-1.5 text-[clamp(20px,1.7vw,26px)] font-normal tracking-[-.03em]">
@@ -69,30 +71,28 @@ export function ProjectPanel({ project, index, active, onActivate }: ProjectPane
           </h3>
           <p className="line-clamp-3 text-sm leading-[1.45] text-body">{description}</p>
           <div className="mt-4 flex items-center gap-2">
-            <button className="btn-ghost" onClick={openDetails}>
-              {t("projects.viewDetails")} →
-            </button>
+            <Button variant="ghost" onClick={openDetails}>
+              {t("projects.viewDetails")}
+            </Button>
             {project.githubUrl && (
-              <a
+              <Button
+                variant="icon"
                 href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                external
                 aria-label={`${project.title} — ${t("projects.viewCode")}`}
-                className="icon-btn"
               >
                 <Github size={15} />
-              </a>
+              </Button>
             )}
             {project.liveUrl && (
-              <a
+              <Button
+                variant="icon"
                 href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                external
                 aria-label={`${project.title} — ${t("projects.liveDemo")}`}
-                className="icon-btn"
               >
                 <ExternalLink size={15} />
-              </a>
+              </Button>
             )}
           </div>
         </div>

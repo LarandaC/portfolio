@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { Button } from "@/components/common/Button";
 
 interface ContactLinkProps {
   href:    string;
@@ -11,14 +12,9 @@ export function ContactLink({ href, icon: Icon, label, primary }: ContactLinkPro
   const isMailto = href.startsWith("mailto");
 
   return (
-    <a
-      href={href}
-      target={isMailto ? undefined : "_blank"}
-      rel={isMailto ? undefined : "noopener noreferrer"}
-      className={primary ? "btn" : "btn-ghost"}
-    >
+    <Button href={href} external={!isMailto} variant={primary ? "primary" : "ghost"}>
       <Icon size={14} />
       {label}
-    </a>
+    </Button>
   );
 }

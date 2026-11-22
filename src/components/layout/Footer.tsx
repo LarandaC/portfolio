@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { navItems } from "@/lib/navigation";
 import { socialLinks } from "@/data/social";
 import { FooterLogo } from "./FooterLogo";
-import { CreditsDialog } from "@/components/shared/CreditsDialog";
+import { CreditsDialog } from "@/components/common/CreditsDialog";
+import { Button } from "@/components/common/Button";
 
 /** Single-row lime footer: logo + copyright, section links, socials. */
 export const Footer = () => {
@@ -19,7 +20,7 @@ export const Footer = () => {
         <p className="text-[11px] leading-snug text-footer-text">
           &copy; {new Date().getFullYear()} · Leticia Aranda.
           <br />
-          {t("footer.title")} · <CreditsDialog className="cursor-pointer underline hover:opacity-70" />
+          {t("footer.title")} · <CreditsDialog variant="link" />
         </p>
       </div>
 
@@ -44,14 +45,15 @@ export const Footer = () => {
             <social.icon size={18} />
           </a>
         ))}
-        <a
+        <Button
+          variant="icon"
           href="#hero"
           aria-label={t("footer.scrollToTop")}
           title={t("footer.scrollToTop")}
-          className="icon-btn size-8 bg-surface/40 text-deep-ink hover:bg-deep-ink hover:text-brand-soft"
+          className="size-8 bg-surface/40 text-deep-ink hover:bg-deep-ink hover:text-brand-soft"
         >
           <ArrowUp size={15} />
-        </a>
+        </Button>
       </div>
     </footer>
   );

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { experiences } from "@/data/experience";
 import { TREE } from "@/lib/media";
-import { SectionHeader } from "@/components/shared/SectionHeader";
-import { SquareField } from "@/components/shared/SquareField";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { SquareField } from "@/components/common/SquareField";
 import { ExperienceTimeline } from "./components/ExperienceTimeline";
 import { TYPE_ICONS } from "./const/constants";
 
