@@ -15,6 +15,7 @@ import { LanternGlows } from "./LanternGlows";
 import { WorldStars } from "./WorldStars";
 import { Fireflies } from "./Fireflies";
 import { MapPetals } from "./MapPetals";
+import { WatercolorPass } from "./WatercolorPass";
 
 /** The map in one canvas: lazily loaded, so three.js stays out of the main chunk. */
 export function WorldScene() {
@@ -26,6 +27,7 @@ export function WorldScene() {
       gl={{ antialias: true, powerPreference: "high-performance" }}
     >
       <MapController />
+      <WatercolorPass />
       <MapCamera />
       <WorldAtmosphere />
       <WorldStars />
