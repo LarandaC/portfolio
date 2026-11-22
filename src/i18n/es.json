@@ -95,5 +95,37 @@
   "footer": {
     "title": "Todos los derechos reservados.",
     "scrollToTop": "Volver arriba"
+  },
+  "map": {
+    "explore": "Explorar el valle",
+    "enter": "Entrar a {{place}}",
+    "enterHint": "Enter",
+    "close": "Cerrar",
+    "simple": "Versión simple",
+    "controls": "Clic para caminar · Flechas o WASD · Rueda para zoom",
+    "controlsTouch": "Toca para caminar",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "overview": "Ver todo el valle",
+    "loading": "Amaru se está despertando…",
+    "menu": "Lugares del valle",
+    "guide": "Amaru, el gato, te guía: elige un lugar o camina libre."
+  },
+  "credits": {
+    "button": "Créditos",
+    "title": "Créditos",
+    "intro": "Los modelos 3D del valle son de estos autores y se usan bajo licencias Creative Commons Attribution (CC BY). ¡Gracias!",
+    "by": "por",
+    "roles": {
+      "amaru": "Amaru",
+      "inicio": "Santuario de Inicio",
+      "about": "Casa de Sobre mí",
+      "projects": "Pagoda de Proyectos",
+      "skills": "Casa de Skills",
+      "experience": "Casa de Experiencia",
+      "bell": "Campana",
+      "maple": "Arce",
+      "lantern": "Faroles de piedra"
+    }
   }
 }

@@ -7,7 +7,7 @@ export function ServiceList() {
 
   return (
     <>
-      <div className="services relative z-4 grid w-[min(880px,100%)] grid-cols-3 gap-3 max-laptop:w-[min(480px,100%)] max-laptop:grid-cols-1">
+      <div className="services relative z-4 grid w-[min(880px,100%)] grid-cols-3 gap-3 max-laptop:w-[min(480px,100%)] max-laptop:grid-cols-1 @max-xl:w-full @max-xl:grid-cols-1">
         {SERVICES.map(({ icon, key }, index) => (
           <ServiceItem
             key={key}

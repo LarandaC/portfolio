@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Center, useAnimations, useGLTF } from "@react-three/drei";
 import { Mesh, type AnimationAction, type AnimationClip, type AnimationMixer, type Group } from "three";
 import { applyToonMaterials } from "./three/applyToonMaterials";
-import { createToonGradient } from "./three/createToonGradient";
+import { createToonGradient } from "@/components/shared/three/three/createToonGradient";
 import { getModelStats, type ModelStats } from "./three/getModelStats";
 
 export type LoadedModel = {

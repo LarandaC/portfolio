@@ -100,5 +100,37 @@
   "footer": {
     "title": "All rights reserved.",
     "scrollToTop": "Back to top"
+  },
+  "map": {
+    "explore": "Explore the valley",
+    "enter": "Enter {{place}}",
+    "enterHint": "Enter",
+    "close": "Close",
+    "simple": "Simple version",
+    "controls": "Click to walk · Arrows or WASD · Wheel to zoom",
+    "controlsTouch": "Tap to walk",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "overview": "See the whole valley",
+    "loading": "Amaru is waking up…",
+    "menu": "Places in the valley",
+    "guide": "Amaru the cat is your guide: pick a place or roam freely."
+  },
+  "credits": {
+    "button": "Credits",
+    "title": "Credits",
+    "intro": "The valley’s 3D models are by these authors, used under Creative Commons Attribution (CC BY) licenses. Thank you!",
+    "by": "by",
+    "roles": {
+      "amaru": "Amaru",
+      "inicio": "Inicio shrine",
+      "about": "About house",
+      "projects": "Projects pagoda",
+      "skills": "Skills house",
+      "experience": "Experience house",
+      "bell": "Bell tower",
+      "maple": "Maple",
+      "lantern": "Stone lanterns"
+    }
   }
 }

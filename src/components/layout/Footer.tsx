@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { navItems } from "@/lib/navigation";
 import { socialLinks } from "@/data/social";
 import { FooterLogo } from "./FooterLogo";
+import { CreditsDialog } from "@/components/shared/CreditsDialog";
 
 /** Single-row lime footer: logo + copyright, section links, socials. */
 export const Footer = () => {
@@ -18,7 +19,7 @@ export const Footer = () => {
         <p className="text-[11px] leading-snug text-footer-text">
           &copy; {new Date().getFullYear()} · Leticia Aranda.
           <br />
-          {t("footer.title")}
+          {t("footer.title")} · <CreditsDialog className="cursor-pointer underline hover:opacity-70" />
         </p>
       </div>
 
