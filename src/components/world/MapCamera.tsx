@@ -10,8 +10,8 @@ const DIRECTION = new Vector3(1, 1.2, 1).normalize();
 const VALLEY_CENTER = new Vector3(-1.5, 1, -1.5);
 
 /**
- * Diorama camera: looks at Amaru from a fixed diagonal and eases after him. The wheel (or the HUD
- * buttons) zooms; fully zoomed out it frames the whole valley.
+ * Diorama camera: looks at Amaru from a fixed diagonal and eases after him. The wheel, a two-finger
+ * pinch or the HUD buttons zoom; fully zoomed out it frames the whole valley.
  */
 export function MapCamera() {
   const { gl } = useThree();
@@ -26,8 +26,34 @@ export function MapCamera() {
       e.preventDefault();
       mapStore.zoomBy(e.deltaY > 0 ? 1.12 : 1 / 1.12);
     };
+    // Two-finger pinch zooms on touch screens; the map owns the gestures (no page zoom/scroll).
+    let pinch = 0;
+    const spread = (e: TouchEvent) =>
+      Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) pinch = spread(e);
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length !== 2 || !pinch) return;
+      e.preventDefault();
+      const now = spread(e);
+      mapStore.zoomBy(pinch / now);
+      pinch = now;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) pinch = 0;
+    };
+    el.style.touchAction = "none";
     el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    el.addEventListener("touchend", onTouchEnd);
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
   }, [gl]);
 
   useFrame(({ camera }, delta) => {

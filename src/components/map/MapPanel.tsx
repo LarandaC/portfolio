@@ -45,7 +45,7 @@ export function MapPanel() {
     <aside
       role="dialog"
       aria-labelledby="map-panel-title"
-      className="fixed top-[84px] right-4 z-30 flex max-h-[calc(100svh-100px)] w-[min(560px,calc(100%-32px))] flex-col overflow-hidden rounded-[28px] border border-line bg-surface/92 shadow-[0_30px_60px_rgba(10,20,60,.18)] backdrop-blur-[14px] max-tablet:top-auto max-tablet:right-2 max-tablet:bottom-2 max-tablet:left-2 max-tablet:max-h-[72svh] max-tablet:w-auto"
+      className="fixed top-4 right-4 z-30 flex max-h-[calc(100svh-96px)] w-[min(560px,calc(100%-32px))] flex-col overflow-hidden rounded-[28px] border border-line bg-surface/92 shadow-[0_30px_60px_rgba(10,20,60,.18)] backdrop-blur-[14px] max-tablet:top-auto max-tablet:right-2 max-tablet:bottom-2 max-tablet:left-2 max-tablet:max-h-[72svh] max-tablet:w-auto"
     >
       <header className="flex items-center gap-3 border-b border-line px-6 py-4">
         <span className="pill">{`0${index} · ${t(STATIONS[index].labelKey)}`}</span>

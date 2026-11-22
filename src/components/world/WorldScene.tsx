@@ -11,6 +11,10 @@ import { WorldPathRibbon } from "./WorldPathRibbon";
 import { MapBuildings } from "./MapBuildings";
 import { MapDecor } from "./MapDecor";
 import { Amaru } from "./Amaru";
+import { LanternGlows } from "./LanternGlows";
+import { WorldStars } from "./WorldStars";
+import { Fireflies } from "./Fireflies";
+import { MapPetals } from "./MapPetals";
 
 /** The map in one canvas: lazily loaded, so three.js stays out of the main chunk. */
 export function WorldScene() {
@@ -24,11 +28,15 @@ export function WorldScene() {
       <MapController />
       <MapCamera />
       <WorldAtmosphere />
+      <WorldStars />
       <WorldTerrain />
       <WorldWater />
       <WorldTrees />
       <WorldPathRibbon />
       <WorldStations />
+      <LanternGlows />
+      <Fireflies />
+      <MapPetals />
       <Suspense fallback={null}>
         <MapBuildings />
         <MapDecor />

@@ -31,7 +31,8 @@ export function createTerrainGeometry(segments: number) {
     color.copy(GROUND.grassLight).lerp(GROUND.grassDark, fbm2D(x * 0.06, z * 0.06));
     if (height > 9) color.lerp(GROUND.rock, Math.min(1, (height - 9) / 4));
     if (height > 20) color.lerp(GROUND.snow, Math.min(1, (height - 20) / 3));
-    if (height < WATER_LEVEL + 0.45) color.copy(GROUND.sand);
+    // Sand fades in towards the waterline (a hard cut-off made a jagged, toothed shore).
+    color.lerp(GROUND.sand, Math.min(1, Math.max(0, (WATER_LEVEL + 0.9 - height) / 0.7)));
     // Slightly warmer grass along the path's edges (the path itself is WorldPathRibbon).
     if (pathDistance < 2.4) color.lerp(GROUND.dirt, 0.25 * (1 - pathDistance / 2.4));
     colors.set([color.r, color.g, color.b], i * 3);
