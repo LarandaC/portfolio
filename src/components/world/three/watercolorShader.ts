@@ -3,7 +3,7 @@
  * - a slight brush wobble (the image is sampled through low-frequency noise),
  * - pigment pooling: colour edges get darker and richer, like paint drying at a wash's border,
  * - paper grain over everything,
- * - a soft vignette that fades into the paper's colour.
+ * - at night, a soft vignette that fades into dark ink-blue paper (none by day: it read as a whitish haze).
  * The scene arrives in linear HDR; tone mapping and sRGB conversion happen here, at the end.
  */
 export const watercolorVertexShader = /* glsl */ `
@@ -20,6 +20,7 @@ export const watercolorFragmentShader = /* glsl */ `
   uniform vec3 uPaper;
   uniform float uInk;
   uniform float uGrain;
+  uniform float uVignette;
   varying vec2 vUv;
 
   float hash(vec2 p) {
@@ -80,7 +81,7 @@ export const watercolorFragmentShader = /* glsl */ `
     // Soft vignette into the paper (after tone mapping, so the paper colour is exact).
     vec2 d = (vUv - 0.5) * vec2(aspect.x * 0.75, 1.0);
     float vignette = smoothstep(0.42, 0.9, length(d));
-    gl_FragColor.rgb = mix(gl_FragColor.rgb, uPaper, vignette * 0.4);
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, uPaper, vignette * uVignette);
 
     #include <colorspace_fragment>
   }

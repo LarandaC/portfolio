@@ -54,10 +54,10 @@ export function WorldAtmosphere() {
     }
     if (fog.current) {
       fog.current.color.copy(tod.horizon);
-      // Fog starts past what the camera is looking at, however far it's zoomed out.
+      // Fog only softens the far mountains, well past the map, however far the camera is zoomed out.
       const d = camera.position.distanceTo(worldRuntime.position);
-      fog.current.near = d * 1.1;
-      fog.current.far = d * 2.6 + 90;
+      fog.current.near = d * 1.8 + 30;
+      fog.current.far = d * 4 + 160;
     }
   });
 

@@ -5,8 +5,7 @@ import { watercolorFragmentShader, watercolorVertexShader } from "./three/waterc
 import { nightAmount } from "./three/nightAmount";
 import { worldRuntime } from "./three/worldRuntime";
 
-/** Paper colour the vignette fades into: warm white by day, ink blue at night (linear, as three stores it). */
-const PAPER_DAY = new Color("#f4ecdc");
+/** Paper colour the night vignette fades into (linear, as three stores it). */
 const PAPER_NIGHT = new Color("#121838");
 
 /**
@@ -31,7 +30,8 @@ export function WatercolorPass() {
       uniforms: {
         tScene: { value: target.texture },
         uResolution: { value: new Vector2(1, 1) },
-        uPaper: { value: new Color() },
+        uPaper: { value: PAPER_NIGHT.clone() },
+        uVignette: { value: 0 },
         uInk: { value: 0.55 },
         uGrain: { value: 0.07 },
       },
@@ -58,7 +58,8 @@ export function WatercolorPass() {
   );
 
   useFrame(({ scene, camera }) => {
-    pass.material.uniforms.uPaper.value.copy(PAPER_DAY).lerp(PAPER_NIGHT, nightAmount(worldRuntime.timeOfDay));
+    // Vignette only at night: by day it washed the map out.
+    pass.material.uniforms.uVignette.value = nightAmount(worldRuntime.timeOfDay) * 0.4;
     gl.setRenderTarget(target);
     gl.render(scene, camera);
     gl.setRenderTarget(null);

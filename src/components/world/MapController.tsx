@@ -4,6 +4,7 @@ import { MathUtils, Vector3 } from "three";
 import { STATIONS, type StationId } from "./const/worldLayout";
 import { mapStore } from "./mapStore";
 import { isBlocked } from "./three/isBlocked";
+import { screenOverflow } from "./three/screenOverflow";
 import { planRoute } from "./three/planRoute";
 import { terrainHeight } from "./three/terrainHeight";
 import { worldRuntime } from "./three/worldRuntime";
@@ -31,7 +32,7 @@ const isTyping = (target: EventTarget | null) =>
 
 /**
  * Moves Amaru: arrows/WASD walk freely; a station command walks the path and opens its panel on arrival;
- * a ground click walks straight there. Water, buildings and the valley's edge block the way.
+ * a ground click walks straight there. Water, buildings, the valley's edge and the screen's edge block the way.
  */
 export function MapController() {
   const pressed = useRef(new Set<string>());
@@ -69,7 +70,7 @@ export function MapController() {
     };
   }, []);
 
-  useFrame((_, delta) => {
+  useFrame(({ camera }, delta) => {
     const dt = Math.min(delta, 0.05);
     const pos = worldRuntime.position;
 
@@ -122,14 +123,20 @@ export function MapController() {
     worldRuntime.wantsToMove = speed > 0;
     if (!worldRuntime.canMove) speed = 0;
 
+    // Water, buildings, the valley's edge, and the edge of the screen: a step may not carry Amaru
+    // further out of view (stepping back in is always allowed, so he can't get stuck).
+    const overflowNow = screenOverflow(pos.x, pos.y, pos.z, camera);
+    const blocked = (x: number, z: number) =>
+      isBlocked(x, z) || screenOverflow(x, pos.y, z, camera) > Math.max(overflowNow, 0) + 1e-4;
+
     // Step, sliding along obstacles instead of stopping dead.
     if (speed > 0) {
       const step = speed * dt;
       const nx = pos.x + move.current.x * step;
       const nz = pos.z + move.current.z * step;
-      if (!isBlocked(nx, nz)) pos.set(nx, pos.y, nz);
-      else if (!isBlocked(nx, pos.z)) pos.x = nx;
-      else if (!isBlocked(pos.x, nz)) pos.z = nz;
+      if (!blocked(nx, nz)) pos.set(nx, pos.y, nz);
+      else if (!blocked(nx, pos.z)) pos.x = nx;
+      else if (!blocked(pos.x, nz)) pos.z = nz;
       else {
         speed = 0;
         route.current = [];
