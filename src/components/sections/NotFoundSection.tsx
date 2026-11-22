@@ -33,7 +33,7 @@ export const NotFoundSection = () => {
           {t("404.title")}
         </h1>
         <p className="max-w-[460px] text-[15px] leading-normal text-muted-ink">{t("404.description")}</p>
-        <Button to="/">{t("404.button")}</Button>
+        <Button to="/inicio">{t("404.button")}</Button>
       </div>
     </section>
   );

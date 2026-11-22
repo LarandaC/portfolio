@@ -21,7 +21,7 @@ export const NavBar = () => {
   isMenuOpenRef.current = isMenuOpen;
 
   const { t } = useTranslation();
-  // The map only exists where it can run; elsewhere "/" is this same classic page.
+  // The map only exists where it can run; elsewhere /inicio is this same classic page.
   const mapEnabled = useMapEnabled();
 
   const sectionIds = useMemo(
@@ -71,7 +71,7 @@ export const NavBar = () => {
             // Text on desktop, icon only on smaller screens.
             <Button
               variant="ghost"
-              to="/"
+              to="/inicio"
               aria-label={t("map.explore")}
               className="max-desktop:size-9 max-desktop:px-0"
             >
@@ -89,7 +89,7 @@ export const NavBar = () => {
               setIsMenuOpen(true);
             }}
             className="hidden size-9 text-pill-ink max-desktop:inline-flex"
-            aria-label="Abrir menú"
+            aria-label={t("nav.openMenu")}
           >
             <Menu size={18} />
           </Button>
