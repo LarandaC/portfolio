@@ -1,4 +1,7 @@
-/** Models available in the dev-only /lab page. Files come from `npm run models` (public/models). */
+/**
+ * Models available in the dev-only /lab page, from `npm run models`: the site's own (public/models) and the
+ * lab-only candidates (dev-models/, served by the Vite dev server but not built).
+ */
 export type LabModel = {
   id: string;
   name: string;
@@ -9,12 +12,12 @@ export type LabModel = {
 };
 
 export const LAB_MODELS: LabModel[] = [
-  { id: "cat-evil-katz", name: "An Animated Cat", kind: "cat", file: "/models/cat-evil-katz.glb", author: "Evil_Katz", license: "CC-BY 4.0" },
-  { id: "cat-madtrollstudio", name: "Cat", kind: "cat", file: "/models/cat-madtrollstudio.glb", author: "madtrollstudio", license: "CC-BY" },
-  { id: "cat-volkanongun", name: "Low Poly Cat", kind: "cat", file: "/models/cat-volkanongun.glb", author: "volkanongun", license: "CC-BY 4.0" },
-  { id: "cat-tuxedo-dreamnoms", name: "Tuxedo Cat Animated 2.0", kind: "cat", file: "/models/cat-tuxedo-dreamnoms.glb", author: "DreamNoms", license: "CC-BY 4.0" },
+  { id: "cat-evil-katz", name: "An Animated Cat", kind: "cat", file: "/dev-models/cat-evil-katz.glb", author: "Evil_Katz", license: "CC-BY 4.0" },
+  { id: "cat-madtrollstudio", name: "Cat", kind: "cat", file: "/dev-models/cat-madtrollstudio.glb", author: "madtrollstudio", license: "CC-BY" },
+  { id: "cat-volkanongun", name: "Low Poly Cat", kind: "cat", file: "/dev-models/cat-volkanongun.glb", author: "volkanongun", license: "CC-BY 4.0" },
+  { id: "cat-tuxedo-dreamnoms", name: "Tuxedo Cat Animated 2.0", kind: "cat", file: "/dev-models/cat-tuxedo-dreamnoms.glb", author: "DreamNoms", license: "CC-BY 4.0" },
   { id: "cat-somali-dreamnoms", name: "Somali Cat Animated 1.2", kind: "cat", file: "/models/cat-somali-dreamnoms.glb", author: "DreamNoms", license: "CC-BY 4.0" },
-  { id: "cat-volkanongun-walk", name: "Low Poly Cat Walk", kind: "cat", file: "/models/cat-volkanongun-walk.glb", author: "volkanongun", license: "CC-BY 4.0" },
+  { id: "cat-volkanongun-walk", name: "Low Poly Cat Walk", kind: "cat", file: "/dev-models/cat-volkanongun-walk.glb", author: "volkanongun", license: "CC-BY 4.0" },
   { id: "pagoda", name: "Pagoda", kind: "building", file: "/models/pagoda.glb", author: "Poly by Google", license: "CC-BY" },
   { id: "house-daniel-stringer", name: "Japanese House", kind: "building", file: "/models/house-daniel-stringer.glb", author: "Daniel Stringer", license: "CC-BY 4.0" },
   { id: "house-ig-shero", name: "Japanese House", kind: "building", file: "/models/house-ig-shero.glb", author: "IG_Shero", license: "CC-BY 4.0" },

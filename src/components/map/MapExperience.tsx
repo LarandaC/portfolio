@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { mapStore } from "@/components/world/mapStore";
 import { useMapStore } from "@/components/world/useMapStore";
@@ -8,16 +9,25 @@ import { MapIntro } from "./MapIntro";
 import { MapPanel } from "./MapPanel";
 import { MapEnterPrompt } from "./MapEnterPrompt";
 import { MapLoader } from "./MapLoader";
+import { MapErrorBoundary } from "./MapErrorBoundary";
 
 const WorldScene = lazy(() => import("@/components/world/WorldScene"));
 
 /**
  * The portfolio as an explorable valley: the 3D map fills the screen and the DOM interface floats on top.
  * The URL hash names the open place (#projects, #contact…), so links and the back button work.
+ * If the scene fails, the visitor lands on the classic page (/simple) instead.
  */
 export function MapExperience() {
   const { theme } = useTheme();
   const panel = useMapStore((s) => s.panel);
+  const navigate = useNavigate();
+
+  // If the 3D scene breaks (an error, or the GPU context is lost), continue on the classic page,
+  // keeping the open place (#projects…). `replace`, so Back doesn't return to the broken map.
+  const fallBack = useCallback(() => {
+    navigate(`/simple${window.location.hash}`, { replace: true });
+  }, [navigate]);
 
   // The classic page's zoom-out intro doesn't apply here.
   useEffect(() => {
@@ -49,9 +59,11 @@ export function MapExperience() {
   return (
     <main className="fixed inset-0 overflow-hidden bg-surface">
       <div className="absolute inset-0" aria-hidden>
-        <Suspense fallback={null}>
-          <WorldScene />
-        </Suspense>
+        <MapErrorBoundary onFail={fallBack}>
+          <Suspense fallback={null}>
+            <WorldScene onContextLost={fallBack} />
+          </Suspense>
+        </MapErrorBoundary>
       </div>
       <MapHud />
       <MapIntro />
