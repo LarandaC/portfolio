@@ -38,15 +38,16 @@ const MODELS = [
   { src: "cat/tuxedo_cat_animated_2.0.glb", out: "cat-tuxedo-dreamnoms.glb", keepMaterials: true, labOnly: true },
   // Buildings
   { src: "house/Pagoda by Poly by Google - d1M5ncMBUDi.glb", out: "pagoda.glb" },
-  { src: "house/japanese_house.glb", out: "house-daniel-stringer.glb" },
-  { src: "house/japanese_house (1).glb", out: "house-ig-shero.glb" },
-  { src: "house/simple_japanese_house_2.glb", out: "house-janab.glb" },
-  { src: "house/japanese_shrine.glb", out: "shrine-wolvemancer.glb" },
-  // 15 texture maps: 512 px keeps it light.
-  { src: "house/japanese_bell_tower.glb", out: "bell-tower-ao-interactive.glb", textureSize: 512 },
+  // Buildings are only seen from the isometric camera, never close up: 512 px is plenty and saves ~1 MB.
+  { src: "house/japanese_house.glb", out: "house-daniel-stringer.glb", textureSize: 512 },
+  { src: "house/japanese_house (1).glb", out: "house-ig-shero.glb", textureSize: 512 },
+  { src: "house/simple_japanese_house_2.glb", out: "house-janab.glb", textureSize: 512 },
+  { src: "house/japanese_shrine.glb", out: "shrine-wolvemancer.glb", textureSize: 512 },
+  // 15 texture maps and small on screen: 256 px.
+  { src: "house/japanese_bell_tower.glb", out: "bell-tower-ao-interactive.glb", textureSize: 256 },
   // Decor
   { src: "decor/japanese_stone_lantern.glb", out: "stone-lantern-sahir-virmani.glb", textureSize: 512 },
-  { src: "decor/japanese_maple_tree.glb", out: "maple-olivermathegames.glb" },
+  { src: "decor/japanese_maple_tree.glb", out: "maple-olivermathegames.glb", textureSize: 512 },
   // Left out on purpose:
   //   cat/cat_walk.glb                         CC-BY-NC: non-commercial license
   //   cat/low-poly_catwalk.glb                 a fashion runway ("catwalk"), not a cat

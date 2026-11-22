@@ -11,7 +11,9 @@
     "skills": "Skills",
     "projects": "Proyectos",
     "contact": "Contacto",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "openMenu": "Abrir menú",
+    "menuTitle": "Menú de navegación"
   },
   "hero": {
     "role": "Desarrolladora Frontend",
@@ -73,7 +75,8 @@
     "description": "Estos son algunos de mis proyectos recientes. Cada uno fue desarrollado con atención al detalle, rendimiento y experiencia de usuario.",
     "viewCode": "Ver código",
     "liveDemo": "Demo en vivo",
-    "viewDetails": "Ver detalles"
+    "viewDetails": "Ver detalles",
+    "highlights": "Aspectos técnicos"
   },
   "contact": {
     "title": "¿Listo para trabajar juntos?",

@@ -11,7 +11,9 @@
     "skills": "Skills",
     "projects": "Projects",
     "contact": "Contact",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "menuTitle": "Navigation menu"
   },
   "hero": {
     "role": "Frontend Developer",
@@ -78,7 +80,8 @@
     "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience.",
     "viewCode": "View code",
     "liveDemo": "Live demo",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "highlights": "Technical highlights"
   },
   "contact": {
     "title": "Ready to work together?",

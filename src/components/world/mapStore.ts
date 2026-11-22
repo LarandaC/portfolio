@@ -23,13 +23,15 @@ export type MapState = {
   quality: "high" | "low";
   /** Still slow at low quality: offer the simple version (until the visitor dismisses it). */
   slowNotice: boolean;
+  /** Share of the map's files downloaded so far, 0–100 (shown on the loading screen). */
+  loadProgress: number;
 };
 
 export type MapCommand = { type: "station"; id: StationId } | { type: "point"; x: number; z: number };
 
 export const ZOOM = { min: 9, max: 50, initial: 22, overview: 50 };
 
-let state: MapState = { panel: null, target: null, nearby: null, introOpen: true, ready: false, zoom: ZOOM.initial, night: false, quality: "high", slowNotice: false };
+let state: MapState = { panel: null, target: null, nearby: null, introOpen: true, ready: false, zoom: ZOOM.initial, night: false, quality: "high", slowNotice: false, loadProgress: 0 };
 const listeners = new Set<() => void>();
 
 /** Movement request for the scene to pick up on its next frame. */

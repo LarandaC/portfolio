@@ -18,6 +18,7 @@ import { Fireflies } from "./Fireflies";
 import { MapPetals } from "./MapPetals";
 import { WatercolorPass } from "./WatercolorPass";
 import { PerformanceGuard } from "./PerformanceGuard";
+import { LoadProgressReporter } from "./LoadProgressReporter";
 import { useMapStore } from "./useMapStore";
 
 type WorldSceneProps = {
@@ -40,6 +41,7 @@ export function WorldScene({ onContextLost }: WorldSceneProps) {
       gl={{ antialias: true, powerPreference: "high-performance" }}
     >
       <MapController />
+      <LoadProgressReporter />
       <PerformanceGuard />
       {!low && <WatercolorPass />}
       <MapCamera />

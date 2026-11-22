@@ -21,7 +21,7 @@ export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) =
   return (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <SheetContent side="right" className="flex w-80 flex-col overflow-hidden border-l border-line bg-surface p-0">
-        <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
+        <SheetTitle className="sr-only">{t("nav.menuTitle")}</SheetTitle>
 
         <div className="flex items-center gap-1.5 px-6 pt-6 pb-2 text-[19px] font-medium tracking-[-.04em] whitespace-nowrap max-tablet:text-[17px]">
           <BrandLogo />
@@ -45,7 +45,7 @@ export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) =
         {mapEnabled && (
           <div className="px-6 pb-5">
             <SheetClose asChild>
-              <Button to="/" className="w-full">
+              <Button to="/inicio" className="w-full">
                 <MapIcon size={16} />
                 {t("map.explore")}
               </Button>

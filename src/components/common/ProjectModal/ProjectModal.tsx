@@ -20,7 +20,6 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
 
   const description = lang === "en" ? project.longDescriptionEn : project.longDescriptionEs;
   const highlights = lang === "en" ? project.highlightsEn : project.highlightsEs;
-  const labelHighlights = lang === "en" ? "Technical highlights" : "Aspectos técnicos";
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
@@ -51,7 +50,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
 
           <div>
             <p className="mb-2.5 text-[11px] font-semibold tracking-[.08em] text-brand uppercase">
-              {labelHighlights}
+              {t("projects.highlights")}
             </p>
             <ul className="flex flex-col gap-2">
               {highlights.map((item, i) => (
