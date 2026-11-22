@@ -19,6 +19,9 @@ const OUT = "public/models";
  * Models published to the site. Anything not listed here stays local only.
  * `keepMaterials`: don't merge materials into a palette, so they keep their names
  * (e.g. the cat's "Collar" or "EyeColor" can be recolored by code).
+ * `textureSize`: max texture side in px (default 1024); smaller for props seen small or repeated.
+ * `simplify`: keep this fraction of the triangles (e.g. 0.1), for heavy models seen from far away
+ *   (with a loose error tolerance, otherwise the simplifier stops early).
  */
 const MODELS = [
   // Amaru candidates
@@ -33,11 +36,19 @@ const MODELS = [
   { src: "house/japanese_house.glb", out: "house-daniel-stringer.glb" },
   { src: "house/japanese_house (1).glb", out: "house-ig-shero.glb" },
   { src: "house/simple_japanese_house_2.glb", out: "house-janab.glb" },
+  { src: "house/japanese_shrine.glb", out: "shrine-wolvemancer.glb" },
+  // 15 texture maps: 512 px keeps it light.
+  { src: "house/japanese_bell_tower.glb", out: "bell-tower-ao-interactive.glb", textureSize: 512 },
+  // Decor
+  { src: "decor/japanese_stone_lantern.glb", out: "stone-lantern-sahir-virmani.glb", textureSize: 512 },
+  { src: "decor/japanese_maple_tree.glb", out: "maple-olivermathegames.glb" },
   // Left out on purpose:
   //   cat/cat_walk.glb                         CC-BY-NC: non-commercial license
   //   cat/low-poly_catwalk.glb                 a fashion runway ("catwalk"), not a cat
   //   house/feudal_japanese_house.glb          ~373k triangles, too heavy for the web
   //   house/traditional_japanese_house.glb     ~814k triangles, too heavy for the web
+  //   house/japanese_castle.glb                ~344k triangles in thousands of small parts: won't simplify
+  //                                            below ~200k (4.5 MB), too heavy even as a backdrop
 ];
 
 const force = process.argv.includes("--force");
@@ -47,7 +58,7 @@ const cli = join("node_modules", "@gltf-transform", "cli", "bin", "cli.js");
 
 mkdirSync(OUT, { recursive: true });
 
-for (const { src, out, keepMaterials } of MODELS) {
+for (const { src, out, keepMaterials, textureSize = 1024, simplify } of MODELS) {
   const input = join(SRC, src);
   const output = join(OUT, out);
 
@@ -67,8 +78,9 @@ for (const { src, out, keepMaterials } of MODELS) {
       "optimize", input, output,
       "--compress", "meshopt",
       "--texture-compress", "webp",
-      "--texture-size", "1024",
+      "--texture-size", String(textureSize),
       ...(keepMaterials ? ["--palette", "false"] : []),
+      ...(simplify ? ["--simplify-ratio", String(simplify), "--simplify-error", "0.05"] : []),
     ],
     { stdio: ["ignore", "ignore", "inherit"] } // errors still show
   );

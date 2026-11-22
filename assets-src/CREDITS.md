@@ -17,6 +17,10 @@ Las licencias CC-BY obligan a dar crédito. En la fase 3 esta lista se muestra e
 | `pagoda.glb` | `house/Pagoda by Poly by Google - d1M5ncMBUDi.glb` | Poly by Google | CC-BY | "Pagoda" vía [Poly Pizza](https://poly.pizza/m/d1M5ncMBUDi) |
 | `house-daniel-stringer.glb` | `house/japanese_house.glb` | Daniel Stringer | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese House"](https://skfb.ly/ooHFU) (Sketchfab) |
 | `house-ig-shero.glb` | `house/japanese_house (1).glb` | IG_Shero | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese House"](https://skfb.ly/pHnOC) (Sketchfab) |
+| `shrine-wolvemancer.glb` | `house/japanese_shrine.glb` | Wolvemancer | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese Shrine"](https://skfb.ly/6UNDD) (Sketchfab) |
+| `bell-tower-ao-interactive.glb` | `house/japanese_bell_tower.glb` | AO-INTERACTIVE | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese Bell Tower"](https://skfb.ly/6GJE7) (Sketchfab) |
+| `stone-lantern-sahir-virmani.glb` | `decor/japanese_stone_lantern.glb` | Sahir Virmani | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese Stone Lantern"](https://skfb.ly/6QTTv) (Sketchfab) |
+| `maple-olivermathegames.glb` | `decor/japanese_maple_tree.glb` | OliverMatheGames | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese Maple Tree"](https://skfb.ly/6Swwv) (Sketchfab) |
 | `house-janab.glb` | `house/simple_japanese_house_2.glb` | JanaB | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Simple Japanese House 2"](https://skfb.ly/oyDtV) (Sketchfab) |
 
 Los enlaces de Poly Pizza se armaron a partir del ID que trae el nombre del archivo. Hay que comprobar que abren el modelo correcto.
@@ -28,6 +32,7 @@ Los enlaces de Poly Pizza se armaron a partir del ID que trae el nombre del arch
 | `cat/cat_walk.glb` | LostBoyz2078 | [CC-BY-NC 4.0](http://creativecommons.org/licenses/by-nc/4.0/) | ["Cat Walk"](https://skfb.ly/oFBFP) | La licencia no permite uso comercial, y un portafolio para conseguir trabajo es zona gris |
 | `cat/low-poly_catwalk.glb` | dylanheyes | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Low-Poly Catwalk"](https://skfb.ly/oBXXR) | Es una pasarela de moda ("catwalk"), no un gato |
 | `house/feudal_japanese_house.glb` | local.yany | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Feudal Japanese House"](https://skfb.ly/pzOPo) | Unos 373 mil triángulos, demasiado pesado para la web |
+| `house/japanese_castle.glb` | Zorodroger | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Japanese Castle"](https://skfb.ly/onSqY) | Unos 344 mil triángulos en miles de piezas pequeñas: no baja de ~200 mil (4,5 MB) ni simplificado, demasiado pesado incluso de fondo |
 | `house/traditional_japanese_house.glb` | Sulfuric Arts | [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0/) | ["Traditional Japanese House"](https://skfb.ly/oULpW) | Unos 814 mil triángulos, demasiado pesado para la web |
 
 ## Cómo agregar un modelo

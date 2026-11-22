@@ -19,6 +19,10 @@ export const LAB_MODELS: LabModel[] = [
   { id: "house-daniel-stringer", name: "Japanese House", kind: "building", file: "/models/house-daniel-stringer.glb", author: "Daniel Stringer", license: "CC-BY 4.0" },
   { id: "house-ig-shero", name: "Japanese House", kind: "building", file: "/models/house-ig-shero.glb", author: "IG_Shero", license: "CC-BY 4.0" },
   { id: "house-janab", name: "Simple Japanese House 2", kind: "building", file: "/models/house-janab.glb", author: "JanaB", license: "CC-BY 4.0" },
+  { id: "shrine-wolvemancer", name: "Japanese Shrine", kind: "building", file: "/models/shrine-wolvemancer.glb", author: "Wolvemancer", license: "CC-BY 4.0" },
+  { id: "bell-tower", name: "Japanese Bell Tower", kind: "building", file: "/models/bell-tower-ao-interactive.glb", author: "AO-INTERACTIVE", license: "CC-BY 4.0" },
+  { id: "maple", name: "Japanese Maple Tree", kind: "building", file: "/models/maple-olivermathegames.glb", author: "OliverMatheGames", license: "CC-BY 4.0" },
+  { id: "stone-lantern", name: "Japanese Stone Lantern", kind: "building", file: "/models/stone-lantern-sahir-virmani.glb", author: "Sahir Virmani", license: "CC-BY 4.0" },
 ];
 
 /** Sidebar entry that shows every cat side by side. */
