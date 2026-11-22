@@ -1,14 +1,9 @@
-import { lazy, Suspense, useState } from "react";
-import { ExternalLink, Github } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { useActiveLang } from "@/hooks/useActiveLang";
 import type { Project } from "@/data/projects";
 import { NUM_COLORS } from "../const/constants";
+import { ProjectActions } from "@/components/common/ProjectActions";
+import { Pill } from "@/components/common/Pill";
 
-// The detail modal (Radix Dialog) is only downloaded once it is first opened.
-const ProjectModal = lazy(() =>
-  import("@/components/cards/ProjectModal").then((m) => ({ default: m.ProjectModal }))
-);
 
 interface ProjectPanelProps {
   project: Project;
@@ -18,21 +13,13 @@ interface ProjectPanelProps {
 }
 
 export function ProjectPanel({ project, index, active, onActivate }: ProjectPanelProps) {
-  const { t } = useTranslation();
   const lang = useActiveLang();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalLoaded, setModalLoaded] = useState(false);
 
   const description = lang === "en" ? project.longDescriptionEn : project.longDescriptionEs;
 
   // The accordion only exists on desktop; on mobile the panels are a stacked list.
   const activate = () => {
     if (window.matchMedia("(min-width: 761px)").matches) onActivate();
-  };
-
-  const openDetails = () => {
-    setModalLoaded(true);
-    setModalOpen(true);
   };
 
   return (
@@ -59,50 +46,18 @@ export function ProjectPanel({ project, index, active, onActivate }: ProjectPane
           </div>
           <div className="mb-3 flex flex-wrap gap-1.5">
             {project.tags.map((tag) => (
-              <span key={tag} className="pill">
+              <Pill key={tag}>
                 {tag}
-              </span>
+              </Pill>
             ))}
           </div>
           <h3 className="mb-1.5 text-[clamp(20px,1.7vw,26px)] font-normal tracking-[-.03em]">
             {project.title}
           </h3>
           <p className="line-clamp-3 text-sm leading-[1.45] text-body">{description}</p>
-          <div className="mt-4 flex items-center gap-2">
-            <button className="btn-ghost" onClick={openDetails}>
-              {t("projects.viewDetails")} →
-            </button>
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} — ${t("projects.viewCode")}`}
-                className="icon-btn"
-              >
-                <Github size={15} />
-              </a>
-            )}
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} — ${t("projects.liveDemo")}`}
-                className="icon-btn"
-              >
-                <ExternalLink size={15} />
-              </a>
-            )}
-          </div>
+          <ProjectActions project={project} detailsVariant="ghost" className="mt-4 flex items-center gap-2" />
         </div>
       </div>
-
-      {modalLoaded && (
-        <Suspense fallback={null}>
-          <ProjectModal project={project} open={modalOpen} onClose={() => setModalOpen(false)} />
-        </Suspense>
-      )}
     </div>
   );
 }

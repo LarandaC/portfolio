@@ -1,6 +1,6 @@
 import { NIGHT } from "@/lib/media";
-import { SquareField } from "@/components/shared/SquareField";
-import { Petals } from "@/components/shared/Petals";
+import { SquareField } from "@/components/common/SquareField";
+import { PetalLayer } from "@/components/common/PetalLayer";
 import { ContactCard } from "./components/ContactCard";
 
 export function ContactSection() {
@@ -20,7 +20,7 @@ export function ContactSection() {
         />
       </div>
 
-      <Petals />
+      <PetalLayer className="z-3" count={140} />
       <ContactCard />
     </section>
   );

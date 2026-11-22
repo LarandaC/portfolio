@@ -12,7 +12,14 @@ dist
 dist-ssr
 *.local
 
-.claude
+# Claude Code: config, skills and MCP servers (local only)
+.claude/
+.mcp.json
+CLAUDE.md
+CLAUDE.local.md
+/.agents/
+/skills/
+/skills-lock.json
 
 # Editor directories and files
 .vscode/*
@@ -24,3 +31,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original 3D downloads (heavy, kept locally). Optimized copies go to public/models via `npm run models`.
+assets-src/**/*.glb
+assets-src/**/*.gltf
+assets-src/**/*.fbx
+assets-src/**/*.blend
+assets-src/**/*.blend1

@@ -1,6 +1,6 @@
 import { CLOUD_A, CLOUD_B } from "@/lib/media";
-import { DriftCloud } from "@/components/shared/DriftCloud";
-import { CLOUD_LEFT, CLOUD_RIGHT } from "@/components/shared/cloudPositions";
+import { DriftCloud } from "@/components/common/DriftCloud";
+import { CLOUD_LEFT, CLOUD_RIGHT } from "@/components/common/DriftCloud";
 
 /** Pastel clouds framing the headline; `parallax` drives their scroll speed. */
 export function HeroClouds() {

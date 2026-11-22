@@ -7,6 +7,8 @@ export interface ExperienceEntry {
   organization: string;
   period: string;
   description: string;
+  /** Bullet points under the description. */
+  highlights?: string[];
 }
 
 export const experiences: ExperienceEntry[] = [
@@ -17,7 +19,15 @@ export const experiences: ExperienceEntry[] = [
     organization: "CLT S.A",
     period: "Ene 2026 – Actualidad",
     description:
-      "Interfaces responsivas con React, Tailwind y Shadcn, transformando mockups de diseño en productos funcionales. Integración de APIs RESTful, gestión de estado con Zustand, componentes UI reutilizables, revisiones de código y trabajo estrecho con backend para definir contratos de integración.",
+      "Desarrollo de aplicaciones web modulares y escalables con React, Next.js, Tailwind y Shadcn, transformando diseños en productos funcionales y trabajando de cerca con backend para definir contratos de integración.",
+    highlights: [
+      "Centro de notificaciones en tiempo real con SignalR.",
+      "Migración de Next.js 12 a Next.js 16.",
+      "Optimizaciones de rendimiento y tiempos de carga.",
+      "Mejoras estéticas y de experiencia de usuario en las interfaces.",
+      "Integración de APIs RESTful y gestión de estado con Zustand.",
+      "Componentes UI reutilizables y revisiones de código.",
+    ],
   },
   {
     id: "guadalupe",
@@ -56,3 +66,7 @@ export const experiences: ExperienceEntry[] = [
       "Aplicaciones web fullstack con React y Express.js, interfaces responsivas y accesibles con TailwindCSS y Shadcn UI, y creación y consumo de servicios RESTful.",
   },
 ];
+
+/** Jobs and freelance work, and studies: the two timelines (classic page and map panel). */
+export const workExperiences = experiences.filter((e) => e.type === "work" || e.type === "freelance");
+export const educationExperiences = experiences.filter((e) => e.type === "education");

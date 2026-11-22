@@ -1,7 +1,7 @@
 import { CLOUD_B } from "@/lib/media";
-import { SectionHeader } from "@/components/shared/SectionHeader";
-import { SquareField } from "@/components/shared/SquareField";
-import { DriftCloud } from "@/components/shared/DriftCloud";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { SquareField } from "@/components/common/SquareField";
+import { DriftCloud } from "@/components/common/DriftCloud";
 import { useSkillsFilter } from "./hooks/useSkillsFilter";
 import { CategoryFilter } from "./components/CategoryFilter";
 import { SkillGrid } from "./components/SkillGrid";

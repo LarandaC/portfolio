@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { projects } from "@/data/projects";
-import { SectionHeader } from "@/components/shared/SectionHeader";
+import { SectionHeader } from "@/components/common/SectionHeader";
 import { ProjectsCloud } from "./components/ProjectsCloud";
 import { ProjectsTrack } from "./components/ProjectsTrack";
 

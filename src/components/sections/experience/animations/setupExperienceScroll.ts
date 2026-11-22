@@ -3,16 +3,29 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /** The line fills with scroll, each dot lights up as the line reaches it, cards slide in. */
 export function setupExperienceScroll(mm: gsap.MatchMedia) {
-  // The line's leading edge sits at 70% of the viewport...
+  // The cherry tree rises gradually while the whole section scrolls by (no pin).
   gsap.fromTo(
-    ".timeline-progress",
-    { scaleY: 0 },
+    "#tree",
+    { yPercent: 100 },
     {
-      scaleY: 1,
+      yPercent: 0,
       ease: "none",
-      scrollTrigger: { trigger: ".timeline", start: "top 70%", end: "bottom 70%", scrub: true },
+      scrollTrigger: { trigger: "#experience", start: "top 70%", end: "bottom bottom", scrub: 1 },
     }
   );
+
+  // Each timeline (work, education) fills its own line; the leading edge sits at 70% of the viewport...
+  gsap.utils.toArray<HTMLElement>(".timeline").forEach((timeline) => {
+    gsap.fromTo(
+      timeline.querySelector(".timeline-progress"),
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: { trigger: timeline, start: "top 70%", end: "bottom 70%", scrub: true },
+      }
+    );
+  });
 
   // ...so a dot is "reached" when it crosses that same line.
   gsap.utils.toArray<HTMLElement>(".timeline-dot").forEach((dot) => {
@@ -33,9 +46,9 @@ export function setupExperienceScroll(mm: gsap.MatchMedia) {
 
   // Desktop cards slide in from their own side of the line; mobile cards rise.
   mm.add("(min-width: 761px)", () => {
-    gsap.utils.toArray<HTMLElement>(".timeline-item").forEach((item, i) => {
+    gsap.utils.toArray<HTMLElement>(".timeline-item").forEach((item) => {
       gsap.from(item.querySelector(".timeline-card"), {
-        x: i % 2 === 0 ? -40 : 40,
+        x: item.dataset.side === "left" ? -40 : 40,
         opacity: 0,
         duration: 0.9,
         ease: "power3.out",

@@ -1,6 +1,7 @@
 import type { Skill } from "@/data/skills";
 import { useActiveLang } from "@/hooks/useActiveLang";
 import { iconMap, levelDots } from "../const/constants";
+import { Card } from "@/components/common/Card";
 
 interface SkillCardProps {
   skill: Skill;
@@ -17,7 +18,7 @@ export function SkillCard({ skill, index }: SkillCardProps) {
       className="animate-card-enter motion-reduce:animate-none"
       style={{ animationDelay: `${index * 45}ms` }}
     >
-      <div className="flex h-full flex-col items-center gap-2.5 rounded-[18px] border border-line bg-surface/85 px-3 pt-5 pb-4 text-center backdrop-blur-[6px] transition-[translate,border-color,box-shadow] duration-300 hover:-translate-y-[3px] hover:border-pill-hover hover:shadow-lift">
+      <Card variant="tile" className="flex h-full flex-col items-center gap-2.5 px-3 pt-5 pb-4 text-center">
         <div className="flex size-11 items-center justify-center rounded-xl bg-pill text-brand">
           <Icon size={22} />
         </div>
@@ -28,7 +29,7 @@ export function SkillCard({ skill, index }: SkillCardProps) {
           ))}
         </div>
         <span className="text-[11px] text-stone">{skill[lang]}</span>
-      </div>
+      </Card>
     </div>
   );
 }

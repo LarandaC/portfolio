@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { CLOUD_A, CLOUD_B, TREE } from "@/lib/media";
-import { DriftCloud } from "@/components/shared/DriftCloud";
-import { Petals } from "@/components/shared/Petals";
-import { CLOUD_LEFT, CLOUD_RIGHT } from "@/components/shared/cloudPositions";
+import { Petals } from "@/components/common/Petals";
+import { CLOUD_LEFT, CLOUD_RIGHT, DriftCloud } from "@/components/common/DriftCloud";
+import { Button } from "@/components/common/Button";
+import { Pill } from "@/components/common/Pill";
 
 export const NotFoundSection = () => {
   const { t } = useTranslation();
@@ -21,7 +22,7 @@ export const NotFoundSection = () => {
       </div>
 
       <div className="relative z-4 flex flex-col items-center gap-5">
-        <span className="pill">ERR · 404</span>
+        <Pill>ERR · 404</Pill>
         <span
           className="text-[clamp(110px,18vw,220px)] leading-[.8] font-semibold tracking-[-.07em] text-brand"
           aria-hidden
@@ -32,9 +33,7 @@ export const NotFoundSection = () => {
           {t("404.title")}
         </h1>
         <p className="max-w-[460px] text-[15px] leading-normal text-muted-ink">{t("404.description")}</p>
-        <a href="/" className="btn">
-          {t("404.button")}
-        </a>
+        <Button to="/inicio">{t("404.button")}</Button>
       </div>
     </section>
   );

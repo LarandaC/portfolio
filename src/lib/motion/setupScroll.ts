@@ -1,11 +1,13 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setupHeroScroll } from "@/components/sections/hero/animations/setupHeroScroll";
+import { setupHeroPointer } from "@/components/sections/hero/animations/setupHeroPointer";
 import { setupAboutScroll } from "@/components/sections/about/animations/setupAboutScroll";
 import { setupProjectsScroll } from "@/components/sections/projects/animations/setupProjectsScroll";
 import { setupExperienceScroll } from "@/components/sections/experience/animations/setupExperienceScroll";
 import { setupContactScroll } from "@/components/sections/contact/animations/setupContactScroll";
 import { setupFooterLogo } from "./setupFooterLogo";
+import { setupPetalWind } from "@/components/common/PetalLayer";
 
 /** All scroll-driven motion; runs once the intro has finished. Returns a cleanup. */
 export function setupScroll() {
@@ -41,11 +43,13 @@ export function setupScroll() {
   });
 
   const mm = gsap.matchMedia();
+  setupHeroPointer(mm);
   setupAboutScroll(mm);
   setupProjectsScroll(mm);
   setupExperienceScroll(mm);
   setupContactScroll();
   setupFooterLogo();
+  setupPetalWind();
 
   const refresh = () => ScrollTrigger.refresh();
   refresh();

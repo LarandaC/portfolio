@@ -3,8 +3,11 @@ import { navItems } from "@/lib/navigation";
 import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useTranslation } from "react-i18next";
+import { Map as MapIcon } from "lucide-react";
+import { use3DEnabled } from "@/hooks/use3DEnabled";
 import { socialLinks } from "@/data/social";
-import { BrandLogo } from "@/components/shared/BrandLogo";
+import { BrandLogo } from "@/components/common/BrandLogo";
+import { Button } from "@/components/common/Button";
 
 interface NavBarMobileProps {
   isMenuOpen: boolean;
@@ -13,11 +16,12 @@ interface NavBarMobileProps {
 
 export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) => {
   const { t } = useTranslation();
+  const mapEnabled = use3DEnabled();
 
   return (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <SheetContent side="right" className="flex w-80 flex-col overflow-hidden border-l border-line bg-surface p-0">
-        <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
+        <SheetTitle className="sr-only">{t("nav.menuTitle")}</SheetTitle>
 
         <div className="flex items-center gap-1.5 px-6 pt-6 pb-2 text-[19px] font-medium tracking-[-.04em] whitespace-nowrap max-tablet:text-[17px]">
           <BrandLogo />
@@ -38,19 +42,23 @@ export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) =
           ))}
         </nav>
 
+        {mapEnabled && (
+          <div className="px-6 pb-5">
+            <SheetClose asChild>
+              <Button to="/inicio" className="w-full">
+                <MapIcon size={16} />
+                {t("map.explore")}
+              </Button>
+            </SheetClose>
+          </div>
+        )}
+
         <div className="flex items-center justify-between border-t border-line px-6 py-5">
           <div className="flex gap-2">
             {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                className="icon-btn"
-              >
+              <Button key={social.name} variant="icon" href={social.href} external aria-label={social.name}>
                 <social.icon size={15} />
-              </a>
+              </Button>
             ))}
           </div>
           <div className="flex items-center gap-1.5">

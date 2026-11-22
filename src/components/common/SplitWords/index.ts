@@ -1,0 +1,1 @@
+export { SplitWords } from "./SplitWords";

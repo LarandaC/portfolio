@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { SectionHeader } from "@/components/shared/SectionHeader";
+import { SectionHeader } from "@/components/common/SectionHeader";
 import { ContactLinks } from "./ContactLinks";
 
 /** Frosted white-to-clear card floating over the night valley. */

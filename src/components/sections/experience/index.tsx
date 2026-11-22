@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { experiences } from "@/data/experience";
-import { CLOUD_B } from "@/lib/media";
-import { SectionHeader } from "@/components/shared/SectionHeader";
-import { SquareField } from "@/components/shared/SquareField";
-import { DriftCloud } from "@/components/shared/DriftCloud";
+import { educationExperiences, workExperiences } from "@/data/experience";
+import { TREE } from "@/lib/media";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { SquareField } from "@/components/common/SquareField";
 import { ExperienceTimeline } from "./components/ExperienceTimeline";
+import { TYPE_ICONS } from "./const/constants";
 
 export function ExperienceSection() {
   const { t } = useTranslation();
@@ -12,21 +12,29 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative overflow-hidden bg-surface px-4 pt-[140px] pb-[130px] max-tablet:pt-[110px] max-tablet:pb-[90px]"
+      className="relative overflow-clip bg-surface px-4 pt-[140px] pb-[360px] max-tablet:pt-[110px] max-tablet:pb-[280px]"
     >
-      <SquareField count={16} />
-      <DriftCloud
-        src={CLOUD_B}
-        className="absolute top-10 -left-[6vw] z-1 w-[min(32vw,440px)] max-tablet:-left-[18vw] max-tablet:w-[60vw]"
-        drift="b"
-      />
+      <SquareField count={22} />
+
+      {/* Cherry tree that sticks to the bottom of the viewport while the section scrolls and rises
+          with it, behind the cards. overflow-clip (not hidden) on the section keeps sticky working. */}
+      <div className="pointer-events-none absolute inset-0 z-1 flex flex-col justify-end" aria-hidden>
+        <div className="sticky bottom-0 mx-auto w-[min(340px,58vw)]">
+          <img id="tree" className="w-full" src={TREE} alt="" />
+        </div>
+      </div>
 
       <div className="relative z-2 mx-auto max-w-[980px]">
         <SectionHeader
           label={`04 · ${t("experience.columnWork")} · ${t("experience.columnEducation")}`}
           title={[t("experience.title")]}
         />
-        <ExperienceTimeline entries={experiences} />
+        <ExperienceTimeline title={t("experience.columnWork")} icon={TYPE_ICONS.work} entries={workExperiences} />
+        <ExperienceTimeline
+          title={t("experience.columnEducation")}
+          icon={TYPE_ICONS.education}
+          entries={educationExperiences}
+        />
       </div>
     </section>
   );

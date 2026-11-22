@@ -1,0 +1,37 @@
+import { useEffect, useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
+import { Color, ShaderMaterial } from "three";
+import { TERRAIN_SIZE, WATER_LEVEL } from "./const/worldLayout";
+import { waterFragmentShader, waterVertexShader } from "./three/waterShaders";
+import { worldRuntime } from "./three/worldRuntime";
+
+const WHITE = new Color(1, 1, 1);
+
+/** One flat water sheet at water level: the terrain hides it except in the lake. Drifting glints on top. */
+export function WorldWater() {
+  const material = useMemo(
+    () =>
+      new ShaderMaterial({
+        vertexShader: waterVertexShader,
+        fragmentShader: waterFragmentShader,
+        uniforms: { uColor: { value: new Color() }, uGlint: { value: new Color() }, uTime: { value: 0 } },
+      }),
+    []
+  );
+
+  useEffect(() => () => material.dispose(), [material]);
+
+  useFrame(({ clock }) => {
+    const { tod } = worldRuntime;
+    material.uniforms.uColor.value.copy(tod.water);
+    // Glints: the sun's (or the moon's) colour, lifted towards white.
+    material.uniforms.uGlint.value.copy(tod.sun).lerp(WHITE, 0.5);
+    material.uniforms.uTime.value = clock.elapsedTime;
+  });
+
+  return (
+    <mesh rotation-x={-Math.PI / 2} position-y={WATER_LEVEL} material={material}>
+      <planeGeometry args={[TERRAIN_SIZE, TERRAIN_SIZE]} />
+    </mesh>
+  );
+}

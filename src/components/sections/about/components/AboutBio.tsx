@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { cvUrl } from "@/lib/cv";
+import { Button } from "@/components/common/Button";
 
 export function AboutBio() {
   const { t } = useTranslation();
@@ -10,12 +11,10 @@ export function AboutBio() {
         {t("about.description")}
       </p>
       <div className="reveal mb-1.5 flex flex-wrap justify-center gap-2.5">
-        <a className="btn" href="#contact">
-          {t("about.buttonPrimary")}
-        </a>
-        <a className="btn-ghost" href={cvUrl} target="_blank" rel="noopener noreferrer">
-          {t("about.buttonSecondary")} ↗
-        </a>
+        <Button href="#contact">{t("about.buttonPrimary")}</Button>
+        <Button variant="ghost" href={cvUrl} external>
+          {t("about.buttonSecondary")}
+        </Button>
       </div>
     </>
   );

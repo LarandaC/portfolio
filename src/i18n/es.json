@@ -11,7 +11,9 @@
     "skills": "Skills",
     "projects": "Proyectos",
     "contact": "Contacto",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "openMenu": "Abrir menú",
+    "menuTitle": "Menú de navegación"
   },
   "hero": {
     "role": "Desarrolladora Frontend",
@@ -48,7 +50,15 @@
     "entries": {
       "clt": {
         "role": "Desarrolladora Frontend",
-        "description": "Interfaces responsivas con React, Tailwind y Shadcn, transformando mockups de diseño en productos funcionales. Integración de APIs RESTful, gestión de estado con Zustand, componentes UI reutilizables, revisiones de código y trabajo estrecho con backend para definir contratos de integración."
+        "description": "Desarrollo de aplicaciones web modulares y escalables con React, Next.js, Tailwind y Shadcn, transformando diseños en productos funcionales y trabajando de cerca con backend para definir contratos de integración.",
+        "highlights": [
+          "Centro de notificaciones en tiempo real con SignalR.",
+          "Migración de Next.js 12 a Next.js 16.",
+          "Optimizaciones de rendimiento y tiempos de carga.",
+          "Mejoras estéticas y de experiencia de usuario en las interfaces.",
+          "Integración de APIs RESTful y gestión de estado con Zustand.",
+          "Componentes UI reutilizables y revisiones de código."
+        ]
       },
       "guadalupe": {
         "role": "Desarrolladora",
@@ -73,7 +83,8 @@
     "description": "Estos son algunos de mis proyectos recientes. Cada uno fue desarrollado con atención al detalle, rendimiento y experiencia de usuario.",
     "viewCode": "Ver código",
     "liveDemo": "Demo en vivo",
-    "viewDetails": "Ver detalles"
+    "viewDetails": "Ver detalles",
+    "highlights": "Aspectos técnicos"
   },
   "contact": {
     "title": "¿Listo para trabajar juntos?",
@@ -95,5 +106,38 @@
   "footer": {
     "title": "Todos los derechos reservados.",
     "scrollToTop": "Volver arriba"
+  },
+  "map": {
+    "explore": "Explorar el valle",
+    "enter": "Entrar a {{place}}",
+    "enterHint": "Enter",
+    "close": "Cerrar",
+    "simple": "Versión simple",
+    "controls": "Clic para caminar · Flechas o WASD · Rueda para zoom",
+    "controlsTouch": "Toca para caminar",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "overview": "Ver todo el valle",
+    "loading": "Amaru se está despertando…",
+    "menu": "Lugares del valle",
+    "guide": "Amaru, el gato, te guía: elige un lugar o camina libre.",
+    "slow": "El mapa va lento en este equipo."
+  },
+  "credits": {
+    "button": "Créditos",
+    "title": "Créditos",
+    "intro": "Los modelos 3D del valle son de estos autores y se usan bajo licencias Creative Commons Attribution (CC BY). ¡Gracias!",
+    "by": "por",
+    "roles": {
+      "amaru": "Amaru",
+      "inicio": "Santuario de Inicio",
+      "about": "Casa de Sobre mí",
+      "projects": "Pagoda de Proyectos",
+      "skills": "Casa de Skills",
+      "experience": "Casa de Experiencia",
+      "bell": "Campana",
+      "maple": "Arce",
+      "lantern": "Faroles de piedra"
+    }
   }
 }

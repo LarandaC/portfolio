@@ -11,7 +11,9 @@
     "skills": "Skills",
     "projects": "Projects",
     "contact": "Contact",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "menuTitle": "Navigation menu"
   },
   "hero": {
     "role": "Frontend Developer",
@@ -53,7 +55,15 @@
     "entries": {
       "clt": {
         "role": "Frontend Developer",
-        "description": "Responsive interfaces with React, Tailwind and Shadcn, turning design mockups into working products. RESTful API integration, state management with Zustand, reusable UI components, code reviews and close work with backend to define integration contracts."
+        "description": "Building modular, scalable web applications with React, Next.js, Tailwind and Shadcn, turning designs into working products and working closely with backend to define integration contracts.",
+        "highlights": [
+          "Real-time notification center with SignalR.",
+          "Migration from Next.js 12 to Next.js 16.",
+          "Performance and load-time optimizations.",
+          "Visual and user-experience improvements across the interfaces.",
+          "RESTful API integration and state management with Zustand.",
+          "Reusable UI components and code reviews."
+        ]
       },
       "guadalupe": {
         "role": "Developer",
@@ -78,7 +88,8 @@
     "description": "These are some of my recent projects. Each one was developed with attention to detail, performance, and user experience.",
     "viewCode": "View code",
     "liveDemo": "Live demo",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "highlights": "Technical highlights"
   },
   "contact": {
     "title": "Ready to work together?",
@@ -100,5 +111,38 @@
   "footer": {
     "title": "All rights reserved.",
     "scrollToTop": "Back to top"
+  },
+  "map": {
+    "explore": "Explore the valley",
+    "enter": "Enter {{place}}",
+    "enterHint": "Enter",
+    "close": "Close",
+    "simple": "Simple version",
+    "controls": "Click to walk · Arrows or WASD · Wheel to zoom",
+    "controlsTouch": "Tap to walk",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "overview": "See the whole valley",
+    "loading": "Amaru is waking up…",
+    "menu": "Places in the valley",
+    "guide": "Amaru the cat is your guide: pick a place or roam freely.",
+    "slow": "The map is running slowly on this device."
+  },
+  "credits": {
+    "button": "Credits",
+    "title": "Credits",
+    "intro": "The valley’s 3D models are by these authors, used under Creative Commons Attribution (CC BY) licenses. Thank you!",
+    "by": "by",
+    "roles": {
+      "amaru": "Amaru",
+      "inicio": "Inicio shrine",
+      "about": "About house",
+      "projects": "Projects pagoda",
+      "skills": "Skills house",
+      "experience": "Experience house",
+      "bell": "Bell tower",
+      "maple": "Maple",
+      "lantern": "Stone lanterns"
+    }
   }
 }
