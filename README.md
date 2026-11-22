@@ -102,4 +102,4 @@ Los modelos 3D son de sus autores y se usan bajo licencia CC BY. La lista comple
 
 Este portafolio refleja mi enfoque colaborativo y mi pasión por crear experiencias digitales claras, diferenciadas y funcionales.
 
-Si quieres conectar o colaborar, puedes escribirme a [leticia.m.aranda@gmail.com](mailto:leticia.m.aranda@gmail.com).
+Si quieres conectar o colaborar, puedes escribirme a [leticiaranda78@gmail.com](mailto:leticiaranda78@gmail.com).
