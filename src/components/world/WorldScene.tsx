@@ -10,12 +10,15 @@ import { WorldStations } from "./WorldStations";
 import { WorldPathRibbon } from "./WorldPathRibbon";
 import { MapBuildings } from "./MapBuildings";
 import { MapDecor } from "./MapDecor";
+import { Signposts } from "./Signposts";
 import { Amaru } from "./Amaru";
 import { LanternGlows } from "./LanternGlows";
 import { WorldStars } from "./WorldStars";
 import { Fireflies } from "./Fireflies";
 import { MapPetals } from "./MapPetals";
 import { WatercolorPass } from "./WatercolorPass";
+import { PerformanceGuard } from "./PerformanceGuard";
+import { useMapStore } from "./useMapStore";
 
 type WorldSceneProps = {
   /** The browser dropped the WebGL context (e.g. a phone short on memory): the map can't continue. */
@@ -25,6 +28,8 @@ type WorldSceneProps = {
 /** The map in one canvas: lazily loaded, so three.js stays out of the main chunk. */
 export function WorldScene({ onContextLost }: WorldSceneProps) {
   const phone = window.innerWidth <= 760;
+  // Drops to "low" if the device can't keep up (PerformanceGuard): the heavy extras go, the map stays.
+  const low = useMapStore((s) => s.quality === "low");
   return (
     <Canvas
       onCreated={({ gl }) => {
@@ -35,18 +40,20 @@ export function WorldScene({ onContextLost }: WorldSceneProps) {
       gl={{ antialias: true, powerPreference: "high-performance" }}
     >
       <MapController />
-      <WatercolorPass />
+      <PerformanceGuard />
+      {!low && <WatercolorPass />}
       <MapCamera />
       <WorldAtmosphere />
       <WorldStars />
       <WorldTerrain />
       <WorldWater />
-      <WorldTrees />
+      <WorldTrees sparse={low} />
       <WorldPathRibbon />
       <WorldStations />
+      <Signposts />
       <LanternGlows />
-      <Fireflies />
-      <MapPetals />
+      {!low && <Fireflies />}
+      {!low && <MapPetals />}
       <Suspense fallback={null}>
         <MapBuildings />
         <MapDecor />

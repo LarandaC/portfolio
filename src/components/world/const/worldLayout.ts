@@ -83,6 +83,22 @@ export const DECOR: Decor[] = [
   ...[108, 180, 252, 324].map((degrees) => ({ file: LANTERN, position: at(degrees, 5.2), size: 0.7, solid: 0.35 })),
 ];
 
+/**
+ * Wooden signposts at the plaza, one where each path starts, pointing to its place.
+ * Set beside the path (15° off it, on the side away from the torii), facing along it.
+ */
+export type Signpost = { stationId: StationId; labelKey: string; position: Vec2; direction: Vec2 };
+
+const SIGN_RING = 5.9;
+const SIGN_SIDE: Record<keyof typeof ANGLE, number> = { contact: -15, projects: 15, experience: 15, skills: 15, about: 15 };
+
+export const SIGNPOSTS: Signpost[] = (Object.keys(ANGLE) as (keyof typeof ANGLE)[]).map((id) => ({
+  stationId: id,
+  labelKey: STATIONS.find((s) => s.id === id)!.labelKey,
+  position: at(ANGLE[id] + SIGN_SIDE[id], SIGN_RING),
+  direction: direction(ANGLE[id]),
+}));
+
 /** Ground height of the valley floor and the paths. */
 export const GROUND_LEVEL = 1;
 export const WATER_LEVEL = 0;

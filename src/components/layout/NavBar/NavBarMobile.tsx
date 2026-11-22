@@ -3,6 +3,8 @@ import { navItems } from "@/lib/navigation";
 import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useTranslation } from "react-i18next";
+import { Map as MapIcon } from "lucide-react";
+import { useMapEnabled } from "@/hooks/useMapEnabled";
 import { socialLinks } from "@/data/social";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { Button } from "@/components/common/Button";
@@ -14,6 +16,7 @@ interface NavBarMobileProps {
 
 export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) => {
   const { t } = useTranslation();
+  const mapEnabled = useMapEnabled();
 
   return (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -38,6 +41,17 @@ export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) =
             </SheetClose>
           ))}
         </nav>
+
+        {mapEnabled && (
+          <div className="px-6 pb-5">
+            <SheetClose asChild>
+              <Button to="/" className="w-full">
+                <MapIcon size={16} />
+                {t("map.explore")}
+              </Button>
+            </SheetClose>
+          </div>
+        )}
 
         <div className="flex items-center justify-between border-t border-line px-6 py-5">
           <div className="flex gap-2">

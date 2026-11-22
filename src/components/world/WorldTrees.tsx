@@ -9,10 +9,10 @@ const GREEN = ["#7fae68", "#6a9a5a"].map((c) => new Color(c));
 const TRUNK = new Color("#7a5a4a");
 
 /** Low-poly trees in two draw calls (trunks + canopies), scattered once around the valley. */
-export function WorldTrees() {
+export function WorldTrees({ sparse = false }: { sparse?: boolean }) {
   const trunks = useRef<InstancedMesh>(null);
   const canopies = useRef<InstancedMesh>(null);
-  const spots = useMemo(() => scatterTrees(window.innerWidth <= 760 ? 100 : 170, 42), []);
+  const spots = useMemo(() => scatterTrees(Math.round((window.innerWidth <= 760 ? 100 : 170) * (sparse ? 0.45 : 1)), 42), [sparse]);
   const { trunkGeometry, canopyGeometry, material } = useMemo(() => {
     const trunk = new CylinderGeometry(0.12, 0.2, 1.6, 6);
     trunk.translate(0, 0.8, 0);

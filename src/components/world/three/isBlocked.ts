@@ -1,4 +1,4 @@
-import { DECOR, ROAM_RADIUS, STATIONS, WATER_LEVEL } from "../const/worldLayout";
+import { DECOR, ROAM_RADIUS, SIGNPOSTS, STATIONS, WATER_LEVEL } from "../const/worldLayout";
 import { terrainHeight } from "./terrainHeight";
 
 /**
@@ -10,7 +10,9 @@ const OBSTACLES = STATIONS.flatMap(({ building }) => {
   const [x, z] = building.position;
   const radius = building.solidRadius ?? building.size * 0.42;
   return radius > 0 ? [{ x, z, radius }] : [];
-}).concat(DECOR.map(({ position: [x, z], solid }) => ({ x, z, radius: solid })));
+})
+  .concat(DECOR.map(({ position: [x, z], solid }) => ({ x, z, radius: solid })))
+  .concat(SIGNPOSTS.map(({ position: [x, z] }) => ({ x, z, radius: 0.25 })));
 
 /** The dock's planks: a strip over the water from the shore. Walkable even though it's over the lake. */
 function onDock(x: number, z: number) {

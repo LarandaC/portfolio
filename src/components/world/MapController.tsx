@@ -99,6 +99,7 @@ export function MapController() {
     if (ix || iy) {
       route.current = [];
       destination.current = null;
+      if (mapStore.get().target) mapStore.set({ target: null });
       move.current.copy(FORWARD).multiplyScalar(iy).addScaledVector(RIGHT, ix).normalize();
       speed = WALK;
       const s = mapStore.get();
@@ -110,7 +111,7 @@ export function MapController() {
       if (distance < 0.25) {
         route.current.shift();
         if (!route.current.length && destination.current) {
-          mapStore.set({ panel: destination.current, nearby: destination.current });
+          mapStore.set({ panel: destination.current, nearby: destination.current, target: null });
           destination.current = null;
         }
       } else {
@@ -141,6 +142,7 @@ export function MapController() {
         speed = 0;
         route.current = [];
         destination.current = null;
+        if (mapStore.get().target) mapStore.set({ target: null });
       }
       if (speed > 0) worldRuntime.heading = Math.atan2(move.current.x, move.current.z);
     }

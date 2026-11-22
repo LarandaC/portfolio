@@ -1,8 +1,9 @@
 import { lazy, Suspense, useEffect, useRef, useState, useMemo } from "react";
-import { Menu } from "lucide-react";
+import { Map as MapIcon, Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "@/lib/navigation";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useMapEnabled } from "@/hooks/useMapEnabled";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { LanguageSelector } from "../LanguageSelector";
 import { ThemeToggle } from "../ThemeToggle";
@@ -20,6 +21,8 @@ export const NavBar = () => {
   isMenuOpenRef.current = isMenuOpen;
 
   const { t } = useTranslation();
+  // The map only exists where it can run; elsewhere "/" is this same classic page.
+  const mapEnabled = useMapEnabled();
 
   const sectionIds = useMemo(
     () => navItems.map((item) => item.href.replace("#", "")),
@@ -64,7 +67,20 @@ export const NavBar = () => {
         </div>
 
         <div className="flex items-center gap-1.5">
-          <ThemeToggle />
+          {mapEnabled && (
+            // Text on desktop, icon only on smaller screens.
+            <Button
+              variant="ghost"
+              to="/"
+              aria-label={t("map.explore")}
+              className="max-desktop:size-9 max-desktop:px-0"
+            >
+              <MapIcon size={16} />
+              <span className="max-desktop:hidden">{t("map.explore")}</span>
+            </Button>
+          )}
+          {/* On phones the theme switch lives in the menu sheet, to keep this bar short. */}
+          <ThemeToggle className="max-tablet:hidden" />
           <LanguageSelector />
           <Button
             variant="icon"

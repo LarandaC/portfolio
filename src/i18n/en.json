@@ -114,7 +114,8 @@
     "overview": "See the whole valley",
     "loading": "Amaru is waking up…",
     "menu": "Places in the valley",
-    "guide": "Amaru the cat is your guide: pick a place or roam freely."
+    "guide": "Amaru the cat is your guide: pick a place or roam freely.",
+    "slow": "The map is running slowly on this device."
   },
   "credits": {
     "button": "Credits",

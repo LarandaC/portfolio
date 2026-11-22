@@ -109,7 +109,8 @@
     "overview": "Ver todo el valle",
     "loading": "Amaru se está despertando…",
     "menu": "Lugares del valle",
-    "guide": "Amaru, el gato, te guía: elige un lugar o camina libre."
+    "guide": "Amaru, el gato, te guía: elige un lugar o camina libre.",
+    "slow": "El mapa va lento en este equipo."
   },
   "credits": {
     "button": "Créditos",

@@ -39,8 +39,9 @@ export function MapHud() {
         ))}
       </nav>
 
-      <div className={`fixed bottom-4 left-4 z-20 flex flex-col items-start gap-2 max-tablet:hidden ${introOpen ? "invisible" : ""}`}>
-        <p className="rounded-full bg-surface/85 px-3 py-1.5 text-xs text-body shadow-nav backdrop-blur-[6px]">
+      <div className={`fixed bottom-4 left-4 z-20 flex flex-col items-start gap-2 max-tablet:bottom-3 max-tablet:left-3 ${introOpen ? "invisible" : ""}`}>
+        {/* The controls hint takes too much room on phones; the links below stay. */}
+        <p className="rounded-full bg-surface/85 px-3 py-1.5 text-xs text-body shadow-nav backdrop-blur-[6px] max-tablet:hidden">
           {touch ? t("map.controlsTouch") : t("map.controls")}
         </p>
         <div className="flex gap-2">

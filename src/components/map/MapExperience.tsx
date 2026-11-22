@@ -10,6 +10,7 @@ import { MapPanel } from "./MapPanel";
 import { MapEnterPrompt } from "./MapEnterPrompt";
 import { MapLoader } from "./MapLoader";
 import { MapErrorBoundary } from "./MapErrorBoundary";
+import { MapSlowNotice } from "./MapSlowNotice";
 
 const WorldScene = lazy(() => import("@/components/world/WorldScene"));
 
@@ -20,7 +21,8 @@ const WorldScene = lazy(() => import("@/components/world/WorldScene"));
  */
 export function MapExperience() {
   const { theme } = useTheme();
-  const panel = useMapStore((s) => s.panel);
+  // The place in the URL: the open panel, or where Amaru is walking to (so a shared link keeps it).
+  const place = useMapStore((s) => s.panel ?? s.target);
   const navigate = useNavigate();
 
   // If the 3D scene breaks (an error, or the GPU context is lost), continue on the classic page,
@@ -43,18 +45,19 @@ export function MapExperience() {
   useEffect(() => {
     const go = () => {
       const id = stationFromHash(window.location.hash);
-      if (id && id !== mapStore.get().panel) mapStore.goTo(id);
+      const { panel, target } = mapStore.get();
+      if (id && id !== panel && id !== target) mapStore.goTo(id);
     };
     go();
     window.addEventListener("hashchange", go);
     return () => window.removeEventListener("hashchange", go);
   }, []);
 
-  // Keep the hash in step with the open place, without adding history entries.
+  // Keep the hash in step with the place (open, or on the way), without adding history entries.
   useEffect(() => {
-    const hash = panel ? `#${STATION_HASH[panel]}` : "";
+    const hash = place ? `#${STATION_HASH[place]}` : "";
     if (window.location.hash !== hash) history.replaceState(null, "", `${window.location.pathname}${hash}`);
-  }, [panel]);
+  }, [place]);
 
   return (
     <main className="fixed inset-0 overflow-hidden bg-surface">
@@ -69,6 +72,7 @@ export function MapExperience() {
       <MapIntro />
       <MapPanel />
       <MapEnterPrompt />
+      <MapSlowNotice />
       <MapLoader />
     </main>
   );
