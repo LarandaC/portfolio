@@ -1,7 +1,4 @@
-/**
- * Models available in the dev-only /lab page, from `npm run models`: the site's own (public/models) and the
- * lab-only candidates (dev-models/, served by the Vite dev server but not built).
- */
+/** /lab models: public/models and dev-models (served in dev, not built). */
 export type LabModel = {
   id: string;
   name: string;
@@ -28,10 +25,9 @@ export const LAB_MODELS: LabModel[] = [
   { id: "stone-lantern", name: "Japanese Stone Lantern", kind: "building", file: "/models/stone-lantern-sahir-virmani.glb", author: "Sahir Virmani", license: "CC-BY 4.0" },
 ];
 
-/** Sidebar entry that shows every cat side by side. */
 export const COMPARE_ID = "compare-cats";
 
-/** Backdrops to judge a model under the world's light: one per time of day in the storyboard. */
+/** One backdrop per time of day. */
 export const LAB_SKIES = [
   { id: "dawn", label: "Amanecer", top: "#f6b38a", bottom: "#c9b8f5", light: "#ffd2a8", intensity: 2.2 },
   { id: "day", label: "Mediodía", top: "#8ec5f0", bottom: "#e8f3fb", light: "#ffffff", intensity: 2.6 },

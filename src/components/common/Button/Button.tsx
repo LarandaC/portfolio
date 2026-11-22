@@ -7,20 +7,14 @@ type AsButton = ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined; to
 type AsAnchor = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   to?: undefined;
-  /** Opens in a new tab, safely (target="_blank" + rel="noopener noreferrer"). */
+  /** New tab with rel="noopener noreferrer". */
   external?: boolean;
 };
 type AsRouterLink = AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; href?: undefined };
 
 export type ButtonProps = ButtonVariantProps & (AsButton | AsAnchor | AsRouterLink);
 
-/**
- * The portfolio's button. Renders what the props call for:
- * - `<Button onClick>` → `<button type="button">`
- * - `<Button href external>` → `<a>` (new tab when `external`)
- * - `<Button to="/simple">` → a router `<Link>` (no page reload)
- * Pick the look with `variant`: primary, ghost, icon, chip or link.
- */
+/** Renders a `<button>`, an `<a>` (`href`) or a router `<Link>` (`to`). */
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(function Button(
   { variant, className, ...props },
   ref

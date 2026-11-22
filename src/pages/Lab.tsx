@@ -8,17 +8,13 @@ import { LabModelInfo } from "@/components/lab/LabModelInfo";
 import { LabAnimationPanel } from "@/components/lab/LabAnimationPanel";
 import { LabErrorBoundary } from "@/components/lab/LabErrorBoundary";
 
-/**
- * Dev-only model lab (/lab): inspect downloaded models under the world's light,
- * play and cut their animations, and compare the Amaru candidates.
- */
+/** Dev-only: inspect models, cut animations, compare cats. */
 export const Lab = () => {
   const [selected, setSelected] = useState(LAB_MODELS[0].id);
   const [sky, setSky] = useState<LabSky>(LAB_SKIES[1]);
   const [toon, setToon] = useState(true);
   const [loaded, setLoaded] = useState<LoadedModel | null>(null);
 
-  // The home page's zoom-out intro class doesn't apply here.
   useEffect(() => {
     document.body.classList.remove("intro");
     document.title = "Laboratorio · modelos 3D";

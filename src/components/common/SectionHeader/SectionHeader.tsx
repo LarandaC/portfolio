@@ -4,16 +4,14 @@ import { Pill } from "@/components/common/Pill";
 
 interface SectionHeaderProps {
   label: string;
-  /** Each entry is rendered on its own line. */
+  /** One line per entry. */
   title: string[];
   className?: string;
-  /** Extra classes for the h2, e.g. a smaller size inside a card. */
   titleClassName?: string;
-  /** Optional content under the title (e.g. an intro paragraph). */
   children?: ReactNode;
 }
 
-/** Pill label + word-split h2 — the heading pattern shared by every section. */
+/** Pill + word-split h2. */
 export function SectionHeader({
   label,
   title,

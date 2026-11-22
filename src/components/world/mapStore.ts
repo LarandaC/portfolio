@@ -1,40 +1,32 @@
 import type { StationId } from "./const/worldLayout";
 
-/**
- * Shared state between the map's DOM interface (menu, panels, HUD) and the 3D scene.
- * Plain module, no three.js: the UI reads it with useMapStore, the scene in useFrame.
- */
+/** State shared by the map's DOM UI (useMapStore) and the scene (useFrame). No three.js. */
 export type MapState = {
-  /** Section panel currently open, if any. */
   panel: StationId | null;
-  /** Station Amaru is walking to (its panel opens on arrival); null once there or if he's sent elsewhere. */
+  /** Station Amaru is walking to; its panel opens on arrival. */
   target: StationId | null;
-  /** Station whose door Amaru is standing at (shows the "enter" prompt). */
+  /** Door Amaru stands at. */
   nearby: StationId | null;
-  /** The welcome card (hero content) is showing. */
   introOpen: boolean;
-  /** The scene has loaded and drawn its first frame. */
   ready: boolean;
-  /** Camera distance: smaller = closer. */
+  /** Camera distance (smaller = closer). */
   zoom: number;
-  /** Night on the map (follows the dark theme). */
   night: boolean;
-  /** "low" once the device proves slow: lower resolution, no watercolor, petals or fireflies, fewer trees. */
+  /** "low" once the device proves slow. */
   quality: "high" | "low";
-  /** Still slow at low quality: offer the simple version (until the visitor dismisses it). */
+  /** Still slow at low quality: offer /simple. */
   slowNotice: boolean;
-  /** Share of the map's files downloaded so far, 0–100 (shown on the loading screen). */
+  /** 0–100. */
   loadProgress: number;
 };
 
 export type MapCommand = { type: "station"; id: StationId } | { type: "point"; x: number; z: number };
 
-export const ZOOM = { min: 9, max: 50, initial: 22, overview: 50 };
+export const ZOOM = { min: 9, max: 50, initial: 22 };
 
 let state: MapState = { panel: null, target: null, nearby: null, introOpen: true, ready: false, zoom: ZOOM.initial, night: false, quality: "high", slowNotice: false, loadProgress: 0 };
 const listeners = new Set<() => void>();
 
-/** Movement request for the scene to pick up on its next frame. */
 let pending: MapCommand | null = null;
 
 export const mapStore = {
@@ -50,17 +42,15 @@ export const mapStore = {
     listeners.forEach((l) => l());
   },
 
-  /** Walk Amaru to a station along the path; its panel opens on arrival. */
   goTo(id: StationId) {
     pending = { type: "station", id };
     mapStore.set({ introOpen: false, panel: null, target: id });
   },
-  /** Walk Amaru straight to a spot on the ground. */
   goToPoint(x: number, z: number) {
     pending = { type: "point", x, z };
     mapStore.set({ introOpen: false, panel: null, target: null });
   },
-  /** The scene takes the latest command (one at a time). */
+  /** Takes the latest command. */
   takeCommand() {
     const command = pending;
     pending = null;

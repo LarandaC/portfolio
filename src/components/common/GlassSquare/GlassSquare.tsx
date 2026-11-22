@@ -3,14 +3,10 @@ import { cn } from "@/lib/utils";
 
 type GlassSquareProps = {
   className?: string;
-  /** Position and size (left/top in %, width…). */
   style?: CSSProperties;
 };
 
-/**
- * A frosted-glass square floating over an image (hero video, project clouds).
- * Keeps the `glass` class as a GSAP hook: the hero's flicker and intro animate `.glass`.
- */
+/** Keeps the `glass` class: GSAP animates `.glass`. */
 export function GlassSquare({ className, style }: GlassSquareProps) {
   return (
     <span

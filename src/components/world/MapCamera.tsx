@@ -3,16 +3,14 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { MathUtils, Vector3, type PerspectiveCamera } from "three";
 import { mapStore, ZOOM } from "./mapStore";
 import { worldRuntime } from "./three/worldRuntime";
+import { SCREEN_UP } from "./const/worldLayout";
 
-/** Isometric-style viewing direction: from the south-east, about 40° above the ground. */
-const DIRECTION = new Vector3(1, 1.2, 1).normalize();
-/** Middle of the valley: what the camera frames when zoomed all the way out. */
+/** From the south-east, ~40° above the ground. */
+const DIRECTION = new Vector3(-SCREEN_UP[0], 1.2 * Math.SQRT1_2, -SCREEN_UP[1]).normalize();
+/** Framed when fully zoomed out. */
 const VALLEY_CENTER = new Vector3(-1.5, 1, -1.5);
 
-/**
- * Diorama camera: looks at Amaru from a fixed diagonal and eases after him. The wheel, a two-finger
- * pinch or the HUD buttons zoom; fully zoomed out it frames the whole valley.
- */
+/** Follows Amaru from a fixed diagonal; wheel, pinch or HUD buttons zoom. */
 export function MapCamera() {
   const { gl } = useThree();
   const look = useRef(new Vector3());
@@ -26,7 +24,7 @@ export function MapCamera() {
       e.preventDefault();
       mapStore.zoomBy(e.deltaY > 0 ? 1.12 : 1 / 1.12);
     };
-    // Two-finger pinch zooms on touch screens; the map owns the gestures (no page zoom/scroll).
+    // The map owns touch gestures (no page zoom/scroll).
     let pinch = 0;
     const spread = (e: TouchEvent) =>
       Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
@@ -60,7 +58,7 @@ export function MapCamera() {
     const dt = Math.min(delta, 0.05);
     const k = 1 - Math.exp(-3 * dt);
     distance.current += (mapStore.get().zoom - distance.current) * k;
-    // Close in: follow Amaru. Far out: drift to the valley's centre so the whole map fits.
+    // Far out, drift to the valley's centre.
     const overview = MathUtils.smoothstep(distance.current, ZOOM.initial * 1.6, ZOOM.max);
     target.current.copy(worldRuntime.position).lerp(VALLEY_CENTER, overview);
 
@@ -70,7 +68,7 @@ export function MapCamera() {
     } else {
       look.current.lerp(target.current, k);
     }
-    // Portrait screens are narrow: back off further when zoomed out so the valley still fits.
+    // Portrait: back off further so the valley fits.
     const aspect = (camera as PerspectiveCamera).aspect;
     const fit = aspect < 1 ? MathUtils.lerp(1, 1 / aspect, overview) : 1;
     camera.position.copy(look.current).addScaledVector(DIRECTION, distance.current * fit);

@@ -56,3 +56,7 @@ export const experiences: ExperienceEntry[] = [
       "Aplicaciones web fullstack con React y Express.js, interfaces responsivas y accesibles con TailwindCSS y Shadcn UI, y creación y consumo de servicios RESTful.",
   },
 ];
+
+/** Jobs and freelance work, and studies: the two timelines (classic page and map panel). */
+export const workExperiences = experiences.filter((e) => e.type === "work" || e.type === "freelance");
+export const educationExperiences = experiences.filter((e) => e.type === "education");

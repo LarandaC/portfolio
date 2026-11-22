@@ -2,22 +2,20 @@ import { useEffect, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Color, HalfFloatType, Mesh, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Vector2, WebGLRenderTarget } from "three";
 import { watercolorFragmentShader, watercolorVertexShader } from "./three/watercolorShader";
-import { nightAmount } from "./three/nightAmount";
+import { createPaperNoiseTexture } from "./three/createPaperNoiseTexture";
 import { worldRuntime } from "./three/worldRuntime";
+import { PHONE_MAX_WIDTH } from "@/lib/isPhone";
 
-/** Paper colour the night vignette fades into (linear, as three stores it). */
+/** Night vignette colour (linear). */
 const PAPER_NIGHT = new Color("#121838");
 
-/**
- * Takes over rendering (useFrame priority > 0): the scene goes into an off-screen target,
- * then a full-screen watercolor pass draws it to the canvas. DOM labels are unaffected.
- */
+/** Takes over rendering (priority > 0): scene to a target, then the watercolor pass to the canvas. */
 export function WatercolorPass() {
   const { gl, size, viewport } = useThree();
-  const phone = size.width <= 760;
+  const phone = size.width <= PHONE_MAX_WIDTH;
 
   const target = useMemo(
-    // HDR so tone mapping can happen in the pass; MSAA because the canvas' own antialias doesn't apply here.
+    // HDR for tone mapping in the pass; MSAA since the canvas antialias doesn't apply.
     () => new WebGLRenderTarget(1, 1, { type: HalfFloatType, samples: phone ? 2 : 4 }),
     [phone]
   );
@@ -34,6 +32,7 @@ export function WatercolorPass() {
         uVignette: { value: 0 },
         uInk: { value: 0.55 },
         uGrain: { value: 0.07 },
+        tNoise: { value: createPaperNoiseTexture() },
       },
     });
     const scene = new Scene();
@@ -51,6 +50,7 @@ export function WatercolorPass() {
   useEffect(
     () => () => {
       target.dispose();
+      pass.material.uniforms.tNoise.value.dispose();
       pass.material.dispose();
       pass.scene.traverse((o) => (o as Mesh).geometry?.dispose());
     },
@@ -58,8 +58,7 @@ export function WatercolorPass() {
   );
 
   useFrame(({ scene, camera }) => {
-    // Vignette only at night: by day it washed the map out.
-    pass.material.uniforms.uVignette.value = nightAmount(worldRuntime.timeOfDay) * 0.4;
+    pass.material.uniforms.uVignette.value = worldRuntime.night * 0.4;
     gl.setRenderTarget(target);
     gl.render(scene, camera);
     gl.setRenderTarget(null);

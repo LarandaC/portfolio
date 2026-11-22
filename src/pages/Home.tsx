@@ -1,17 +1,14 @@
 import { lazy, Suspense } from "react";
-import { useMapEnabled } from "@/hooks/useMapEnabled";
+import { use3DEnabled } from "@/hooks/use3DEnabled";
 import { Index } from "./Index";
 
 const MapExperience = lazy(() =>
   import("@/components/map/MapExperience").then((m) => ({ default: m.MapExperience }))
 );
 
-/**
- * The home page is the explorable map. Without WebGL, or with reduced motion,
- * it's the classic scrolling portfolio (always available at /simple too).
- */
+/** The map; the classic page without WebGL or with reduced motion. */
 export const Home = () => {
-  const mapEnabled = useMapEnabled();
+  const mapEnabled = use3DEnabled();
   if (!mapEnabled) return <Index />;
 
   return (

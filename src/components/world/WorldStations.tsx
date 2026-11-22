@@ -1,18 +1,17 @@
 import { useEffect, useMemo } from "react";
 import { MeshToonMaterial } from "three";
-import { createToonGradient } from "@/lib/three/createToonGradient";
+import { getToonGradient } from "@/lib/three/getToonGradient";
 import { STATIONS } from "./const/worldLayout";
 import { terrainHeight } from "./three/terrainHeight";
 
 /** A round patch of packed dirt in front of each building: where Amaru stops to go in. Drawn just above the path. */
 export function WorldStations() {
   const material = useMemo(
-    () => new MeshToonMaterial({ color: "#e4c9a0", gradientMap: createToonGradient() }),
+    () => new MeshToonMaterial({ color: "#e4c9a0", gradientMap: getToonGradient() }),
     []
   );
   useEffect(
     () => () => {
-      material.gradientMap?.dispose();
       material.dispose();
     },
     [material]

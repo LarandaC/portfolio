@@ -2,9 +2,10 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, ShaderMaterial, type Points } from "three";
 import { ROAM_RADIUS, WATER_LEVEL } from "./const/worldLayout";
-import { nightAmount } from "./three/nightAmount";
 import { terrainHeight } from "./three/terrainHeight";
 import { worldRuntime } from "./three/worldRuntime";
+import { isPhone } from "@/lib/isPhone";
+import { mulberry32 } from "./three/mulberry32";
 
 const vertexShader = /* glsl */ `
   attribute float aSeed;
@@ -36,13 +37,12 @@ const fragmentShader = /* glsl */ `
 /** Fireflies drifting low over the grass and the lake shore, blinking; only at night. */
 export function Fireflies() {
   const points = useRef<Points>(null);
-  const count = window.innerWidth <= 760 ? 60 : 110;
+  const count = isPhone() ? 60 : 110;
 
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const seeds = new Float32Array(count);
-    let seed = 11;
-    const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+    const random = mulberry32(11);
     for (let i = 0; i < count; i++) {
       const a = random() * Math.PI * 2;
       const r = 3 + Math.sqrt(random()) * (ROAM_RADIUS - 3);
@@ -80,7 +80,7 @@ export function Fireflies() {
   );
 
   useFrame(({ clock, gl }) => {
-    const night = nightAmount(worldRuntime.timeOfDay);
+    const night = worldRuntime.night;
     material.uniforms.uTime.value = clock.elapsedTime;
     material.uniforms.uOpacity.value = night;
     material.uniforms.uPixelRatio.value = gl.getPixelRatio();

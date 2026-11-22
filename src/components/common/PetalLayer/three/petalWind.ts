@@ -1,5 +1,2 @@
-/**
- * Scroll "wind" shared by every petal scene. GSAP writes `push` (see setupPetalWind),
- * each scene reads it in useFrame. A plain object so updates never re-render React.
- */
+/** Scroll "wind": GSAP writes, scenes read in useFrame. Plain object, so no re-renders. */
 export const petalWind = { push: 0 };

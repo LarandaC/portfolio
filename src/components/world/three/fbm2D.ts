@@ -1,6 +1,7 @@
 const hash = (x: number, y: number) => {
-  const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
-  return s - Math.floor(s);
+  let h = Math.imul(x, 374761393) ^ Math.imul(y, 668265263);
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
 };
 
 const valueNoise = (x: number, y: number) => {
@@ -17,7 +18,7 @@ const valueNoise = (x: number, y: number) => {
   return a + (b - a) * ux + (c - a) * uy + (a - b - c + d) * ux * uy;
 };
 
-/** Deterministic fractal value noise, roughly 0..1. Same input, same output, on every load. */
+/** Deterministic fractal value noise, ~0..1. */
 export function fbm2D(x: number, y: number, octaves = 4) {
   let value = 0;
   let amplitude = 0.5;

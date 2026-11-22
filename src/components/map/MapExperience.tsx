@@ -14,34 +14,26 @@ import { MapSlowNotice } from "./MapSlowNotice";
 
 const WorldScene = lazy(() => import("@/components/world/WorldScene"));
 
-/**
- * The portfolio as an explorable valley: the 3D map fills the screen and the DOM interface floats on top.
- * The URL hash names the open place (#projects, #contact…), so links and the back button work.
- * If the scene fails, the visitor lands on the classic page (/simple) instead.
- */
+/** The 3D map with the DOM UI on top. The hash names the open place; if the scene fails, go to /simple. */
 export function MapExperience() {
   const { theme } = useTheme();
-  // The place in the URL: the open panel, or where Amaru is walking to (so a shared link keeps it).
   const place = useMapStore((s) => s.panel ?? s.target);
   const navigate = useNavigate();
 
-  // If the 3D scene breaks (an error, or the GPU context is lost), continue on the classic page,
-  // keeping the open place (#projects…). `replace`, so Back doesn't return to the broken map.
+  // `replace`, so Back doesn't return to the broken map.
   const fallBack = useCallback(() => {
     navigate(`/simple${window.location.hash}`, { replace: true });
   }, [navigate]);
 
-  // The classic page's zoom-out intro doesn't apply here.
   useEffect(() => {
     document.body.classList.remove("intro");
   }, []);
 
-  // Dark theme = night in the valley.
   useEffect(() => {
     mapStore.set({ night: theme === "dark" });
   }, [theme]);
 
-  // #hash → walk to that place (also catches in-content links like "Ponte en contacto" → #contact).
+  // Also catches in-content links like #contact.
   useEffect(() => {
     const go = () => {
       const id = stationFromHash(window.location.hash);
@@ -53,7 +45,7 @@ export function MapExperience() {
     return () => window.removeEventListener("hashchange", go);
   }, []);
 
-  // Keep the hash in step with the place (open, or on the way), without adding history entries.
+  // Sync the hash without adding history entries.
   useEffect(() => {
     const hash = place ? `#${STATION_HASH[place]}` : "";
     if (window.location.hash !== hash) history.replaceState(null, "", `${window.location.pathname}${hash}`);

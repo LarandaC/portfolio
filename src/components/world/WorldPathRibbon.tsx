@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { BufferAttribute, BufferGeometry, MeshToonMaterial, Vector3 } from "three";
-import { createToonGradient } from "@/lib/three/createToonGradient";
+import { getToonGradient } from "@/lib/three/getToonGradient";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { PLAZA } from "./const/worldLayout";
 import { getWorldPath } from "./three/getWorldPath";
@@ -43,14 +43,13 @@ export function WorldPathRibbon() {
   const plaza = useMemo(() => terrainHeight(PLAZA[0], PLAZA[1]).height, []);
 
   const material = useMemo(
-    () => new MeshToonMaterial({ color: "#d9b88c", gradientMap: createToonGradient(), polygonOffset: true, polygonOffsetFactor: -2 }),
+    () => new MeshToonMaterial({ color: "#d9b88c", gradientMap: getToonGradient(), polygonOffset: true, polygonOffsetFactor: -2 }),
     []
   );
 
   useEffect(
     () => () => {
       geometry?.dispose();
-      material.gradientMap?.dispose();
       material.dispose();
     },
     [geometry, material]

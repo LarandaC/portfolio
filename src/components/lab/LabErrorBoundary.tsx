@@ -3,10 +3,7 @@ import { Component, type ReactNode } from "react";
 type LabErrorBoundaryProps = { children: ReactNode };
 type LabErrorBoundaryState = { error: Error | null };
 
-/**
- * Keeps one broken model from taking the whole lab down, and says how to fix the usual cause.
- * Remount it with a `key` per model so choosing another one clears the error.
- */
+/** Use a `key` per model so choosing another clears the error. */
 export class LabErrorBoundary extends Component<LabErrorBoundaryProps, LabErrorBoundaryState> {
   state: LabErrorBoundaryState = { error: null };
 

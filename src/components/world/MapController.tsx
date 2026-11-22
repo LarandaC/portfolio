@@ -1,23 +1,23 @@
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MathUtils, Vector3 } from "three";
-import { STATIONS, type StationId } from "./const/worldLayout";
+import { SCREEN_RIGHT, SCREEN_UP, STATIONS, type StationId } from "./const/worldLayout";
 import { mapStore } from "./mapStore";
 import { isBlocked } from "./three/isBlocked";
 import { screenOverflow } from "./three/screenOverflow";
 import { planRoute } from "./three/planRoute";
 import { terrainHeight } from "./three/terrainHeight";
 import { worldRuntime } from "./three/worldRuntime";
+import { sampleTimeOfDay } from "./three/timeOfDay";
+import { nightAmount } from "./three/nightAmount";
 
-/** Free walking speed (keyboard, clicks on the ground), world units per second. */
+/** World units per second. */
 const WALK = 3;
-/** Faster trot when heading to a building along the path. */
+/** Trot when heading to a building. */
 const TROT = 5;
-/** Standing this close to a door counts as "at" that station. */
 const DOOR_RADIUS = 1.6;
-/** Isometric camera axes on the ground: screen-up and screen-right. */
-const FORWARD = new Vector3(-1, 0, -1).normalize();
-const RIGHT = new Vector3(1, 0, -1).normalize();
+const FORWARD = new Vector3(SCREEN_UP[0], 0, SCREEN_UP[1]);
+const RIGHT = new Vector3(SCREEN_RIGHT[0], 0, SCREEN_RIGHT[1]);
 
 const KEYS: Record<string, [number, number]> = {
   ArrowUp: [0, 1], KeyW: [0, 1],
@@ -26,25 +26,19 @@ const KEYS: Record<string, [number, number]> = {
   ArrowRight: [1, 0], KeyD: [1, 0],
 };
 
-/** True when typing in a field, so arrows/WASD don't move Amaru. */
 const isTyping = (target: EventTarget | null) =>
   target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
 
-/**
- * Moves Amaru: arrows/WASD walk freely; a station command walks the path and opens its panel on arrival;
- * a ground click walks straight there. Water, buildings, the valley's edge and the screen's edge block the way.
- */
 export function MapController() {
   const pressed = useRef(new Set<string>());
   const route = useRef<Vector3[]>([]);
   const destination = useRef<StationId | null>(null);
   const move = useRef(new Vector3());
 
-  // Start in the plaza, by the torii.
   useEffect(() => {
     const [x, z] = STATIONS[0].door;
     worldRuntime.position.set(x, terrainHeight(x, z).height, z);
-    worldRuntime.heading = Math.atan2(1, 1); // facing the camera, through the torii
+    worldRuntime.heading = Math.atan2(1, 1); // facing the camera
   }, []);
 
   useEffect(() => {
@@ -70,15 +64,20 @@ export function MapController() {
     };
   }, []);
 
+  const stop = () => {
+    route.current = [];
+    destination.current = null;
+    mapStore.set({ target: null });
+  };
+
   useFrame(({ camera }, delta) => {
     const dt = Math.min(delta, 0.05);
     const pos = worldRuntime.position;
 
-    // Time of day eases towards the theme's: afternoon by day, night in the dark theme.
-    worldRuntime.timeTarget = mapStore.get().night ? 5 : 3;
-    worldRuntime.timeOfDay = MathUtils.damp(worldRuntime.timeOfDay, worldRuntime.timeTarget, 1.5, dt);
+    worldRuntime.timeOfDay = MathUtils.damp(worldRuntime.timeOfDay, mapStore.get().night ? 2 : 0, 1.5, dt);
+    sampleTimeOfDay(worldRuntime.timeOfDay, worldRuntime.tod);
+    worldRuntime.night = nightAmount(worldRuntime.timeOfDay);
 
-    // New command from the UI or a click.
     const command = mapStore.takeCommand();
     if (command?.type === "station") {
       route.current = planRoute(pos, command.id);
@@ -88,7 +87,6 @@ export function MapController() {
       destination.current = null;
     }
 
-    // Keyboard wins over any route.
     let ix = 0;
     let iy = 0;
     pressed.current.forEach((code) => {
@@ -97,13 +95,10 @@ export function MapController() {
     });
     let speed = 0;
     if (ix || iy) {
-      route.current = [];
-      destination.current = null;
-      if (mapStore.get().target) mapStore.set({ target: null });
+      stop();
       move.current.copy(FORWARD).multiplyScalar(iy).addScaledVector(RIGHT, ix).normalize();
       speed = WALK;
-      const s = mapStore.get();
-      if (s.panel || s.introOpen) mapStore.set({ panel: null, introOpen: false });
+      mapStore.set({ panel: null, introOpen: false });
     } else if (route.current.length) {
       const next = route.current[0];
       move.current.set(next.x - pos.x, 0, next.z - pos.z);
@@ -120,17 +115,15 @@ export function MapController() {
       }
     }
 
-    // Amaru gets up before walking off: hold still while he's sitting or standing up.
     worldRuntime.wantsToMove = speed > 0;
     if (!worldRuntime.canMove) speed = 0;
 
-    // Water, buildings, the valley's edge, and the edge of the screen: a step may not carry Amaru
-    // further out of view (stepping back in is always allowed, so he can't get stuck).
+    // A step may not carry him further off-screen (stepping back in is allowed, so he can't get stuck).
     const overflowNow = screenOverflow(pos.x, pos.y, pos.z, camera);
     const blocked = (x: number, z: number) =>
       isBlocked(x, z) || screenOverflow(x, pos.y, z, camera) > Math.max(overflowNow, 0) + 1e-4;
 
-    // Step, sliding along obstacles instead of stopping dead.
+    // Slide along obstacles.
     if (speed > 0) {
       const step = speed * dt;
       const nx = pos.x + move.current.x * step;
@@ -140,19 +133,15 @@ export function MapController() {
       else if (!blocked(pos.x, nz)) pos.z = nz;
       else {
         speed = 0;
-        route.current = [];
-        destination.current = null;
-        if (mapStore.get().target) mapStore.set({ target: null });
+        stop();
       }
       if (speed > 0) worldRuntime.heading = Math.atan2(move.current.x, move.current.z);
     }
     worldRuntime.speed = speed;
     pos.y = terrainHeight(pos.x, pos.z).height;
 
-    // Which door (if any) Amaru stands at.
     const at = STATIONS.find(({ door: [x, z] }) => Math.hypot(pos.x - x, pos.z - z) < DOOR_RADIUS);
-    const nearby = at?.id ?? null;
-    if (nearby !== mapStore.get().nearby) mapStore.set({ nearby });
+    mapStore.set({ nearby: at?.id ?? null });
   }, -2);
 
   return null;

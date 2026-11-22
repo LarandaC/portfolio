@@ -1,9 +1,6 @@
 import type { StationId } from "@/components/world/const/worldLayout";
 
-/**
- * Map station ↔ URL hash. The hashes are the classic page's section ids, so existing links
- * (e.g. "Ponte en contacto" → #contact) walk Amaru to that building instead.
- */
+/** Station ↔ hash, using the classic page's section ids so its links work on the map. */
 export const STATION_HASH: Record<StationId, string> = {
   inicio: "hero",
   about: "about",

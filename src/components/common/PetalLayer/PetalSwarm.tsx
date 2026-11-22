@@ -11,7 +11,7 @@ type PetalSwarmProps = {
   colors: SceneColors;
 };
 
-/** Hundreds of tumbling petals in one draw call; motion lives in the vertex shader. */
+/** One draw call; motion in the vertex shader. */
 export function PetalSwarm({ count, colors }: PetalSwarmProps) {
   const geometry = useMemo(() => createPetalGeometry(count), [count]);
   const material = useMemo(
@@ -20,7 +20,7 @@ export function PetalSwarm({ count, colors }: PetalSwarmProps) {
         vertexShader: petalVertexShader,
         fragmentShader: petalFragmentShader,
         transparent: true,
-        // Writes depth (and draws first) so mist layers in 3D scenes sit correctly in front of / behind petals.
+        // Writes depth so other layers sort correctly against petals.
         depthWrite: true,
         side: DoubleSide,
         uniforms: {
@@ -45,7 +45,6 @@ export function PetalSwarm({ count, colors }: PetalSwarmProps) {
     material.uniforms.uLavender.value.setStyle(colors.lavender);
   }, [colors, material]);
 
-  // Created by hand, so freed by hand.
   useEffect(() => () => geometry.dispose(), [geometry]);
   useEffect(() => () => material.dispose(), [material]);
 
@@ -59,7 +58,6 @@ export function PetalSwarm({ count, colors }: PetalSwarmProps) {
     u.uView.value.set(tanHalf * camera.aspect, tanHalf);
     u.uCameraZ.value = camera.position.z;
     u.uSize.value = Math.min(1, Math.max(0.65, camera.aspect / 1.4));
-    // Scrolling down lifts the petals with the page and blows them sideways.
     u.uWind.value.x += petalWind.push * dt * 0.25;
     u.uWind.value.y += petalWind.push * dt * 0.45;
     u.uSwirl.value += Math.abs(petalWind.push) * dt * 3;

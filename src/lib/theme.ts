@@ -1,7 +1,4 @@
-/**
- * Light/dark theme stored as the `dark` class on <html>.
- * index.html applies it before first paint; this module keeps it in sync afterwards.
- */
+/** `dark` class on <html>; index.html sets it before first paint. */
 export type Theme = "light" | "dark";
 
 const STORAGE_KEY = "theme";
@@ -15,12 +12,11 @@ function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", theme === "dark");
 }
 
-/** An explicit choice is remembered and wins over the system setting from then on. */
 export function setTheme(theme: Theme) {
   try {
     localStorage.setItem(STORAGE_KEY, theme);
   } catch {
-    // Private mode or blocked storage: the choice just won't persist.
+    // Blocked storage: won't persist.
   }
   applyTheme(theme);
 }

@@ -2,10 +2,7 @@ import { Mesh, MeshToonMaterial, type Material, type Object3D, type Texture } fr
 
 type WithColorAndMap = Material & { color?: MeshToonMaterial["color"]; map?: Texture | null };
 
-/**
- * Swaps every mesh's material for a toon one (keeping its color and texture) or restores the originals.
- * Originals are stashed on `userData` so toggling back and forth is lossless.
- */
+/** Toggles toon materials; originals are stashed on `userData`. */
 export function applyToonMaterials(root: Object3D, toon: boolean, gradientMap: Texture) {
   root.traverse((object) => {
     if (!(object instanceof Mesh)) return;

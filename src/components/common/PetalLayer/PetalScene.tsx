@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import { Canvas } from "@react-three/fiber";
 import { PetalSwarm } from "./PetalSwarm";
 import type { SceneProps } from "./three/types";
 
-/** Transparent canvas for the petal swarm; loaded lazily so three.js stays out of the main chunk. */
-export function PetalScene({ count, colors, active }: SceneProps) {
+/** Lazy, so three.js stays out of the main chunk. */
+export function PetalScene({ count, colors, active, children }: SceneProps & { children?: ReactNode }) {
   return (
     <Canvas
       frameloop={active ? "always" : "never"}
@@ -13,6 +14,7 @@ export function PetalScene({ count, colors, active }: SceneProps) {
       // offsetSize ignores CSS transforms, so the intro's zoom on #app doesn't shrink the canvas.
       resize={{ offsetSize: true }}
     >
+      {children}
       <PetalSwarm count={count} colors={colors} />
     </Canvas>
   );

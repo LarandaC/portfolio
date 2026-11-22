@@ -8,14 +8,11 @@ type LabAnimationPanelProps = {
   mixer: AnimationMixer;
 };
 
-/** Frames per second used to cut segments out of a clip (three's subclip works in frames). */
+/** subclip works in frames. */
 const FPS = 30;
 const SPEEDS = [0.25, 0.5, 1, 1.5];
 
-/**
- * Plays, pauses and scrubs a model's clips, and lets you mark segments inside a long clip
- * (e.g. walk / sit / idle inside one "Take 001") and loop each one to check it.
- */
+/** Plays and scrubs clips; marks and loops segments inside a long clip. */
 export function LabAnimationPanel({ clips, mixer }: LabAnimationPanelProps) {
   const action = useRef<AnimationAction | null>(null);
   const [clip, setClip] = useState<AnimationClip | null>(null);
@@ -43,7 +40,6 @@ export function LabAnimationPanel({ clips, mixer }: LabAnimationPanelProps) {
     }
   };
 
-  // A new model: start from its first clip.
   useEffect(() => {
     setSegments([]);
     if (clips.length) play(clips[0]);
@@ -54,7 +50,6 @@ export function LabAnimationPanel({ clips, mixer }: LabAnimationPanelProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only when the model changes
   }, [clips, mixer]);
 
-  // Live time readout.
   useEffect(() => {
     let frame = 0;
     const tick = () => {
@@ -85,7 +80,7 @@ export function LabAnimationPanel({ clips, mixer }: LabAnimationPanelProps) {
     action.current.paused = true;
     setPaused(true);
     action.current.time = value;
-    mixer.update(0); // apply the pose while paused
+    mixer.update(0);
   };
 
   const loopSegment = () => {
@@ -108,7 +103,7 @@ export function LabAnimationPanel({ clips, mixer }: LabAnimationPanelProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      // Clipboard blocked: the list is still on screen to copy by hand.
+      // Clipboard blocked: the list stays on screen.
     }
   };
 

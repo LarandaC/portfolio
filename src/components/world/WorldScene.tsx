@@ -13,6 +13,7 @@ import { MapDecor } from "./MapDecor";
 import { Signposts } from "./Signposts";
 import { Amaru } from "./Amaru";
 import { LanternGlows } from "./LanternGlows";
+import { NightGlow } from "./NightGlow";
 import { WorldStars } from "./WorldStars";
 import { Fireflies } from "./Fireflies";
 import { MapPetals } from "./MapPetals";
@@ -20,23 +21,24 @@ import { WatercolorPass } from "./WatercolorPass";
 import { PerformanceGuard } from "./PerformanceGuard";
 import { LoadProgressReporter } from "./LoadProgressReporter";
 import { useMapStore } from "./useMapStore";
+import { isPhone } from "@/lib/isPhone";
 
 type WorldSceneProps = {
-  /** The browser dropped the WebGL context (e.g. a phone short on memory): the map can't continue. */
+  /** WebGL context lost (e.g. phone out of memory). */
   onContextLost?: () => void;
 };
 
-/** The map in one canvas: lazily loaded, so three.js stays out of the main chunk. */
+/** Lazy, so three.js stays out of the main chunk. */
 export function WorldScene({ onContextLost }: WorldSceneProps) {
-  const phone = window.innerWidth <= 760;
-  // Drops to "low" if the device can't keep up (PerformanceGuard): the heavy extras go, the map stays.
+  const phone = isPhone();
   const low = useMapStore((s) => s.quality === "low");
   return (
     <Canvas
       onCreated={({ gl }) => {
         if (onContextLost) gl.domElement.addEventListener("webglcontextlost", onContextLost, { once: true });
       }}
-      dpr={phone ? [1, 1.5] : [1, 1.75]}
+      // Sole owner of the pixel ratio.
+      dpr={low ? 1 : phone ? [1, 1.5] : [1, 1.75]}
       camera={{ position: [30, 30, 40], fov: 32, near: 0.5, far: 900 }}
       gl={{ antialias: true, powerPreference: "high-performance" }}
     >
@@ -54,6 +56,7 @@ export function WorldScene({ onContextLost }: WorldSceneProps) {
       <WorldStations />
       <Signposts />
       <LanternGlows />
+      <NightGlow />
       {!low && <Fireflies />}
       {!low && <MapPetals />}
       <Suspense fallback={null}>

@@ -1,18 +1,20 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { Color, CylinderGeometry, IcosahedronGeometry, Matrix4, MeshToonMaterial, Quaternion, Vector3, type InstancedMesh } from "three";
-import { createToonGradient } from "@/lib/three/createToonGradient";
+import { getToonGradient } from "@/lib/three/getToonGradient";
 import { scatterTrees } from "./three/scatterTrees";
+import { isPhone } from "@/lib/isPhone";
 
-/** Canopy colors: cherry pinks, and a few plain greens so the blossoms stand out. */
 const SAKURA = ["#f6c4d6", "#efa7c3", "#f9dbe6", "#e98fb3"].map((c) => new Color(c));
 const GREEN = ["#7fae68", "#6a9a5a"].map((c) => new Color(c));
 const TRUNK = new Color("#7a5a4a");
 
-/** Low-poly trees in two draw calls (trunks + canopies), scattered once around the valley. */
+/** Two draw calls: trunks and canopies. */
 export function WorldTrees({ sparse = false }: { sparse?: boolean }) {
   const trunks = useRef<InstancedMesh>(null);
   const canopies = useRef<InstancedMesh>(null);
-  const spots = useMemo(() => scatterTrees(Math.round((window.innerWidth <= 760 ? 100 : 170) * (sparse ? 0.45 : 1)), 42), [sparse]);
+  const spots = useMemo(() => scatterTrees(isPhone() ? 100 : 170, 42), []);
+  // Low quality draws the first 45% (seeded scatter: a fair sample).
+  const count = sparse ? Math.round(spots.length * 0.45) : spots.length;
   const { trunkGeometry, canopyGeometry, material } = useMemo(() => {
     const trunk = new CylinderGeometry(0.12, 0.2, 1.6, 6);
     trunk.translate(0, 0.8, 0);
@@ -21,7 +23,7 @@ export function WorldTrees({ sparse = false }: { sparse?: boolean }) {
     return {
       trunkGeometry: trunk,
       canopyGeometry: canopy,
-      material: new MeshToonMaterial({ gradientMap: createToonGradient() }),
+      material: new MeshToonMaterial({ gradientMap: getToonGradient() }),
     };
   }, []);
 
@@ -40,7 +42,6 @@ export function WorldTrees({ sparse = false }: { sparse?: boolean }) {
       trunks.current?.setMatrixAt(i, matrix);
       trunks.current?.setColorAt(i, TRUNK);
 
-      // Canopies a bit wider than tall for the round cherry silhouette.
       scale.set(spot.scale * 1.25, spot.scale * 1.05, spot.scale * 1.25);
       matrix.compose(position, rotation, scale);
       canopies.current?.setMatrixAt(i, matrix);
@@ -59,7 +60,6 @@ export function WorldTrees({ sparse = false }: { sparse?: boolean }) {
     () => () => {
       trunkGeometry.dispose();
       canopyGeometry.dispose();
-      material.gradientMap?.dispose();
       material.dispose();
     },
     [trunkGeometry, canopyGeometry, material]
@@ -67,8 +67,8 @@ export function WorldTrees({ sparse = false }: { sparse?: boolean }) {
 
   return (
     <>
-      <instancedMesh ref={trunks} args={[trunkGeometry, material, spots.length]} />
-      <instancedMesh ref={canopies} args={[canopyGeometry, material, spots.length]} />
+      <instancedMesh ref={trunks} args={[trunkGeometry, material, spots.length]} count={count} />
+      <instancedMesh ref={canopies} args={[canopyGeometry, material, spots.length]} count={count} />
     </>
   );
 }

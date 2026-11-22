@@ -1,6 +1,6 @@
 import { InstancedBufferAttribute, PlaneGeometry } from "three";
 
-/** A subdivided plane (shaped and cupped in the shader) with random per-instance seeds. */
+/** Subdivided plane (shaped in the shader) with per-instance seeds. */
 export function createPetalGeometry(count: number) {
   const geometry = new PlaneGeometry(0.085, 0.1, 4, 6);
 
@@ -12,10 +12,10 @@ export function createPetalGeometry(count: number) {
     seed.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4);
     motion.set(
       [
-        0.035 + Math.random() * 0.045, // fall speed (screen heights per second)
+        0.035 + Math.random() * 0.045, // fall speed
         0.015 + Math.random() * 0.035, // sway amplitude
-        0.4 + Math.random() * 1.1, //     spin speed
-        0.55 + Math.random() * 0.6, //    scale
+        0.4 + Math.random() * 1.1, // spin speed
+        0.55 + Math.random() * 0.6, // scale
       ],
       i * 4
     );

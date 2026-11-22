@@ -1,29 +1,27 @@
 import { useLayoutEffect, useState, type RefObject } from "react";
 import { useTheme } from "./useTheme";
 
-/**
- * Resolves `--color-*` tokens as seen from an element, so `force-light` zones get their light values.
- * Re-reads them when the theme changes. Returns rgb() strings.
- */
-export function useCssColors<T extends string[]>(ref: RefObject<HTMLElement>, tokens: [...T]) {
+/** Resolves `--color-*` tokens from an element (so `force-light` applies); re-reads on theme change. */
+export function useCssColors<K extends string>(ref: RefObject<HTMLElement>, tokens: Record<K, string>) {
   const { theme } = useTheme();
-  const [colors, setColors] = useState<{ [K in keyof T]: string } | null>(null);
-  const key = tokens.join(",");
+  const [colors, setColors] = useState<Record<K, string> | null>(null);
 
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // A probe element lets the browser resolve var() chains and any color syntax to rgb().
+    // A probe resolves var() chains to rgb().
     const probe = document.createElement("span");
     probe.style.display = "none";
     el.appendChild(probe);
-    const resolved = key.split(",").map((token) => {
-      probe.style.color = `var(--color-${token})`;
-      return getComputedStyle(probe).color;
-    });
+    const resolved = {} as Record<K, string>;
+    for (const name of Object.keys(tokens) as K[]) {
+      probe.style.color = `var(--color-${tokens[name]})`;
+      resolved[name] = getComputedStyle(probe).color;
+    }
     probe.remove();
-    setColors(resolved as { [K in keyof T]: string });
-  }, [ref, key, theme]);
+    setColors(resolved);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref, theme]);
 
   return colors;
 }

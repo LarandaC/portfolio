@@ -9,17 +9,12 @@ import { setupScroll } from "@/lib/motion/setupScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Lenis + intro zoom, then the scroll-driven animations. Scrolling only starts
- * once the intro has finished AND the lazily loaded sections are in the DOM,
- * since every ScrollTrigger needs its final layout. Returns whether the intro is done.
- */
+/** Lenis + intro, then scroll animations once the lazy sections are in (triggers need final layout). */
 export function usePageMotion(sectionsReady: boolean) {
   const [introDone, setIntroDone] = useState(false);
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // The intro always starts at the top of the page.
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
 

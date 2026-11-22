@@ -7,7 +7,6 @@ import { mapStore } from "./mapStore";
 import { worldRuntime } from "./three/worldRuntime";
 
 const MODEL = "/models/cat-somali-dreamnoms.glb";
-/** Clips in the Somali model (DreamNoms). */
 const CLIP = {
   idle: "Idle",
   walk: "WalkClean",
@@ -15,30 +14,21 @@ const CLIP = {
   sitting: "SittingIdle",
   standUp: "StandUp",
 } as const;
-/** Seconds standing still before he sits down. */
+/** Seconds idle before sitting. */
 const SIT_AFTER = 1.2;
 const FADE = 0.25;
 
-/**
- * walk → stand (Idle) → after a moment sit down → stay sitting.
- * Asked to move while sitting (or sitting down): stand up first, then walk.
- */
+/** walk → stand → sit; asked to move while sitting, he stands up first. */
 type Pose = "walk" | "stand" | "sitDown" | "sitting" | "standUp";
-/** World units per second that look natural at walk timeScale 1 (tuned by eye). */
+/** Speed matching walk timeScale 1 (by eye). */
 const WALK_SPEED = 1.6;
-/** Material of the stray floor cube bundled with the Somali model. */
-const STRAY_FLOOR = "material_0";
-/** Height of the path and plaza meshes above the terrain (see WorldPathRibbon), plus a hair. */
+/** Path meshes sit above the terrain. */
 const PAW_CLEARANCE = 0.07;
-/** The Somali model's nose points along -Z, so turn it around to face where it walks. */
+/** The model faces -Z. */
 const FACING_OFFSET = Math.PI;
 
 useGLTF.preload(MODEL);
 
-/**
- * Amaru: placed by MapController, turns smoothly, walks in step with his speed, and when left alone
- * sits down; he stands up again before walking off.
- */
 export function Amaru() {
   const root = useRef<Group>(null);
   const gltf = useGLTF(MODEL);
@@ -48,15 +38,8 @@ export function Amaru() {
   const stillFor = useRef(0);
   const announced = useRef(false);
 
-  // Scale to AMARU_HEIGHT and lift so the paws (the model's lowest point, not its origin) touch the ground.
+  // Lift so the paws (lowest point, not the origin) touch the ground.
   const { scale, lift } = useMemo(() => {
-    // The download ships a flattened cube under the cat as a floor ("material_0"): it showed as a pale
-    // square and skewed the measurements, so it goes before measuring.
-    const floors: Mesh[] = [];
-    gltf.scene.traverse((o) => {
-      if (o instanceof Mesh && !Array.isArray(o.material) && o.material.name === STRAY_FLOOR) floors.push(o);
-    });
-    floors.forEach((mesh) => mesh.removeFromParent());
     const box = new Box3().setFromObject(gltf.scene);
     const s = AMARU_HEIGHT / Math.max(box.getSize(new Vector3()).y, 1e-6);
     return { scale: s, lift: -box.min.y * s };
@@ -66,7 +49,7 @@ export function Amaru() {
     gltf.scene.traverse((o) => {
       if (o instanceof Mesh) o.frustumCulled = false; // skinned bounds lag behind the pose
     });
-    // The one-shot clips hold their last pose until the next clip fades in.
+    // One-shot clips hold their last pose.
     for (const name of [CLIP.sitDown, CLIP.standUp]) {
       const action = actions[name];
       if (action) {
@@ -89,7 +72,6 @@ export function Amaru() {
     diff = Math.atan2(Math.sin(diff), Math.cos(diff)); // shortest turn
     group.rotation.y += diff * (1 - Math.exp(-10 * dt));
 
-    // Pose machine.
     const play = (next: Pose, clip: string) => {
       const to = actions[clip];
       if (!to) return;
@@ -136,7 +118,6 @@ export function Amaru() {
     const walk = actions[CLIP.walk];
     if (walk) walk.timeScale = MathUtils.clamp(speed / WALK_SPEED, 0.8, 3);
 
-    // The map is ready once Amaru has been drawn.
     if (!announced.current) {
       announced.current = true;
       mapStore.set({ ready: true });
@@ -145,8 +126,7 @@ export function Amaru() {
 
   return (
     <group ref={root}>
-      {/* Scale on a wrapper, never on the cached scene, so remounting measures the same size. */}
-      {/* PAW_CLEARANCE keeps the paws above the path and plaza meshes, which sit a little over the terrain. */}
+      {/* Scale the wrapper, not the cached scene, so remounts measure the same size. */}
       <group scale={scale} position-y={lift + PAW_CLEARANCE}>
         <primitive object={gltf.scene} />
       </group>

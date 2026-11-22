@@ -1,5 +1,6 @@
-/** 0 by day, 1 at night: how much the night effects (glows, stars, fireflies) should show. */
-export function nightAmount(timeOfDay: number) {
-  const t = Math.min(1, Math.max(0, (timeOfDay - 3.6) / (4.9 - 3.6)));
-  return t * t * (3 - 2 * t);
+import { MathUtils } from "three";
+
+/** 0 by day, 1 at night, from the time of day (0 afternoon … 2 night): how much the night effects show. */
+export function nightAmount(time: number) {
+  return MathUtils.smoothstep(time, 0.6, 1.9);
 }

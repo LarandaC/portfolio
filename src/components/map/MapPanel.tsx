@@ -10,6 +10,7 @@ import { ProjectsPanel } from "./panels/ProjectsPanel";
 import { SkillsPanel } from "./panels/SkillsPanel";
 import { ExperiencePanel } from "./panels/ExperiencePanel";
 import { ContactPanel } from "./panels/ContactPanel";
+import { Card } from "@/components/common/Card";
 import { Button } from "@/components/common/Button";
 import { Pill } from "@/components/common/Pill";
 
@@ -22,10 +23,7 @@ const CONTENT = {
   contact: ContactPanel,
 };
 
-/**
- * The open building's content, over the map: a side panel on desktop, a bottom sheet on phones.
- * Not modal: the map stays usable, and walking away (or Esc) closes it.
- */
+/** Side panel / bottom sheet. Not modal: walking away or Esc closes it. */
 export function MapPanel() {
   const { t } = useTranslation();
   const panel = useMapStore((s) => s.panel);
@@ -44,10 +42,12 @@ export function MapPanel() {
   const Content = CONTENT[panel];
 
   return (
-    <aside
+    <Card
+      as="aside"
+      variant="sheet"
       role="dialog"
       aria-labelledby="map-panel-title"
-      className="fixed top-4 right-4 z-30 flex max-h-[calc(100svh-96px)] w-[min(560px,calc(100%-32px))] flex-col overflow-hidden rounded-[28px] border border-line bg-surface/92 shadow-[0_30px_60px_rgba(10,20,60,.18)] backdrop-blur-[14px] max-tablet:top-auto max-tablet:right-2 max-tablet:bottom-2 max-tablet:left-2 max-tablet:max-h-[72svh] max-tablet:w-auto"
+      className="fixed top-4 right-4 z-30 flex max-h-[calc(100svh-96px)] w-[min(560px,calc(100%-32px))] flex-col overflow-hidden max-tablet:top-auto max-tablet:right-2 max-tablet:bottom-2 max-tablet:left-2 max-tablet:max-h-[72svh] max-tablet:w-auto"
     >
       <header className="flex items-center gap-3 border-b border-line px-6 py-4">
         <Pill>{`0${index} · ${t(STATIONS[index].labelKey)}`}</Pill>
@@ -58,10 +58,10 @@ export function MapPanel() {
           <X className="size-4" />
         </Button>
       </header>
-      {/* @container: shared section components adapt to the panel's width, not the screen's. */}
+      {/* @container: sections adapt to the panel's width. */}
       <div className="@container overflow-y-auto overscroll-contain px-6 pt-6 pb-8">
         <Content />
       </div>
-    </aside>
+    </Card>
   );
 }

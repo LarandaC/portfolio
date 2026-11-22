@@ -1,18 +1,9 @@
 import { DECOR, STATIONS, WATER_LEVEL } from "../const/worldLayout";
 import { terrainHeight } from "./terrainHeight";
+import { mulberry32 } from "./mulberry32";
 
 export type TreeSpot = { x: number; y: number; z: number; scale: number; rotation: number; sakura: boolean };
 
-/** Small seeded PRNG so the forest is the same on every visit. */
-const mulberry32 = (seed: number) => () => {
-  seed |= 0;
-  seed = (seed + 0x6d2b79f5) | 0;
-  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
-
-/** Keeps trees off the buildings, the decor and the space in front of the doors. */
 function nearBuilding(x: number, z: number) {
   if (DECOR.some(({ position: [dx, dz], size }) => Math.hypot(x - dx, z - dz) < size * 0.6 + 1.5)) return true;
   return STATIONS.some(({ building, door }) => {
@@ -22,10 +13,7 @@ function nearBuilding(x: number, z: number) {
   });
 }
 
-/**
- * Places trees on dry ground: off the path, the buildings and the water, below the rocky heights.
- * About seven in ten are cherry trees.
- */
+/** Trees on dry ground below the rocky heights; ~70% cherry. */
 export function scatterTrees(count: number, radius: number): TreeSpot[] {
   const random = mulberry32(20261121);
   const spots: TreeSpot[] = [];

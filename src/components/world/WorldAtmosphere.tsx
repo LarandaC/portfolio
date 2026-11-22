@@ -2,16 +2,14 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { BackSide, Color, ShaderMaterial, Vector3, type DirectionalLight, type Fog, type HemisphereLight, type Mesh } from "three";
 import { skyFragmentShader, skyVertexShader } from "./three/skyShaders";
-import { createTimeOfDay, sampleTimeOfDay } from "./three/timeOfDay";
 import { worldRuntime } from "./three/worldRuntime";
 
-/** Sky, sun/moon light, ambient light and fog, all following the time of day of Amaru's station. */
+/** Sky, lights and fog following the time of day. */
 export function WorldAtmosphere() {
   const sky = useRef<Mesh>(null);
   const sun = useRef<DirectionalLight>(null);
   const hemi = useRef<HemisphereLight>(null);
   const fog = useRef<Fog>(null);
-  const tod = useMemo(createTimeOfDay, []);
   const material = useMemo(
     () =>
       new ShaderMaterial({
@@ -33,14 +31,14 @@ export function WorldAtmosphere() {
   useEffect(() => () => material.dispose(), [material]);
 
   useFrame(({ camera }) => {
-    sampleTimeOfDay(worldRuntime.timeOfDay, tod);
+    const { tod } = worldRuntime;
     const u = material.uniforms;
     u.uTop.value.copy(tod.top);
     u.uHorizon.value.copy(tod.horizon);
     u.uGround.value.copy(tod.ground);
     u.uSun.value.copy(tod.sun);
     u.uSunDirection.value.copy(tod.sunDirection);
-    sky.current?.position.copy(camera.position); // the dome never gets closer
+    sky.current?.position.copy(camera.position);
 
     if (sun.current) {
       sun.current.color.copy(tod.sun);
@@ -54,7 +52,7 @@ export function WorldAtmosphere() {
     }
     if (fog.current) {
       fog.current.color.copy(tod.horizon);
-      // Fog only softens the far mountains, well past the map, however far the camera is zoomed out.
+      // Fog only reaches the far mountains, at any zoom.
       const d = camera.position.distanceTo(worldRuntime.position);
       fog.current.near = d * 1.8 + 30;
       fog.current.far = d * 4 + 160;

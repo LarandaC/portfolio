@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { GlassSquare } from "@/components/common/GlassSquare";
 import { HERO_GLASS } from "../const/constants";
+import { isPhone } from "@/lib/isPhone";
 
 /** Flickering frosted squares laid over the hero video. */
 export function HeroGlass() {
   const ref = useRef<HTMLDivElement>(null);
   const [squares] = useState(() => {
-    const isMobile = window.innerWidth <= 760;
+    const isMobile = isPhone();
     // On phones the copy fills the lower band, so only squares above it remain.
     return HERO_GLASS.filter(([, y], i) => !(isMobile && (i % 2 === 1 || y > 66)));
   });
@@ -16,8 +17,7 @@ export function HeroGlass() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".glass").forEach((sq) => {
-        // fromTo so the yoyo always returns to full opacity, even if it
-        // starts while the intro is still fading the squares in.
+        // fromTo: the yoyo returns to full opacity even mid-intro.
         gsap.fromTo(sq, { opacity: 1 }, {
           opacity: 0.15,
           immediateRender: false,

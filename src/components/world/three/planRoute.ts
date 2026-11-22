@@ -2,19 +2,15 @@ import { Vector3 } from "three";
 import { PLAZA, STATIONS, type StationId } from "../const/worldLayout";
 import { getWorldPath } from "./getWorldPath";
 
-/** Farther than this from every path, Amaru first walks straight to the nearest one. */
+/** Farther than this from every path, first walk straight to the nearest. */
 const OFF_PATH = 3;
 
-/**
- * Waypoints from `from` to a station's door along the paths: back along the current path to the plaza
- * (if it isn't the right one), then out along the destination's path. Keeps Amaru off hills and out of the lake.
- */
+/** Waypoints to a station's door: back to the plaza if on another path, then out along its path. */
 export function planRoute(from: Vector3, id: StationId): Vector3[] {
   const { spokes } = getWorldPath();
   const targetIndex = STATIONS.findIndex((s) => s.id === id);
   const [doorX, doorZ] = STATIONS[targetIndex].door;
 
-  // Nearest point on any path.
   let spoke = spokes[0];
   let index = 0;
   let best = Infinity;
@@ -33,12 +29,10 @@ export function planRoute(from: Vector3, id: StationId): Vector3[] {
   if (Math.sqrt(best) > OFF_PATH) route.push(spoke.points[index]);
 
   if (spoke.stationIndex === targetIndex) {
-    // Already on the right path: just walk out to its door.
     route.push(...spoke.points.slice(index + 1));
   } else {
-    // Back to the plaza…
     route.push(...spoke.points.slice(0, index).reverse());
-    // …and out along the destination's path (Inicio is the plaza itself).
+    // Inicio is the plaza itself.
     const out = spokes.find((s) => s.stationIndex === targetIndex);
     if (out) route.push(...out.points.slice(1));
   }

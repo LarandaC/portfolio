@@ -4,7 +4,7 @@ import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useTranslation } from "react-i18next";
 import { Map as MapIcon } from "lucide-react";
-import { useMapEnabled } from "@/hooks/useMapEnabled";
+import { use3DEnabled } from "@/hooks/use3DEnabled";
 import { socialLinks } from "@/data/social";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { Button } from "@/components/common/Button";
@@ -16,7 +16,7 @@ interface NavBarMobileProps {
 
 export const NavBarMobile = ({ isMenuOpen, setIsMenuOpen }: NavBarMobileProps) => {
   const { t } = useTranslation();
-  const mapEnabled = useMapEnabled();
+  const mapEnabled = use3DEnabled();
 
   return (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>

@@ -5,12 +5,11 @@ import type { LabSky } from "./const/labModels";
 
 type LabViewerProps = {
   sky: LabSky;
-  /** Changing it re-frames the camera on the new content. */
+  /** Changing it re-frames the camera. */
   fitKey: string;
   children: ReactNode;
 };
 
-/** Canvas with the time-of-day light and backdrop, orbit camera and a soft ground shadow. */
 export function LabViewer({ sky, fitKey, children }: LabViewerProps) {
   return (
     <div className="relative size-full" style={{ background: `linear-gradient(to bottom, ${sky.top}, ${sky.bottom})` }}>

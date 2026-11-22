@@ -26,14 +26,14 @@ export function CreditsDialog({ variant = "link" }: { variant?: "link" | "chip" 
                 {t(`credits.roles.${credit.roleKey}`)}
               </span>
               <span className="text-ink">
-                <a href={credit.url} target="_blank" rel="noopener noreferrer" className="font-medium underline">
+                <Button variant="link" href={credit.url} external className="font-medium">
                   "{credit.title}"
-                </a>{" "}
+                </Button>{" "}
                 {t("credits.by")} {credit.author}
               </span>
-              <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-muted-ink underline">
+              <Button variant="link" href={credit.licenseUrl} external className="self-start text-xs text-muted-ink">
                 {credit.license}
-              </a>
+              </Button>
             </li>
           ))}
         </ul>

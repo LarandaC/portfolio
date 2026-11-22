@@ -1,9 +1,8 @@
-import { BufferAttribute, Color, PlaneGeometry } from "three";
+import { BufferAttribute, Color, MathUtils, PlaneGeometry } from "three";
 import { TERRAIN_SIZE, WATER_LEVEL } from "../const/worldLayout";
 import { fbm2D } from "./fbm2D";
 import { terrainHeight } from "./terrainHeight";
 
-/** Ground colors of the valley (watercolor anime: soft, flat greens and warm dirt). */
 const GROUND = {
   grassLight: new Color("#9cc978"),
   grassDark: new Color("#6f9f5c"),
@@ -13,7 +12,7 @@ const GROUND = {
   snow: new Color("#f3f1fa"),
 };
 
-/** The valley as one mesh: heights from terrainHeight, flat colors per vertex (path, sand, grass, rock, snow). */
+/** The valley as one mesh with per-vertex colours. */
 export function createTerrainGeometry(segments: number) {
   const geometry = new PlaneGeometry(TERRAIN_SIZE, TERRAIN_SIZE, segments, segments);
   geometry.rotateX(-Math.PI / 2);
@@ -31,11 +30,13 @@ export function createTerrainGeometry(segments: number) {
     color.copy(GROUND.grassLight).lerp(GROUND.grassDark, fbm2D(x * 0.06, z * 0.06));
     if (height > 9) color.lerp(GROUND.rock, Math.min(1, (height - 9) / 4));
     if (height > 20) color.lerp(GROUND.snow, Math.min(1, (height - 20) / 3));
-    // Sand fades in towards the waterline (a hard cut-off made a jagged, toothed shore).
-    color.lerp(GROUND.sand, Math.min(1, Math.max(0, (WATER_LEVEL + 0.9 - height) / 0.7)));
-    // Slightly warmer grass along the path's edges (the path itself is WorldPathRibbon).
+    // Fade the sand: a hard cut made a jagged shore.
+    color.lerp(GROUND.sand, MathUtils.clamp((WATER_LEVEL + 0.9 - height) / 0.7, 0, 1));
+    // Warmer grass along the path.
     if (pathDistance < 2.4) color.lerp(GROUND.dirt, 0.25 * (1 - pathDistance / 2.4));
-    colors.set([color.r, color.g, color.b], i * 3);
+    colors[i * 3] = color.r;
+    colors[i * 3 + 1] = color.g;
+    colors[i * 3 + 2] = color.b;
   }
 
   geometry.setAttribute("color", new BufferAttribute(colors, 3));

@@ -1,7 +1,4 @@
-/**
- * Lake water: a flat toon colour from the time of day, crossed by slow drifting glints
- * (hard-edged noise bands, like painted highlights). At night the glints take the moon's colour.
- */
+/** Flat toon water with drifting hard-edged glints. */
 export const waterVertexShader = /* glsl */ `
   varying vec2 vWorld;
   void main() {
@@ -28,11 +25,10 @@ export const waterFragmentShader = /* glsl */ `
   }
 
   void main() {
-    // Two noise layers sliding past each other, stretched along the breeze.
     vec2 p = vWorld * vec2(0.55, 1.1);
     float n = noise(p + vec2(uTime * 0.18, uTime * 0.05)) + noise(p * 1.9 - vec2(uTime * 0.11, uTime * 0.07)) * 0.6;
-    float glint = smoothstep(1.12, 1.2, n);           // crisp painted highlights
-    float ripple = smoothstep(0.95, 1.05, n) * 0.12;  // a softer band around them
+    float glint = smoothstep(1.12, 1.2, n);
+    float ripple = smoothstep(0.95, 1.05, n) * 0.12;
     vec3 color = uColor * (1.0 + ripple) + uGlint * glint * 0.55;
     gl_FragColor = vec4(color, 1.0);
     #include <colorspace_fragment>

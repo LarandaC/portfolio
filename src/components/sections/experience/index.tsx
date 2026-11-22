@@ -1,13 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { experiences } from "@/data/experience";
+import { educationExperiences, workExperiences } from "@/data/experience";
 import { TREE } from "@/lib/media";
 import { SectionHeader } from "@/components/common/SectionHeader";
 import { SquareField } from "@/components/common/SquareField";
 import { ExperienceTimeline } from "./components/ExperienceTimeline";
 import { TYPE_ICONS } from "./const/constants";
-
-const WORK = experiences.filter((e) => e.type === "work" || e.type === "freelance");
-const EDUCATION = experiences.filter((e) => e.type === "education");
 
 export function ExperienceSection() {
   const { t } = useTranslation();
@@ -32,11 +29,11 @@ export function ExperienceSection() {
           label={`04 · ${t("experience.columnWork")} · ${t("experience.columnEducation")}`}
           title={[t("experience.title")]}
         />
-        <ExperienceTimeline title={t("experience.columnWork")} icon={TYPE_ICONS.work} entries={WORK} />
+        <ExperienceTimeline title={t("experience.columnWork")} icon={TYPE_ICONS.work} entries={workExperiences} />
         <ExperienceTimeline
           title={t("experience.columnEducation")}
           icon={TYPE_ICONS.education}
-          entries={EDUCATION}
+          entries={educationExperiences}
         />
       </div>
     </section>

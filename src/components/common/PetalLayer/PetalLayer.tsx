@@ -1,38 +1,31 @@
-import { lazy, Suspense, useMemo, useRef, useState, type ComponentType, type LazyExoticComponent } from "react";
+import { lazy, Suspense, useRef, useState, type ComponentType, type LazyExoticComponent } from "react";
 import { cn } from "@/lib/utils";
 import { useInView } from "@/hooks/useInView";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { use3DEnabled } from "@/hooks/use3DEnabled";
 import { useCssColors } from "@/hooks/useCssColors";
 import { Petals } from "@/components/common/Petals";
-import { hasWebGL } from "@/lib/three/hasWebGL";
 import type { SceneProps } from "./three/types";
+import { isPhone } from "@/lib/isPhone";
+
+const PETAL_TOKENS = { petal: "petal", blossom: "blossom", lavender: "brand-soft" };
 
 const DefaultScene = lazy(() => import("./PetalScene"));
 
 type PetalLayerProps = {
-  /** Petal count on desktop; phones get about 40% of it. */
+  /** Desktop count; phones get ~40%. */
   count?: number;
-  /** Stacking within the section, e.g. "z-4". */
   className?: string;
-  /** A lazily loaded scene to render instead of the plain petal swarm (e.g. the hero's depth scene). */
+  /** Lazy scene to render instead of the plain swarm. */
   scene?: LazyExoticComponent<ComponentType<SceneProps>>;
 };
 
-/**
- * Decorative 3D layer for a section. Falls back to the CSS petals
- * without WebGL or with reduced motion (where they stay still).
- */
+/** 3D petals; CSS petals without WebGL or with reduced motion. */
 export function PetalLayer({ count = 160, className, scene: Scene = DefaultScene }: PetalLayerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
-  const reducedMotion = useReducedMotion();
-  const resolved = useCssColors(ref, ["petal", "blossom", "brand-soft", "surface"]);
-  const colors = useMemo(
-    () => resolved && { petal: resolved[0], blossom: resolved[1], lavender: resolved[2], mist: resolved[3] },
-    [resolved]
-  );
-  const [finalCount] = useState(() => (window.innerWidth <= 760 ? Math.round(count * 0.4) : count));
-  const use3D = hasWebGL() && !reducedMotion;
+  const colors = useCssColors(ref, PETAL_TOKENS);
+  const [finalCount] = useState(() => (isPhone() ? Math.round(count * 0.4) : count));
+  const use3D = use3DEnabled();
 
   return (
     <div ref={ref} className={cn("pointer-events-none absolute inset-0", className)} aria-hidden>

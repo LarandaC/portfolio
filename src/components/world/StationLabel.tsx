@@ -8,11 +8,10 @@ import { Pill } from "@/components/common/Pill";
 type StationLabelProps = {
   id: StationId;
   labelKey: string;
-  /** World position of the label (above the building). */
   position: [number, number, number];
 };
 
-/** Floating name tag over a building; clicking it sends Amaru there. Highlighted while he's at its door. */
+/** Clicking sends Amaru there; highlighted while he's at the door. */
 export function StationLabel({ id, labelKey, position }: StationLabelProps) {
   const { t } = useTranslation();
   const here = useMapStore((s) => s.nearby === id || s.panel === id);

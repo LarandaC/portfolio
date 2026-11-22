@@ -3,13 +3,13 @@ import { Map as MapIcon, Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "@/lib/navigation";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { useMapEnabled } from "@/hooks/useMapEnabled";
+import { use3DEnabled } from "@/hooks/use3DEnabled";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { LanguageSelector } from "../LanguageSelector";
 import { ThemeToggle } from "../ThemeToggle";
 import { Button } from "@/components/common/Button";
 
-// The mobile sheet (Radix Dialog) is only downloaded the first time the menu opens.
+// Downloaded on first open.
 const NavBarMobile = lazy(() =>
   import("./NavBarMobile").then((m) => ({ default: m.NavBarMobile }))
 );
@@ -21,8 +21,7 @@ export const NavBar = () => {
   isMenuOpenRef.current = isMenuOpen;
 
   const { t } = useTranslation();
-  // The map only exists where it can run; elsewhere /inicio is this same classic page.
-  const mapEnabled = useMapEnabled();
+  const mapEnabled = use3DEnabled();
 
   const sectionIds = useMemo(
     () => navItems.map((item) => item.href.replace("#", "")),
@@ -68,7 +67,6 @@ export const NavBar = () => {
 
         <div className="flex items-center gap-1.5">
           {mapEnabled && (
-            // Text on desktop, icon only on smaller screens.
             <Button
               variant="ghost"
               to="/inicio"
@@ -79,7 +77,7 @@ export const NavBar = () => {
               <span className="max-desktop:hidden">{t("map.explore")}</span>
             </Button>
           )}
-          {/* On phones the theme switch lives in the menu sheet, to keep this bar short. */}
+          {/* On phones the theme switch lives in the menu sheet. */}
           <ThemeToggle className="max-tablet:hidden" />
           <LanguageSelector />
           <Button

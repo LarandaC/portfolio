@@ -5,7 +5,10 @@ export function hasWebGL() {
   if (supported === undefined) {
     try {
       const canvas = document.createElement("canvas");
-      supported = !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+      const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+      supported = !!gl;
+      // Release the probe right away: browsers cap live WebGL contexts, and the real canvases need them.
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
     } catch {
       supported = false;
     }

@@ -6,14 +6,14 @@ import { ModelBuilding } from "./ModelBuilding";
 export function MapDecor() {
   return (
     <>
-      {DECOR.map(({ file, position: [x, z], size, rotation }, i) => (
+      {DECOR.map(({ file, position: [x, z], size }, i) => (
         <ModelBuilding
           key={`${file}-${i}`}
           file={file}
           size={size}
           position={[x, terrainHeight(x, z).height, z]}
           // Facing the plaza unless told otherwise.
-          rotationY={rotation ?? Math.atan2(-x, -z)}
+          rotationY={Math.atan2(-x, -z)}
         />
       ))}
     </>
