@@ -23,6 +23,9 @@ export function ExperienceItem({ entry, side }: ExperienceItemProps) {
   const description = t(`experience.entries.${entry.id}.description`, {
     defaultValue: entry.description,
   });
+  const highlights = entry.highlights
+    ? (t(`experience.entries.${entry.id}.highlights`, { returnObjects: true, defaultValue: entry.highlights }) as string[])
+    : [];
 
   return (
     <li data-side={side} className={`timeline-item relative max-tablet:mt-0 max-tablet:pr-0 max-tablet:pl-9 @max-xl:mt-0 @max-xl:pr-0 @max-xl:pl-9 ${SIDE[side].item}`}>
@@ -43,6 +46,15 @@ export function ExperienceItem({ entry, side }: ExperienceItemProps) {
         <h3 className="mb-1 text-[clamp(19px,1.6vw,23px)] font-medium tracking-[-.03em]">{role}</h3>
         <p className="mb-2.5 text-[13px] font-semibold text-brand">{entry.organization}</p>
         <p className="text-sm leading-normal text-body">{description}</p>
+        {highlights.length > 0 && (
+          <ul className="mt-3 flex flex-col gap-1.5 text-sm leading-normal text-body">
+            {highlights.map((item) => (
+              <li key={item} className="relative pl-4 before:absolute before:top-[0.6em] before:left-0 before:size-1.5 before:rounded-full before:bg-brand">
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
       </Card>
     </li>
   );

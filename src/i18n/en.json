@@ -55,7 +55,15 @@
     "entries": {
       "clt": {
         "role": "Frontend Developer",
-        "description": "Responsive interfaces with React, Tailwind and Shadcn, turning design mockups into working products. RESTful API integration, state management with Zustand, reusable UI components, code reviews and close work with backend to define integration contracts."
+        "description": "Building modular, scalable web applications with React, Next.js, Tailwind and Shadcn, turning designs into working products and working closely with backend to define integration contracts.",
+        "highlights": [
+          "Real-time notification center with SignalR.",
+          "Migration from Next.js 12 to Next.js 16.",
+          "Performance and load-time optimizations.",
+          "Visual and user-experience improvements across the interfaces.",
+          "RESTful API integration and state management with Zustand.",
+          "Reusable UI components and code reviews."
+        ]
       },
       "guadalupe": {
         "role": "Developer",
