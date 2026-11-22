@@ -5,7 +5,7 @@ import { HeroGlass } from "./components/HeroGlass";
 import { lazy } from "react";
 import { PetalLayer } from "@/components/shared/three/PetalLayer";
 
-// Mist + petals depth scene; lazy so three.js stays out of the main chunk.
+// Petals scene with mouse parallax; lazy so three.js stays out of the main chunk.
 const HeroScene = lazy(() => import("./components/HeroScene"));
 
 export const HeroSection = () => {

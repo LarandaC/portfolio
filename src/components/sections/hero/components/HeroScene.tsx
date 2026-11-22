@@ -1,11 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 import { PetalSwarm } from "@/components/shared/three/PetalSwarm";
 import type { SceneProps } from "@/components/shared/three/three/types";
-import { MIST_LAYERS } from "../const/constants";
 import { HeroCameraRig } from "./HeroCameraRig";
-import { MistPlane } from "./MistPlane";
 
-/** Hero depth scene: watercolor mist layers and petals sharing one camera, over the video. */
+/** Hero scene: petals over the video, with a camera that follows the mouse for a touch of depth. */
 export function HeroScene({ count, colors, active }: SceneProps) {
   return (
     <Canvas
@@ -17,9 +15,6 @@ export function HeroScene({ count, colors, active }: SceneProps) {
       resize={{ offsetSize: true }}
     >
       <HeroCameraRig />
-      {MIST_LAYERS.map((layer) => (
-        <MistPlane key={layer.seed} layer={layer} colors={colors} />
-      ))}
       <PetalSwarm count={count} colors={colors} />
     </Canvas>
   );
