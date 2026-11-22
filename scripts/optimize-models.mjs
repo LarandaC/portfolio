@@ -15,12 +15,19 @@ import { join } from "node:path";
 const SRC = "assets-src";
 const OUT = "public/models";
 
-/** Models published to the site. Anything not listed here stays local only. */
+/**
+ * Models published to the site. Anything not listed here stays local only.
+ * `keepMaterials`: don't merge materials into a palette, so they keep their names
+ * (e.g. the cat's "Collar" or "EyeColor" can be recolored by code).
+ */
 const MODELS = [
   // Amaru candidates
-  { src: "cat/an_animated_cat.glb", out: "cat-evil-katz.glb" },
-  { src: "cat/Cat by madtrollstudio - YvVobPlTlQ.glb", out: "cat-madtrollstudio.glb" },
-  { src: "cat/low_poly_cat.glb", out: "cat-volkanongun.glb" },
+  { src: "cat/an_animated_cat.glb", out: "cat-evil-katz.glb", keepMaterials: true },
+  { src: "cat/Cat by madtrollstudio - YvVobPlTlQ.glb", out: "cat-madtrollstudio.glb", keepMaterials: true },
+  { src: "cat/low_poly_cat.glb", out: "cat-volkanongun.glb", keepMaterials: true },
+  { src: "cat/low_poly_cat_walk.glb", out: "cat-volkanongun-walk.glb", keepMaterials: true },
+  { src: "cat/tuxedo_cat_animated_2.0.glb", out: "cat-tuxedo-dreamnoms.glb", keepMaterials: true },
+  { src: "cat/somali_cat_animated_ver_1.2.glb", out: "cat-somali-dreamnoms.glb", keepMaterials: true },
   // Buildings
   { src: "house/Pagoda by Poly by Google - d1M5ncMBUDi.glb", out: "pagoda.glb" },
   { src: "house/japanese_house.glb", out: "house-daniel-stringer.glb" },
@@ -28,6 +35,7 @@ const MODELS = [
   { src: "house/simple_japanese_house_2.glb", out: "house-janab.glb" },
   // Left out on purpose:
   //   cat/cat_walk.glb                         CC-BY-NC: non-commercial license
+  //   cat/low-poly_catwalk.glb                 a fashion runway ("catwalk"), not a cat
   //   house/feudal_japanese_house.glb          ~373k triangles, too heavy for the web
   //   house/traditional_japanese_house.glb     ~814k triangles, too heavy for the web
 ];
@@ -39,7 +47,7 @@ const cli = join("node_modules", "@gltf-transform", "cli", "bin", "cli.js");
 
 mkdirSync(OUT, { recursive: true });
 
-for (const { src, out } of MODELS) {
+for (const { src, out, keepMaterials } of MODELS) {
   const input = join(SRC, src);
   const output = join(OUT, out);
 
@@ -60,6 +68,7 @@ for (const { src, out } of MODELS) {
       "--compress", "meshopt",
       "--texture-compress", "webp",
       "--texture-size", "1024",
+      ...(keepMaterials ? ["--palette", "false"] : []),
     ],
     { stdio: ["ignore", "ignore", "inherit"] } // errors still show
   );
