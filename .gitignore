@@ -12,7 +12,14 @@ dist
 dist-ssr
 *.local
 
-.claude
+# Claude Code: config, skills and MCP servers (local only)
+.claude/
+.mcp.json
+CLAUDE.md
+CLAUDE.local.md
+/.agents/
+/skills/
+/skills-lock.json
 
 # Editor directories and files
 .vscode/*
